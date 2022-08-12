@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -14,15 +15,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: Column(
         children: <Widget>[
           SizedBox(
-            height: 150,
-            width: double.infinity,
+            height: 120,
+            width: MediaQuery.of(context).size.width *1,
             child: Stack(
               children: <Widget>[
-                Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  child: Image.asset(
-                    'images/Rectangle4.png',
+                Positioned(
+                  child: SvgPicture.asset(
+                    'images/rectangle1.svg',
+                    width: MediaQuery.of(context).size.width *1,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -30,7 +30,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     top: 56,
                     left: 15,
                     child: InkResponse(
-                      onTap: () {Navigator.pop(context);},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: Row(
                         children: const [
                           Icon(
@@ -39,13 +41,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             size: 15,
                           ),
                           Text('Forgot Password',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 22)),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 22)),
                         ],
                       ),
                     )),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 20,
           ),
           SizedBox(
             width: double.infinity,
@@ -92,32 +97,29 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
           Expanded(flex: 3, child: Container()),
-          Expanded(
-              flex: 2,
-              child: Container()),
+          Expanded(flex: 2, child: Container()),
           Expanded(
             flex: 1,
             child: SizedBox(
               width: double.infinity,
               child: Center(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                    onPressed: () {},
-                    child: const Text(
-                      'Send',
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
-                    ),
-                  )),
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                onPressed: () {},
+                child: const Text(
+                  'Send',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              )),
             ),
           ),
         ],

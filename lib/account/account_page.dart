@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/account/profil_page.dart';
 import 'package:samaya_hotel/account/register_page.dart';
 import 'package:samaya_hotel/account/setting_page.dart';
@@ -13,6 +14,9 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPage extends State<AccountPage> {
+
+
+
   bool checkbox = false;
 
   late bool _isLogin;
@@ -43,8 +47,7 @@ class _AccountPage extends State<AccountPage> {
               children: <Widget>[
                 SizedBox(
                     height: 250,
-                    child: Image.asset(
-                      'images/Rectangle4_1.png',
+                    child: SvgPicture.asset('images/rectangle2.svg',
                       fit: BoxFit.cover,
                       width: double.infinity,
                     )),
@@ -75,7 +78,7 @@ class _AccountPage extends State<AccountPage> {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
-                              'https://assets.jalantikus.com/assets/cache/405/350/userfiles/2020/05/07/51-Custom-7f21c.jpg'),
+                              'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -84,18 +87,11 @@ class _AccountPage extends State<AccountPage> {
                 ),
                 Positioned(
                     bottom: 65,
-                    right: 115,
+                    right: 110,
                     child: Container(
                       height: 70,
                       width: 70,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.transparent,
-                        image: DecorationImage(
-                          image: AssetImage('images/cameraicon.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      child: SvgPicture.asset('images/iconcamera.svg'),
                     )),
                 Positioned(
                     bottom: 10,
@@ -107,7 +103,7 @@ class _AccountPage extends State<AccountPage> {
                         children: const [
                           Center(
                             child: Text(
-                              'budichan',
+                              'Lilya Cordoba',
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 20,
@@ -116,7 +112,7 @@ class _AccountPage extends State<AccountPage> {
                           ),
                           Center(
                             child: Text(
-                              'janganlupatidur@gmail.com',
+                              'lilyacordoba@gmail.com',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 18),
                             ),
@@ -348,16 +344,14 @@ class _AccountPage extends State<AccountPage> {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 150,
-          width: double.infinity,
+          height: 120,
+          width: MediaQuery.of(context).size.width *1,
           child: Stack(
             children: <Widget>[
-              Container(
-                color: Colors.white,
-                width: double.infinity,
-                child: Image.asset(
-                  'images/Rectangle4.png',
+              Positioned(
+                child: SvgPicture.asset('images/rectangle1.svg',
                   fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width *1,
                 ),
               ),
               Positioned(

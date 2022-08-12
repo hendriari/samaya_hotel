@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/dialog/page_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+
   String _selectedItem = '';
 
   var _guest = 0;
@@ -72,10 +74,10 @@ class _HomePage extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
-            const SizedBox(
+             SizedBox(
               height: 30,
-              width: double.infinity,
-              child: Padding(
+              width: MediaQuery.of(context).size.width,
+              child: const Padding(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
                   'Recomended Vacation',
@@ -357,23 +359,28 @@ class _HomePage extends State<HomePage> {
   }
 
   Widget _header() {
-    return SizedBox(
-      height: 400,
-      width: double.infinity,
+    return Container(
+      //height: 400,
+      height: MediaQuery.of(context).size.height*0.6,
+      width: MediaQuery.of(context).size.width *1,
       child: Stack(
         children: <Widget>[
           Positioned(
-            child: Image.asset(
-              'images/Rectangle4.png',
-              fit: BoxFit.cover,
-              width: double.infinity,
+            child: Container(
+              height: 120,
+              width: MediaQuery.of(context).size.width *1,
+              child: SvgPicture.asset(
+                'images/rectangle1.svg',
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width * 1,
+              ),
             ),
           ),
           const Positioned(
             top: 50,
             left: 35,
             child: Text(
-              'Hi, Nama',
+              'Hi, Lilya',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -816,7 +823,7 @@ class _HomePage extends State<HomePage> {
         });
   }
 
-  Column _buildButtonSelectionRoom() {
+  Widget _buildButtonSelectionRoom() {
     return Column(
       children: <Widget>[
         const Expanded(
@@ -829,7 +836,7 @@ class _HomePage extends State<HomePage> {
               ),
             )),
         Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             height: 60,
             width: double.infinity,
@@ -855,7 +862,7 @@ class _HomePage extends State<HomePage> {
                       onTap: () {
                         _incrementCount();
                       },
-                      child: Icon(Icons.keyboard_arrow_up)),
+                      child: const Icon(Icons.keyboard_arrow_up)),
                 ),
                 Positioned(
                     right: 10,
@@ -864,13 +871,13 @@ class _HomePage extends State<HomePage> {
                         onTap: () {
                           _decrementCount();
                         },
-                        child: Icon(Icons.keyboard_arrow_down))),
+                        child: const Icon(Icons.keyboard_arrow_down))),
                 Positioned(
                     left: 40,
                     top: 25,
                     child: Text(
                       "${_count}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     )),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -888,11 +895,11 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  Column _buildButtonSelectionGuest() {
+  Widget _buildButtonSelectionGuest() {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             height: 60,
             width: double.infinity,
@@ -918,7 +925,7 @@ class _HomePage extends State<HomePage> {
                       onTap: () {
                         _incrementGuest();
                       },
-                      child: Icon(Icons.keyboard_arrow_up)),
+                      child: const Icon(Icons.keyboard_arrow_up)),
                 ),
                 Positioned(
                     right: 10,
@@ -927,23 +934,23 @@ class _HomePage extends State<HomePage> {
                         onTap: () {
                           _decrementGuest();
                         },
-                        child: Icon(Icons.keyboard_arrow_down))),
+                        child: const Icon(Icons.keyboard_arrow_down))),
                 Positioned(
                     left: 40,
                     top: 25,
                     child: Text(
                       "${_guest}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     )),
                 Positioned(
                     left: 40,
                     top: 25,
                     child: Text(
                       "${_guest}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     )),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Container(
                       alignment: Alignment.bottomCenter,
                       child: InkResponse(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
@@ -51,14 +52,18 @@ class _HomeReservationState extends State<HomeReservation> {
           children: <Widget>[
             SizedBox(
               height: 180,
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width *1,
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Image.asset(
-                      'images/Rectangle4.png',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width *1,
+                      child: SvgPicture.asset(
+                        'images/rectangle1.svg',
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width *1,
+                      ),
                     ),
                   ),
                   Positioned(

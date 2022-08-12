@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileAccount extends StatefulWidget {
   const ProfileAccount({Key? key}) : super(key: key);
@@ -14,16 +15,15 @@ class _ProfileAccountState extends State<ProfileAccount> {
         body: Column(
       children: <Widget>[
         SizedBox(
-          height: 150,
-          width: double.infinity,
+          height: 120,
+          width: MediaQuery.of(context).size.width *1,
           child: Stack(
             children: <Widget>[
-              Container(
-                color: Colors.white,
-                width: double.infinity,
-                child: Image.asset(
-                  'images/Rectangle4.png',
+              Positioned(
+                child: SvgPicture.asset(
+                  'images/rectangle1.svg',
                   fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width *1,
                 ),
               ),
               Positioned(
@@ -48,6 +48,9 @@ class _ProfileAccountState extends State<ProfileAccount> {
                   )),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
         SizedBox(
           height: 400,
@@ -78,7 +81,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                             child: TextField(
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Jhon Doe'),
+                                  hintText: 'Lilya Cordoba'),
                             ),
                           )),
                     ),
@@ -201,7 +204,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'tutordisayangayang@gmail.com'),
+                                  hintText: 'lilyacordoba@gmail.com'),
                             ),
                           )),
                     ),
@@ -243,7 +246,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText:
-                                      'Gang cuek, Jl. ingpo hiling, no 99 '),
+                                      'Jl. Jalan no 99'),
                             ),
                           )),
                     ),

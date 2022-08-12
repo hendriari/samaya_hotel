@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegisterAccount extends StatefulWidget {
   const RegisterAccount({Key? key}) : super(key: key);
@@ -14,16 +15,15 @@ class _RegisterAccountState extends State<RegisterAccount> {
       body: Column(
         children: <Widget>[
           SizedBox(
-            height: 150,
-            width: double.infinity,
+            height: 120,
+            width: MediaQuery.of(context).size.width *1,
             child: Stack(
               children: <Widget>[
-                Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  child: Image.asset(
-                    'images/Rectangle4.png',
+                Positioned(
+                  child: SvgPicture.asset(
+                    'images/rectangle1.svg',
                     fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width * 1,
                   ),
                 ),
                 Positioned(

@@ -8,7 +8,10 @@ class AccessPage extends StatefulWidget {
   _AccessPage createState() => _AccessPage();
 }
 
+
+
 class _AccessPage extends State<AccessPage> {
+  late final width = MediaQuery.of(context).size.width;
   bool click = false;
 
   @override
@@ -23,10 +26,13 @@ class _AccessPage extends State<AccessPage> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Image.asset(
-                      'images/Rectangle4.png',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width * 1,
+                      child: SvgPicture.asset(
+                        'images/rectangle1.svg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -107,9 +113,9 @@ class _AccessPage extends State<AccessPage> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 100,
-            ),
+        const SizedBox(
+          height: 100,),
+
             // mentahan
             GestureDetector(
               onTap: (){

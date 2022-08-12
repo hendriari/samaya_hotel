@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingAccount extends StatefulWidget {
   const SettingAccount({Key? key}) : super(key: key);
@@ -14,16 +15,15 @@ class _SettingAccountState extends State<SettingAccount> {
         body: Column(
           children: <Widget>[
             SizedBox(
-              height: 150,
-              width: double.infinity,
+              height: 120,
+              width: MediaQuery.of(context).size.width *1,
               child: Stack(
                 children: <Widget>[
-                  Container(
-                    color: Colors.white,
-                    width: double.infinity,
-                    child: Image.asset(
-                      'images/Rectangle4.png',
+                  Positioned(
+                    child: SvgPicture.asset(
+                      'images/rectangle1.svg',
                       fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width *1,
                     ),
                   ),
                   Positioned(
@@ -48,6 +48,9 @@ class _SettingAccountState extends State<SettingAccount> {
                       )),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             SizedBox(
               height: 400,

@@ -30,7 +30,8 @@ class _LandingPage extends State<LandingPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Center(
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.7,
               child: Stack(
                 children: [
                   CarouselSlider.builder(
@@ -78,25 +79,22 @@ class _LandingPage extends State<LandingPage> {
             const SizedBox(
               height: 30,
             ),
-            SizedBox(
+            Container(
               height: 62,
-              width: mediaQueryWidth,
-              child: Stack(
-                children: const <Widget>[
-                  Positioned(
-                    child: Center(
-                      child: Text(
-                        'Samaya Hotel',
-                        style: TextStyle(
-                          fontSize: 36,
-                          color: Colors.deepPurple,
-                        ),
+              width: double.infinity,
+              child: Column(
+                children:  const <Widget>[
+                  Center(
+                    child: Text(
+                      'Samaya Hotel',
+                      style: TextStyle(
+                        fontSize: 36,
+                        color: Colors.deepPurple,
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 300,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(160,0,0,0),
                     child: Text('v 1.0.1',
                         style: TextStyle(
                           color: Colors.deepPurple,

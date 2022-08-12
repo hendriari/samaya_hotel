@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/home/reservation_summary.dart';
 import 'package:samaya_hotel/model/hotel_room.dart';
 import 'package:intl/intl.dart';
@@ -34,20 +35,24 @@ class _ReservationDetailState extends State<ReservationDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: 130,
-              width: double.infinity,
+              height: 140,
+              width: MediaQuery.of(context).size.width *1,
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Image.asset(
-                      'images/Rectangle4.png',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width *1,
+                      child: SvgPicture.asset(
+                        'images/rectangle1.svg',
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width *1,
+                      ),
                     ),
                   ),
                   Positioned(
                     top: 50,
-                    left: 35,
+                    left: 25,
                     child: InkResponse(
                       onTap: () {
                         Navigator.pop(context);
