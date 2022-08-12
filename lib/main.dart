@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Orderan(),
+      home: LandingPage(),
       title: 'Samaya Hotel',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,

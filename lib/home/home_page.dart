@@ -851,7 +851,7 @@ class _HomePage extends State<HomePage> {
                 Positioned(
                   right: 10,
                   top: 10,
-                  child: InkResponse(
+                  child:  InkResponse(
                       onTap: () {
                         _incrementCount();
                       },
