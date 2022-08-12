@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+
 class HotelsInfo {
   String? nameHotel;
   String? imageHotel;
   String? guestRoom;
   String? date;
-  String? history;
+  Widget? historyIcon;
+  Widget? history;
 
   HotelsInfo({
     this.nameHotel,
@@ -11,6 +14,6 @@ class HotelsInfo {
     this.guestRoom,
     this.date,
     this.history,
-
+    this.historyIcon,
   });
 }
