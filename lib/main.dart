@@ -5,7 +5,9 @@ import 'package:samaya_hotel/account/account_page.dart';
 import 'package:samaya_hotel/account/forgot_password.dart';
 import 'package:samaya_hotel/account/profil_page.dart';
 import 'package:samaya_hotel/account/register_page.dart';
+import 'package:samaya_hotel/dialog/payment_loading.dart';
 import 'package:samaya_hotel/dialog/page_view.dart';
+import 'package:samaya_hotel/dialog/payment_success.dart';
 import 'package:samaya_hotel/home/home_page.dart';
 import 'package:samaya_hotel/home/home_reservation.dart';
 import 'package:samaya_hotel/home/reservation_detail.dart';
@@ -18,6 +20,8 @@ import 'dialog/exit_dialog.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //kunci potrait device
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp]);
   runApp(MyApp());

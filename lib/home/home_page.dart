@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-
   String _selectedItem = '';
 
   var _guest = 0;
@@ -35,17 +34,17 @@ class _HomePage extends State<HomePage> {
     });
   }
 
-  void _incrementGuest(){
-    setState((){
+  void _incrementGuest() {
+    setState(() {
       _guest++;
     });
   }
 
-  void _decrementGuest(){
-    if(_guest <1){
+  void _decrementGuest() {
+    if (_guest < 1) {
       return;
     }
-    setState((){
+    setState(() {
       _guest--;
     });
   }
@@ -74,7 +73,7 @@ class _HomePage extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
-             SizedBox(
+            SizedBox(
               height: 30,
               width: MediaQuery.of(context).size.width,
               child: const Padding(
@@ -210,8 +209,8 @@ class _HomePage extends State<HomePage> {
                                 ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: Image.network(
-                                      'https://pedianusantara.com/wp-content/uploads/2021/12/gili2-1.jpg',
-                                      fit: BoxFit.cover,
+                                      'https://www.water-sport-bali.com/wp-content/uploads/2014/04/Gili-Trawangan-Feature-Image.jpg',
+                                       fit: BoxFit.cover,
                                       width: double.infinity,
                                     )),
                                 Positioned(
@@ -360,15 +359,15 @@ class _HomePage extends State<HomePage> {
 
   Widget _header() {
     return Container(
-      //height: 400,
-      height: MediaQuery.of(context).size.height*0.6,
-      width: MediaQuery.of(context).size.width *1,
+      height: 400,
+      // height: MediaQuery.of(context).size.height * 0.6,
+      width: MediaQuery.of(context).size.width * 1,
       child: Stack(
         children: <Widget>[
           Positioned(
             child: Container(
               height: 120,
-              width: MediaQuery.of(context).size.width *1,
+              width: MediaQuery.of(context).size.width * 1,
               child: SvgPicture.asset(
                 'images/rectangle1.svg',
                 fit: BoxFit.cover,
@@ -587,7 +586,6 @@ class _HomePage extends State<HomePage> {
                                 MaterialPageRoute(
                                     builder: (context) => ViewPages(
                                           date: _range,
-
                                         )),
                               );
                             },
@@ -611,11 +609,16 @@ class _HomePage extends State<HomePage> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return SizedBox(
-            height: double.maxFinite,
-            child: Container(
-              child: _buildBottomNavigationMenu(),
-            ),
+          return ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              SizedBox(
+                height: double.maxFinite,
+                child: Container(
+                  child: _buildBottomNavigationMenu(),
+                ),
+              ),
+            ],
           );
         });
   }
@@ -630,27 +633,51 @@ class _HomePage extends State<HomePage> {
             width: 50,
             child: Divider(
               color: Colors.black,
-              thickness: 2.0,
+              thickness: 2,
             ),
           ),
         ),
-        Expanded(
-          flex: 0,
-          child: Padding(
-            padding: EdgeInsets.zero,
-            child: Container(
-              color: Colors.red,
-              alignment: Alignment.topLeft,
-              width: double.infinity,
-              child: Column(
-                children: const <Widget>[
-                  Text(
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Container(
+            alignment: Alignment.topLeft,
+            width: double.infinity,
+            child: Stack(
+              children: <Widget>[
+                const Center(
+                  child: Text(
                     'Hotel',
                     style: TextStyle(color: Colors.grey, fontSize: 20),
                   ),
-                  TextField()
-                ],
-              ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(35, 20, 30, 0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none
+                    ),
+                  ),
+                ),
+                Positioned(
+                    child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Icon(Icons.location_pin),
+                          InkResponse(
+                              onTap: (){},
+                              child: const Icon(Icons.search))],
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                      )
+                    ],
+                  ),
+                ))
+              ],
             ),
           ),
         ),
@@ -858,7 +885,7 @@ class _HomePage extends State<HomePage> {
                 Positioned(
                   right: 10,
                   top: 10,
-                  child:  InkResponse(
+                  child: InkResponse(
                       onTap: () {
                         _incrementCount();
                       },
@@ -954,7 +981,7 @@ class _HomePage extends State<HomePage> {
                   child: Container(
                       alignment: Alignment.bottomCenter,
                       child: InkResponse(
-                        onTap: (){},
+                        onTap: () {},
                         child: const Divider(
                           color: Colors.black,
                         ),
