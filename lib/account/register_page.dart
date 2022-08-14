@@ -279,7 +279,7 @@ class _RegisterAccountState extends State<RegisterAccount> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animasi1, animasi2) =>
-                            SignUpSuccess(),
+                            const SignUpSuccess(),
                         reverseTransitionDuration: Duration.zero,
                         transitionDuration: Duration.zero,
                       ));

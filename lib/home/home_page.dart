@@ -358,14 +358,14 @@ class _HomePage extends State<HomePage> {
   }
 
   Widget _header() {
-    return Container(
+    return SizedBox(
       height: 400,
       // height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 1,
       child: Stack(
         children: <Widget>[
           Positioned(
-            child: Container(
+            child: SizedBox(
               height: 120,
               width: MediaQuery.of(context).size.width * 1,
               child: SvgPicture.asset(
@@ -542,7 +542,7 @@ class _HomePage extends State<HomePage> {
                         right: 0,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 40,
                             child: InkWell(
                               onTap: () => _onSelectionRoom(),
@@ -554,7 +554,7 @@ class _HomePage extends State<HomePage> {
                                         children: [
                                           const Icon(Icons.bed),
                                           Text(
-                                            "${callBack} Room, ${_guest} Guest",
+                                            "$callBack Room, $_guest Guest",
                                             style:
                                                 const TextStyle(fontSize: 16),
                                           ),
@@ -864,7 +864,7 @@ class _HomePage extends State<HomePage> {
             )),
         Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
+          child: SizedBox(
             height: 60,
             width: double.infinity,
             child: Stack(
@@ -903,7 +903,7 @@ class _HomePage extends State<HomePage> {
                     left: 40,
                     top: 25,
                     child: Text(
-                      "${_count}",
+                      "$_count",
                       style: const TextStyle(fontSize: 16),
                     )),
                 Padding(
@@ -927,7 +927,7 @@ class _HomePage extends State<HomePage> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
+          child: SizedBox(
             height: 60,
             width: double.infinity,
             child: Stack(
@@ -966,14 +966,14 @@ class _HomePage extends State<HomePage> {
                     left: 40,
                     top: 25,
                     child: Text(
-                      "${_guest}",
+                      "$_guest",
                       style: const TextStyle(fontSize: 16),
                     )),
                 Positioned(
                     left: 40,
                     top: 25,
                     child: Text(
-                      "${_guest}",
+                      "$_guest",
                       style: const TextStyle(fontSize: 16),
                     )),
                 Padding(

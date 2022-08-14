@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:samaya_hotel/landing_page.dart';
+import 'dart:async';
 
 class SplashScreen2 extends StatefulWidget {
   const SplashScreen2({Key? key}) : super(key: key);
@@ -16,11 +17,27 @@ class _SplashScreen2State extends State<SplashScreen2> {
   }
 
   _splashscreen() async {
-    await Future.delayed(Duration(milliseconds: 100), () {});
+    await Future.delayed(Duration(milliseconds: 300), () {});
+    if(!mounted) return;
     Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-            pageBuilder: (context, animasi1, animasi2) => LandingPage(),transitionDuration: Duration.zero,reverseTransitionDuration: Duration.zero));
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondAnimation) => LandingPage(),
+        transitionsBuilder: (context, animation, secondAnimation, child) {
+          const begin = Offset(0.0, 1.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
   }
 
   @override

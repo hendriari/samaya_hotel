@@ -5,7 +5,7 @@ import 'package:samaya_hotel/home/reservation_room.dart';
 class ViewPages extends StatefulWidget {
  final String date;
 
- ViewPages({required this.date});
+ const ViewPages({required this.date});
 
   @override
   State<ViewPages> createState() => _ViewPagesState();
@@ -13,7 +13,7 @@ class ViewPages extends StatefulWidget {
 }
 
 class _ViewPagesState extends State<ViewPages> {
-  PageController _controllerPage = PageController(initialPage: 0);
+  final PageController _controllerPage = PageController(initialPage: 0);
 
   @override
   void dispose() {
@@ -28,7 +28,7 @@ class _ViewPagesState extends State<ViewPages> {
       scrollDirection: Axis.horizontal,
       children:[
         HomeReservation(date: widget.date),
-        ReservationRoom(),
+        const ReservationRoom(),
       ],
     );
   }

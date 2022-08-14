@@ -8,7 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 class HomeReservation extends StatefulWidget {
   final String date;
 
-  HomeReservation({required this.date});
+  const HomeReservation({required this.date});
 
   @override
   State<HomeReservation> createState() => _HomeReservationState();
@@ -56,7 +56,7 @@ class _HomeReservationState extends State<HomeReservation> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Container(
+                    child: SizedBox(
                       height: 120,
                       width: MediaQuery.of(context).size.width *1,
                       child: SvgPicture.asset(
@@ -255,7 +255,7 @@ class _HomeReservationState extends State<HomeReservation> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 10),
-              child: Container(
+              child: SizedBox(
                 height: 130,
                 width: double.infinity,
                 child: ListView(

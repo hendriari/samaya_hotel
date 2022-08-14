@@ -25,7 +25,7 @@ class _SignUpSuccessState extends State<SignUpSuccess> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 120,
             width: MediaQuery.of(context).size.width * 1,
             child: SvgPicture.asset(
@@ -43,7 +43,7 @@ class _SignUpSuccessState extends State<SignUpSuccess> {
                     right: 0,
                     top: MediaQuery.of(context).size.height * 0.5,
                     child: Column(
-                      children: [
+                      children: const [
                         Text(
                           'SIGN UP SUCCESS',
                           style: TextStyle(

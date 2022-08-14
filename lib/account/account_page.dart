@@ -3,6 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/account/profil_page.dart';
 import 'package:samaya_hotel/account/register_page.dart';
 import 'package:samaya_hotel/account/setting_page.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:async';
+import 'dart:io';
 
 import 'forgot_password.dart';
 
@@ -14,8 +17,15 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPage extends State<AccountPage> {
+  File? image;
 
-
+  Future getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.camera);
+    image = File(pickedImage!.path);
+    setState(() {});
+  }
 
   bool checkbox = false;
 
@@ -47,51 +57,63 @@ class _AccountPage extends State<AccountPage> {
               children: <Widget>[
                 SizedBox(
                     height: 250,
-                    child: SvgPicture.asset('images/rectangle2.svg',
+                    child: SvgPicture.asset(
+                      'images/rectangle2.svg',
                       fit: BoxFit.cover,
                       width: double.infinity,
                     )),
                 Positioned(
-                  bottom: 60,
-                  left: 0,
+                  bottom: 65,
                   right: 0,
-                  child: Container(
-                    height: 190,
-                    width: 190,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
+                  left: 0,
+                  child: Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        color: Colors.white,
+                        height: 190,
+                        width: 190,
+                      )
                     ),
                   ),
+                  // ),
                 ),
                 Positioned(
-                  bottom: 65,
-                  left: 0,
+                  bottom: 70,
                   right: 0,
-                  child: InkResponse(
-                    onTap: () {},
-                    child: Container(
+                  left: 0,
+                  child: Center(
+                    child: SizedBox(
                       height: 180,
                       width: 180,
-                      decoration: const BoxDecoration(
-                        color: Colors.deepOrange,
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg'),
-                          fit: BoxFit.cover,
-                        ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: image != null
+                            ? Image.file(
+                                image!,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg',
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                   ),
+                  // ),
                 ),
                 Positioned(
-                    bottom: 65,
-                    right: 110,
-                    child: Container(
+                    top: 280,
+                    right: 0,
+                    left: 150,
+                    child: SizedBox(
                       height: 70,
                       width: 70,
-                      child: SvgPicture.asset('images/iconcamera.svg'),
+                      child: InkResponse(
+                          onTap: () async {
+                            await getImage();
+                          },
+                          child: SvgPicture.asset('images/iconcamera.svg')),
                     )),
                 Positioned(
                     bottom: 10,
@@ -345,13 +367,14 @@ class _AccountPage extends State<AccountPage> {
       children: <Widget>[
         SizedBox(
           height: 120,
-          width: MediaQuery.of(context).size.width *1,
+          width: MediaQuery.of(context).size.width * 1,
           child: Stack(
             children: <Widget>[
               Positioned(
-                child: SvgPicture.asset('images/rectangle1.svg',
+                child: SvgPicture.asset(
+                  'images/rectangle1.svg',
                   fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width *1,
+                  width: MediaQuery.of(context).size.width * 1,
                 ),
               ),
               Positioned(
@@ -584,13 +607,13 @@ class _AccountPage extends State<AccountPage> {
   }
 }
 
-  //comingsoon button sheet
-  Widget membershipSheet() => const Center(
+//comingsoon button sheet
+Widget membershipSheet() => const Center(
       child: Text('Comingsoon'),
     );
 
-  //faq button sheet
-  Widget faqSheet() => ListView(
+//faq button sheet
+Widget faqSheet() => ListView(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(20),

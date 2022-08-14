@@ -22,7 +22,8 @@ class _SplashScreen1State extends State<SplashScreen1> {
               click = !click;
             });
             setState(() async {
-              await Future.delayed(Duration(milliseconds: 280), () {});
+              await Future.delayed(Duration(milliseconds: 480));
+              if(!mounted) return;
               Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
@@ -31,7 +32,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
             });
           },
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: Duration(milliseconds: 500),
             height: click ? MediaQuery.of(context).size.height * 1 : 130 ,
             width: click ? MediaQuery.of(context).size.width * 1 : 130  ,
             curve: Curves.fastOutSlowIn,

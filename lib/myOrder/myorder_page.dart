@@ -103,7 +103,7 @@ class _Orderan extends State<Orderan> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Container(
+                    child: SizedBox(
                       height: 120,
                       width: MediaQuery.of(context).size.width *1,
                       child: SvgPicture.asset(

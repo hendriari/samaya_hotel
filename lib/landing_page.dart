@@ -79,7 +79,7 @@ class _LandingPage extends State<LandingPage> {
             const SizedBox(
               height: 30,
             ),
-            Container(
+            SizedBox(
               height: 62,
               width: double.infinity,
               child: Column(

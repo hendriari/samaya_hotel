@@ -15,11 +15,11 @@ class PaymentLoading extends StatefulWidget {
 class _PaymentLoadingState extends State<PaymentLoading> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-              pageBuilder: (context, animated1, animated2) => PaymentSuccess(),
+              pageBuilder: (context, animated1, animated2) => const PaymentSuccess(),
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero));
     });
@@ -31,7 +31,7 @@ class _PaymentLoadingState extends State<PaymentLoading> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 120,
             width: MediaQuery.of(context).size.width * 1,
             child: SvgPicture.asset(
@@ -45,13 +45,13 @@ class _PaymentLoadingState extends State<PaymentLoading> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _loading(),
-              Text(
+              const Text(
                 'TRANSACTION IN PROGRESS',
                 style: TextStyle(
                   fontSize: 24,
                 ),
               ),
-              Center(child: Text('Lorem Ipsum is simply dummy'))
+              const Center(child: Text('Lorem Ipsum is simply dummy'))
             ],
           )),
         ],
@@ -60,7 +60,7 @@ class _PaymentLoadingState extends State<PaymentLoading> {
   }
 
   Widget _loading() {
-    return SpinKitCircle(
+    return const SpinKitCircle(
       size: 120,
       color: Colors.deepPurple,
       duration: Duration(seconds: 3),

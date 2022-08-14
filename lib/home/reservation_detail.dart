@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class ReservationDetail extends StatefulWidget {
   final HotelRoom data;
 
-  ReservationDetail({required this.data});
+  const ReservationDetail({Key? key, required this.data}) : super(key: key);
 
   @override
   State<ReservationDetail> createState() => _ReservationDetailState();
@@ -18,7 +18,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
   bool checkbox2 = false;
   bool checkbox3 = false;
 
-  int _tax = 60000;
+  final int _tax = 60000;
   late final int _total;
 
   @override
@@ -40,7 +40,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Container(
+                    child: SizedBox(
                       height: 120,
                       width: MediaQuery.of(context).size.width *1,
                       child: SvgPicture.asset(
@@ -362,7 +362,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Tax & Service'),
+                  const Text('Tax & Service'),
                   SizedBox(
                       width: 70,
                       child: Text(
@@ -383,7 +383,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Amount'),
+                  const Text('Amount'),
                   SizedBox(
                     width: 70,
                     child: Text(

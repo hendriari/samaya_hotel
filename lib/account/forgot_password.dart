@@ -118,7 +118,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation1, animation2) =>
-                            EmailSent(),
+                            const EmailSent(),
                         transitionDuration: Duration.zero,
                         reverseTransitionDuration: Duration.zero,
                       ));

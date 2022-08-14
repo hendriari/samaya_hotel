@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/dialog/payment_loading.dart';
 import 'package:samaya_hotel/model/hotel_room.dart';

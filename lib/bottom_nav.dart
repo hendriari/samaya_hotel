@@ -18,7 +18,7 @@ class _BottomNavState extends State<BottomNav> {
 
   final List<Widget> body = [
     const HomePage(),
-    Orderan(),
+    const Orderan(),
     const AccessPage(),
     const AccountPage(),
   ];

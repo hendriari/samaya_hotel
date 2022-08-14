@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AccessPage extends StatefulWidget {
@@ -21,13 +20,13 @@ class _AccessPage extends State<AccessPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 180,
               width: double.infinity,
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: Container(
+                    child: SizedBox(
                       height: 120,
                       width: MediaQuery.of(context).size.width * 1,
                       child: SvgPicture.asset(
