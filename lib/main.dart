@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:samaya_hotel/access/access_page.dart';
@@ -18,11 +20,13 @@ import 'package:samaya_hotel/splashscreen1.dart';
 import 'package:samaya_hotel/splashscreen2.dart';
 import 'bottom_nav.dart';
 import 'home/reservation_room.dart';
+import 'http_overrides.dart';
 import 'myOrder/myorder_page.dart';
 import 'dialog/exit_dialog.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
 
   //kunci potrait device
   SystemChrome.setPreferredOrientations([
@@ -43,4 +47,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 

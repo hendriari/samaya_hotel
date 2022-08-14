@@ -297,10 +297,10 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       primary: Colors.deepPurple,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
-                  onPressed: () async {
+                  onPressed: () {
                     setState(() => loadingpayment = true);
-                    await Future.delayed(Duration(seconds: 6));
-                    setState(() => loadingpayment = false);
+                    // await Future.delayed(Duration(seconds: 6));
+                    // setState(() => loadingpayment = false);
                   },
                   child: Text(
                     'Confirm',

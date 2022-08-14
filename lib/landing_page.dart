@@ -11,6 +11,7 @@ class LandingPage extends StatefulWidget {
   _LandingPage createState() => _LandingPage();
 }
 
+
 int activeIndex = 0;
 final assetImages = [
   'images/hotels/landingimages4.jpg',

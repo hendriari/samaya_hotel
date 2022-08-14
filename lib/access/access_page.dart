@@ -123,7 +123,12 @@ class _AccessPage extends State<AccessPage> {
 
                 });
               },
-              child: Image.asset('images/phone.gif')
+              child: AnimatedContainer(
+                duration: Duration(seconds: 2),
+                height: 100,
+                width: 100,
+                curve: Curves.easeInExpo,
+              )
             ),
           ],
         ),

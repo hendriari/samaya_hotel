@@ -11,32 +11,35 @@ class SplashScreen1 extends StatefulWidget {
 class _SplashScreen1State extends State<SplashScreen1> {
   bool click = false;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: Center(
         child: GestureDetector(
-          onTap: () {
+          onTap: () async {
             setState(() {
               click = !click;
             });
-            setState(() async {
-              await Future.delayed(Duration(milliseconds: 480));
+            await Future.delayed(const Duration(milliseconds: 250));
+            setState(()  {
+              // await Future.delayed(const Duration(milliseconds: 480));
               if(!mounted) return;
               Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
                       pageBuilder: (context, animasi1, animasi2) =>
-                          SplashScreen2()));
+                           const SplashScreen2()));
+
             });
           },
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             height: click ? MediaQuery.of(context).size.height * 1 : 130 ,
             width: click ? MediaQuery.of(context).size.width * 1 : 130  ,
             curve: Curves.fastOutSlowIn,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
                 boxShadow: [
@@ -47,7 +50,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                 ]),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   'Samaya',
                   style: TextStyle(fontSize: 28),
@@ -64,3 +67,4 @@ class _SplashScreen1State extends State<SplashScreen1> {
     );
   }
 }
+
