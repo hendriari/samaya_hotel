@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../bottom_nav.dart';
 
 class PaymentSuccess extends StatefulWidget {
   const PaymentSuccess({Key? key}) : super(key: key);
@@ -13,11 +17,19 @@ class PaymentSuccess extends StatefulWidget {
 
 class _PaymentSuccessState extends State<PaymentSuccess> {
   @override
+  void initState() {
+    Timer(const Duration(seconds: 2), (){
+      Navigator.pop(context);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 120,
             width: MediaQuery.of(context).size.width * 1,
             child: SvgPicture.asset(
@@ -31,11 +43,11 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _loading(),
-                  Text(
+                  const Text(
                     'PAYMENT SUCCESS',
                     style: TextStyle(fontSize: 24),
                   ),
-                  Center(child: Text('Lorem Ipsum is simply dummy'))
+                  const Center(child: Text('Lorem Ipsum is simply dummy'))
                 ],
               )),
         ],
@@ -43,10 +55,10 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
     );
   }
   Widget _loading(){
-    return SpinKitSpinningLines(
+    return const SpinKitPumpingHeart(
       size: 120,
       color: Colors.deepPurple,
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 2),
     );
   }
 }

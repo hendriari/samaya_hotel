@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:samaya_hotel/dialog/email_sent.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -16,13 +17,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         children: <Widget>[
           SizedBox(
             height: 120,
-            width: MediaQuery.of(context).size.width *1,
+            width: MediaQuery.of(context).size.width * 1,
             child: Stack(
               children: <Widget>[
                 Positioned(
                   child: SvgPicture.asset(
                     'images/rectangle1.svg',
-                    width: MediaQuery.of(context).size.width *1,
+                    width: MediaQuery.of(context).size.width * 1,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -112,7 +113,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     primary: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) =>
+                            EmailSent(),
+                        transitionDuration: Duration.zero,
+                        reverseTransitionDuration: Duration.zero,
+                      ));
+                },
                 child: const Text(
                   'Send',
                   style: TextStyle(

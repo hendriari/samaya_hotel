@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AccessPage extends StatefulWidget {
@@ -123,115 +124,8 @@ class _AccessPage extends State<AccessPage> {
 
                 });
               },
-              child: AnimatedAlign(
-                alignment: Alignment.center,
-                duration: Duration(milliseconds: 300),
-                child: Container(
-                  width: double.infinity,
-                  height: 300,
-                  color: Colors.red,
-                  child: Stack(
-                    children: [
-                      Align(
-                        child: _animatedTelu(),
-                      ),
-
-                      Align(
-                        child: _animatedLoro()
-                      ),
-                      Align(
-                          child: _animatedSiji()),
-                    ],
-                  ),
-                ),
-              ),
+              child: Image.asset('images/phone.gif')
             ),
-
-            // Container(
-            //   width: double.infinity,
-            //   height: 300,
-            //   color: Colors.red,
-            //   child: AnimatedAlign(
-            //     duration: Duration(milliseconds: 400),
-            //     alignment: Alignment.bottomRight,
-            //     child: Stack(
-            //       children: <Widget> [
-            //         Align(
-            //             child: SvgPicture.asset(
-            //                 'images/svgAssets/accessImage1.svg')),
-            //         Align(
-            //             child: SvgPicture.asset(
-            //                 'images/svgAssets/accessImage2.svg')),
-            //         Align(
-            //             child: SvgPicture.asset(
-            //                 'images/svgAssets/accessImage3.svg')),
-            //       ],
-            //     ),
-            //   ),
-            // )
-          ],
-        ),
-      ),
-    );
-  }
-  Widget _animatedSiji(){
-    return AnimatedSwitcher(
-      duration: Duration(seconds: 1),
-      child: Container(
-        height: 120,
-        width: 120,
-        child: Stack(
-          children: [
-            Align(
-              child: SvgPicture.asset(
-                  'images/svgAssets/accessImage2.svg'),
-            ),
-            Align(
-              child: SvgPicture.asset(
-                  'images/svgAssets/accessImage1.svg'),
-            ),
-            Align(
-              child: SvgPicture.asset(
-                  'images/svgAssets/accessImage3.svg'),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _animatedLoro(){
-    return AnimatedSwitcher(
-      duration: Duration(seconds: 5),
-      child: Container(
-        height: 160,
-        width: 160,
-        child: Stack(
-          children: [
-            SvgPicture.asset('images/svgAssets/accessProcess1.svg'),
-            Positioned(
-                right: 0,
-                bottom: 0,
-                child: SvgPicture.asset('images/svgAssets/accessProcess1.svg'))
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _animatedTelu(){
-    return AnimatedSwitcher(
-      duration: Duration(seconds: 10),
-      child: Container(
-        height: 230,
-        width: 230,
-        child: Stack(
-          children: [
-            SvgPicture.asset('images/svgAssets/acessProcess2.svg'),
-            Positioned(
-                right: 0,
-                bottom: 0,
-                child: SvgPicture.asset('images/svgAssets/acessProcess2.svg'))
           ],
         ),
       ),

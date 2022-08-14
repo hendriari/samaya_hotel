@@ -300,7 +300,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                           borderRadius: BorderRadius.circular(20))),
                   onPressed: () async {
                     setState(() => loadingpayment = true);
-                    await Future.delayed(Duration(seconds: 3));
+                    await Future.delayed(Duration(seconds: 6));
                     setState(() => loadingpayment = false);
                   },
                   child: Text(

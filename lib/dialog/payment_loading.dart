@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:samaya_hotel/dialog/payment_success.dart';
 
 class PaymentLoading extends StatefulWidget {
   const PaymentLoading({Key? key}) : super(key: key);
@@ -10,6 +13,18 @@ class PaymentLoading extends StatefulWidget {
 }
 
 class _PaymentLoadingState extends State<PaymentLoading> {
+  @override
+  void initState() {
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animated1, animated2) => PaymentSuccess(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero));
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +42,28 @@ class _PaymentLoadingState extends State<PaymentLoading> {
           ),
           Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SpinKitCircle(
-                    size: 120,
-                    color: Colors.deepPurple,
-                    duration: Duration(seconds: 3),
-                  ),
-                  Text('PAYMENT GATEWAY',
-                  style: TextStyle(fontSize: 24),),
-                  Center(child: Text('Lorem Ipsum is simply dummy'))
-                ],
-              )),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _loading(),
+              Text(
+                'TRANSACTION IN PROGRESS',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              Center(child: Text('Lorem Ipsum is simply dummy'))
+            ],
+          )),
         ],
       ),
+    );
+  }
+
+  Widget _loading() {
+    return SpinKitCircle(
+      size: 120,
+      color: Colors.deepPurple,
+      duration: Duration(seconds: 3),
     );
   }
 }

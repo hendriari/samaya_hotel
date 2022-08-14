@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:samaya_hotel/dialog/singup_success.dart';
 
 class RegisterAccount extends StatefulWidget {
   const RegisterAccount({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _RegisterAccountState extends State<RegisterAccount> {
         children: <Widget>[
           SizedBox(
             height: 120,
-            width: MediaQuery.of(context).size.width *1,
+            width: MediaQuery.of(context).size.width * 1,
             child: Stack(
               children: <Widget>[
                 Positioned(
@@ -30,7 +31,9 @@ class _RegisterAccountState extends State<RegisterAccount> {
                     top: 56,
                     left: 15,
                     child: InkResponse(
-                      onTap: () {Navigator.pop(context);},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: Row(
                         children: const [
                           Icon(
@@ -39,8 +42,8 @@ class _RegisterAccountState extends State<RegisterAccount> {
                             size: 15,
                           ),
                           Text('Sign Up',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 22)),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 22)),
                         ],
                       ),
                     )),
@@ -229,34 +232,36 @@ class _RegisterAccountState extends State<RegisterAccount> {
               flex: 2,
               child: Stack(
                 children: <Widget>[
-              Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text('Already have an account ?',
-                                style: TextStyle(fontSize: 18)),
-                            const SizedBox(
-                              width: 10,
+                  Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('Already have an account ?',
+                                    style: TextStyle(fontSize: 18)),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                InkResponse(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Login',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.deepPurple)),
+                                ),
+                              ],
                             ),
-                            InkResponse(
-                              onTap: () {Navigator.pop(context);},
-                              child: const Text('Login',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.deepPurple)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )),
+                          ),
+                        ],
+                      )),
                 ],
               )),
           Expanded(
@@ -269,7 +274,16 @@ class _RegisterAccountState extends State<RegisterAccount> {
                     primary: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animasi1, animasi2) =>
+                            SignUpSuccess(),
+                        reverseTransitionDuration: Duration.zero,
+                        transitionDuration: Duration.zero,
+                      ));
+                },
                 child: const Text(
                   'Sign Up',
                   style: TextStyle(

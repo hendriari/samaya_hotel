@@ -85,6 +85,8 @@ flutter:
      - images/iconcamera.svg
      - images/rectangle1.svg
      - images/rectangle2.svg
+     - images/phone.gif
+     - images/ceklist.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
