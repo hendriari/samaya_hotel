@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:samaya_hotel/bottom_nav.dart';
+import 'package:samaya_hotel/bottom_navbar.dart';
 
 class PaymentSuccess extends StatefulWidget {
   const PaymentSuccess({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
     Timer(const Duration(milliseconds: 2500), () {
       //push and delete the preveious route
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomNav()),
+          MaterialPageRoute(builder: (context) => BottomNavbar()),
           (Route<dynamic> route) => false);
     });
     super.initState();

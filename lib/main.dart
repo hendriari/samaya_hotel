@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:samaya_hotel/bottom_navbar.dart';
 import 'package:samaya_hotel/splashscreen1.dart';
+import 'bottom_nav.dart';
 import 'http_overrides.dart';
 
 void main() {
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashScreen1(),
+      home: const BottomNavbar(),
       title: 'Samaya Hotel',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,

@@ -22,8 +22,8 @@ class _AccessPage extends State<AccessPage>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 900));
     // _animationController.addStatusListener((status) {
     //   if (status == AnimationStatus.completed)
     //     setState(() {
@@ -157,7 +157,7 @@ class _AccessPage extends State<AccessPage>
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 300,
+                      height: MediaQuery.of(context).size.height * 0.35,
                       child: _anim
                           ? Lottie.asset('images/assets/unlock2.json')
                           : Lottie.asset(

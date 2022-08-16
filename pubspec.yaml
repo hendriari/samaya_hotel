@@ -87,6 +87,8 @@ flutter:
      - images/iconcamera.svg
      - images/rectangle1.svg
      - images/rectangle2.svg
+     - images/assets/
+     - images/navbarIcon/
      - images/location.png
 
 

@@ -843,6 +843,7 @@ class _HomePage extends State<HomePage> {
         context: context,
         builder: (context) {
           return Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 child: _buildButtonSelectionRoom(),

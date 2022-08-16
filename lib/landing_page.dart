@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:samaya_hotel/bottom_navbar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'bottom_nav.dart';
@@ -121,7 +122,7 @@ class _LandingPage extends State<LandingPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const BottomNav()));
+                            builder: (context) => const BottomNavbar()));
                   },
                   child: const Text(
                     'Book Now',
