@@ -4,6 +4,8 @@ import 'package:samaya_hotel/dialog/page_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
+import 'home_reservation.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -587,7 +589,7 @@ class _HomePage extends State<HomePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ViewPages(
+                                    builder: (context) => HomeReservation(
                                           date: _range,
                                         )),
                               );

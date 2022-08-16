@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 
 class EmailSent extends StatefulWidget {
   const EmailSent({Key? key}) : super(key: key);
@@ -11,12 +10,10 @@ class EmailSent extends StatefulWidget {
   State<EmailSent> createState() => _EmailSentState();
 }
 
-
 class _EmailSentState extends State<EmailSent> {
-
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), (){
+    Timer(const Duration(seconds: 3), () {
       Navigator.pop(context);
     });
     super.initState();
@@ -64,10 +61,11 @@ class _EmailSentState extends State<EmailSent> {
   }
 
   Widget _loading() {
-    return const Center(
-      child: SpinKitCubeGrid(
-        color: Colors.deepPurple,
-      )
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Center(
+        child: Lottie.asset('images/assets/emailAnimation.json'),
+      ),
     );
   }
 }

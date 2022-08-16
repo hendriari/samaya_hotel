@@ -88,6 +88,48 @@ class _Orderan extends State<Orderan> {
           color: Colors.deepPurpleAccent,
         ),
       ),
+      HotelsInfo(
+        nameHotel: 'Hotel Samaya, Kab. Semarang',
+        imageHotel: 'images/hotels/landingimages4.jpg',
+        date: '19 Juni 2022 - 21 Juni 2022',
+        guestRoom: '1 Room, 2 Guest',
+        history: const Text(
+          'Finish',
+          style: TextStyle(color: Colors.deepPurpleAccent),
+        ),
+        historyIcon: const Icon(
+          Icons.check_circle,
+          color: Colors.deepPurpleAccent,
+        ),
+      ),
+      HotelsInfo(
+        nameHotel: 'Hotel Samaya, Jakarta',
+        imageHotel: 'images/hotels/landingimages4.jpg',
+        date: '1 July 2022 - 2 Juni 2022',
+        guestRoom: '1 Room, 2 Guest',
+        history: const Text(
+          'Cancel',
+          style: TextStyle(color: Colors.deepPurpleAccent),
+        ),
+        historyIcon: const Icon(
+          Icons.cancel,
+          color: Colors.red,
+        ),
+      ),
+      HotelsInfo(
+        nameHotel: 'Hotel Samaya, Semarang',
+        imageHotel: 'images/hotels/landingimages4.jpg',
+        date: '4 July 2022 - 6 July 2022',
+        guestRoom: '1 Room, 2 Guest',
+        history: const Text(
+          'Reserved',
+          style: TextStyle(color: Colors.green),
+        ),
+        historyIcon: const Icon(
+          Icons.check_circle,
+          color: Colors.green,
+        ),
+      ),
     ];
   }
 
@@ -99,17 +141,17 @@ class _Orderan extends State<Orderan> {
           children: <Widget>[
             SizedBox(
               height: 180,
-              width: MediaQuery.of(context).size.width *1,
+              width: MediaQuery.of(context).size.width * 1,
               child: Stack(
                 children: <Widget>[
                   Positioned(
                     child: SizedBox(
                       height: 120,
-                      width: MediaQuery.of(context).size.width *1,
+                      width: MediaQuery.of(context).size.width * 1,
                       child: SvgPicture.asset(
                         'images/rectangle1.svg',
                         fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width *1,
+                        width: MediaQuery.of(context).size.width * 1,
                       ),
                     ),
                   ),
@@ -186,7 +228,7 @@ class _Orderan extends State<Orderan> {
                                     child: const Icon(Icons.search))),
                             const Align(
                               child: Padding(
-                                padding: EdgeInsets.fromLTRB(8,30,8,0),
+                                padding: EdgeInsets.fromLTRB(8, 30, 8, 0),
                                 child: Divider(
                                   color: Colors.black,
                                 ),

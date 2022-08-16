@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 
 class SignUpSuccess extends StatefulWidget {
   const SignUpSuccess({Key? key}) : super(key: key);
@@ -12,10 +13,9 @@ class SignUpSuccess extends StatefulWidget {
 }
 
 class _SignUpSuccessState extends State<SignUpSuccess> {
-
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), (){
+    Timer(const Duration(milliseconds: 2600), () {
       Navigator.pop(context);
     });
     super.initState();
@@ -37,34 +37,41 @@ class _SignUpSuccessState extends State<SignUpSuccess> {
           ),
           Expanded(
               child: Stack(
-                children: [
-                  _loading(),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: MediaQuery.of(context).size.height * 0.5,
-                    child: Column(
-                      children: const [
-                        Text(
-                          'SIGN UP SUCCESS',
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        ),
-                        Text('Lorem Ipsum is simply dummy')
-                      ],
+            children: [
+              _loading(),
+              Positioned(
+                left: 0,
+                right: 0,
+                top: MediaQuery.of(context).size.height * 0.5,
+                child: Column(
+                  children: const [
+                    Text(
+                      'SIGN UP SUCCESS',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
                     ),
-                  ),
-                ],
-              )),
+                    Text('Lorem Ipsum is simply dummy')
+                  ],
+                ),
+              ),
+            ],
+          )),
         ],
       ),
     );
   }
+
   Widget _loading() {
-    return const Center(
-      child: SpinKitDancingSquare(
-        color: Colors.deepPurple,
+    return Positioned(
+      left: 0,
+      right: 0,
+      top: MediaQuery.of(context).size.height * 0.28,
+      child: Container(
+        height: 200,
+        width: 200,
+        child:
+            Center(child: Lottie.asset('images/assets/successAnimation.json')),
       ),
     );
   }

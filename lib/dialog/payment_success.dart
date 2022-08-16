@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:lottie/lottie.dart';
+import 'package:samaya_hotel/bottom_nav.dart';
 
 class PaymentSuccess extends StatefulWidget {
   const PaymentSuccess({Key? key}) : super(key: key);
@@ -12,13 +11,14 @@ class PaymentSuccess extends StatefulWidget {
   State<PaymentSuccess> createState() => _PaymentSuccessState();
 }
 
-
-
 class _PaymentSuccessState extends State<PaymentSuccess> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), (){
-      Navigator.pop(context);
+    Timer(const Duration(milliseconds: 2500), () {
+      //push and delete the preveious route
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomNav()),
+          (Route<dynamic> route) => false);
     });
     super.initState();
   }
@@ -39,27 +39,29 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
           ),
           Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _loading(),
-                  const Text(
-                    'PAYMENT SUCCESS',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  const Center(child: Text('Lorem Ipsum is simply dummy'))
-                ],
-              )),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _loading(),
+              const Text(
+                'PAYMENT SUCCESS',
+                style: TextStyle(fontSize: 24),
+              ),
+              const Center(child: Text('Lorem Ipsum is simply dummy'))
+            ],
+          )),
         ],
       ),
     );
   }
-  Widget _loading(){
-    return const SpinKitPumpingHeart(
-      size: 120,
-      color: Colors.deepPurple,
-      duration: Duration(seconds: 2),
+
+  Widget _loading() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Center(
+          child: SizedBox(
+              height: 100,
+              width: 100,
+              child: Lottie.asset('images/assets/successAnimation.json'))),
     );
   }
 }
-
-
