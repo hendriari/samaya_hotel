@@ -1,70 +1,27 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:samaya_hotel/access/digital_key.dart';
-import 'package:samaya_hotel/access/loading_access.dart';
 
-class AccessPage extends StatefulWidget {
-  const AccessPage({Key? key}) : super(key: key);
+class AccessSuccess extends StatefulWidget {
+  const AccessSuccess({Key? key}) : super(key: key);
 
   @override
-  _AccessPage createState() => _AccessPage();
+  State<AccessSuccess> createState() => _AccessSuccessState();
 }
 
-class _AccessPage extends State<AccessPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late final width = MediaQuery.of(context).size.width;
-
-
-  bool _anim = false;
-  bool _animasiLoading = false;
-
-  String _status = 'Tap to Unlock Room';
-
+class _AccessSuccessState extends State<AccessSuccess> {
   @override
   void initState() {
+    Timer(const Duration(seconds: 2), (){
+      Navigator.pop(context);
+    });
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
-    // _animationController.addStatusListener((status) {
-    //   if (status == AnimationStatus.completed)
-    //     setState(() {
-    //       _anim = true;
-    //     });
-    // });
   }
 
-
-
   @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-
-  // void _onLoading ()async{
-  //   if(_anim){
-  //     setState((){
-  //       _anim = true;
-  //       _animasiLoading = true;
-  //     });
-  //     await Future.delayed(Duration(seconds: 3));
-  //     setState((){
-  //       _anim = false;
-  //       _animasiLoading = true;
-  //     });
-  //   }
-  // }
-
-
-  @override
-  Widget build(BuildContext context)
-  // => _animasiLoading ? AccessLoading() :
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -165,58 +122,13 @@ class _AccessPage extends State<AccessPage>
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
-                onTap:
-                // _onLoading
-                ()async{
-                  setState((){
-                    _anim = true;
-                    _animasiLoading = true;
-                    _status = 'Proccess';
-                  });
-                  await Future.delayed(Duration(milliseconds: 3500));
-                  setState((){
-                    _anim = false;
-                    _animasiLoading = false;
-                   _status = 'Complete';
-                  });
-                }
-                ,
-                child: Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.47,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: _anim
-                          ? Lottie.asset('images/assets/ncf_card.json')
-                          : Lottie.asset(
-                              'images/assets/ncf_card.json',
-                              controller: _animationController,
-                            ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child: Text(
-                              _status,
-                              style: TextStyle(fontSize: 18),
-                            )
-                    ),
-                  ],
-                )),
-            Expanded(
-              flex: 0,
-              child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DigitalKey()));
-                  },
-                  child: const Text(
-                    'Show 3D Key',
-                    style: TextStyle(color: Colors.deepPurple),
-                  )),
-            )
+            Container(
+              color: Colors.red,
+              height: MediaQuery.of(context).size.height * 0.47,
+              width: MediaQuery.of(context).size.width * 1,
+              child: Lottie.asset('images/assets/ncf_card.json'),
+            ),
+            Text('Success Unlock'),
           ],
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:samaya_hotel/access/access_page.dart';
 import 'package:samaya_hotel/account/account_page.dart';
 import 'package:samaya_hotel/dialog/exit_dialog.dart';
 import 'package:samaya_hotel/home/home_page.dart';
-
 import 'myOrder/myorder_page.dart';
 
 class BottomNav extends StatefulWidget {
@@ -63,21 +62,21 @@ class _BottomNavState extends State<BottomNav> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_balance_wallet_sharp,
                     color: Colors.deepPurple),
-                label: 'Home',
+                label: 'My Order',
                 activeIcon: Icon(
                   Icons.account_balance_wallet_outlined,
                   color: Colors.amberAccent,
                 )),
             BottomNavigationBarItem(
                 icon: Icon(Icons.access_time_filled, color: Colors.deepPurple),
-                label: 'Home',
+                label: 'Access',
                 activeIcon: Icon(
                   Icons.access_time,
                   color: Colors.amberAccent,
                 )),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle, color: Colors.deepPurple),
-                label: 'Home',
+                label: 'Account',
                 activeIcon: Icon(
                   Icons.account_circle_outlined,
                   color: Colors.amberAccent,

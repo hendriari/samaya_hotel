@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignUpSuccess extends StatefulWidget {
@@ -61,8 +62,10 @@ class _SignUpSuccessState extends State<SignUpSuccess> {
     );
   }
   Widget _loading() {
-    return Center(
-      child: Image.asset('images/ceklist.gif'),
+    return const Center(
+      child: SpinKitDancingSquare(
+        color: Colors.deepPurple,
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class ReservationSummary extends StatefulWidget {
   final HotelRoom data;
 
-  ReservationSummary({required this.data});
+  const ReservationSummary({Key? key, required this.data}) : super(key: key);
 
   @override
   State<ReservationSummary> createState() => _ReservationSummaryState();
@@ -16,7 +16,7 @@ class ReservationSummary extends StatefulWidget {
 class _ReservationSummaryState extends State<ReservationSummary> {
   bool loadingpayment = false;
 
-  int _tax = 60000;
+  final int _tax = 60000;
   late final int _total;
 
   @override
@@ -38,7 +38,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                   child: Stack(
                     children: <Widget>[
                       Positioned(
-                        child: Container(
+                        child: SizedBox(
                           height: 120,
                           width: MediaQuery.of(context).size.width * 1,
                           child: SvgPicture.asset(
@@ -92,7 +92,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     children: [
                       const Text(
                         'Hotel Samaya, Semarang',
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
@@ -133,7 +133,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     children: [
                       const Text(
                         'Superior King Bed Room',
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
@@ -149,8 +149,8 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       ),
                       Row(
                         children: [
-                          Icon(Icons.money),
-                          SizedBox(width: 10),
+                          const Icon(Icons.money),
+                          const SizedBox(width: 10),
                           Text(
                             widget.data.refund!,
                           ),
@@ -169,7 +169,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     children: [
                       const Text(
                         'Guest Information',
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
@@ -201,7 +201,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     children: [
                       const Text(
                         'Special Request',
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
@@ -237,7 +237,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                         NumberFormat.currency(
                                 locale: 'id', symbol: 'IDR ', decimalDigits: 0)
                             .format(widget.data.price!),
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -248,7 +248,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Tax & Service'),
+                      const Text('Tax & Service'),
                       SizedBox(
                           width: 70,
                           child: Text(
@@ -257,7 +257,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                                     symbol: 'IDR ',
                                     decimalDigits: 0)
                                 .format(_tax),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           )),
                     ],
                   ),
@@ -274,7 +274,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Amount'),
+                      const Text('Amount'),
                       SizedBox(
                           width: 70,
                           child: Text(
@@ -283,7 +283,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                                     symbol: 'IDR ',
                                     decimalDigits: 0)
                                 .format(_total),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           )),
                     ],
                   ),
@@ -299,10 +299,8 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                           borderRadius: BorderRadius.circular(20))),
                   onPressed: () {
                     setState(() => loadingpayment = true);
-                    // await Future.delayed(Duration(seconds: 6));
-                    // setState(() => loadingpayment = false);
                   },
-                  child: Text(
+                  child: const Text(
                     'Confirm',
                     style: TextStyle(
                       fontSize: 22,

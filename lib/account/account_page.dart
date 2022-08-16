@@ -20,9 +20,9 @@ class _AccountPage extends State<AccountPage> {
   File? image;
 
   Future getImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.camera);
+        await picker.pickImage(source: ImageSource.camera);
     image = File(pickedImage!.path);
     setState(() {});
   }

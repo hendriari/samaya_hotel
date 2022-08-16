@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EmailSent extends StatefulWidget {
@@ -63,8 +64,10 @@ class _EmailSentState extends State<EmailSent> {
   }
 
   Widget _loading() {
-    return Center(
-      child: Image.asset('images/ceklist.gif'),
+    return const Center(
+      child: SpinKitCubeGrid(
+        color: Colors.deepPurple,
+      )
     );
   }
 }
