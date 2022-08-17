@@ -89,6 +89,8 @@ flutter:
      - images/rectangle2.svg
      - images/assets/
      - images/navbarIcon/
+     - images/promotion/
+     - images/vacation/
      - images/location.png
 
 

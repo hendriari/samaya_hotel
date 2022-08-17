@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:samaya_hotel/bottom_navbar.dart';
 import 'package:samaya_hotel/splashscreen1.dart';
-import 'bottom_nav.dart';
+import 'package:samaya_hotel/unUsed/bottom_navbar.dart';
 import 'http_overrides.dart';
 
 void main() {

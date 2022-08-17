@@ -27,9 +27,9 @@ final urlImages = [
 
 class _HomeReservationState extends State<HomeReservation> {
   late List<HotelRoom> _hotelrooms;
-  String? _range;
   late PageController _controllerPage;
   late ScrollController _scrollController;
+  String? _range;
 
   @override
   void initState() {

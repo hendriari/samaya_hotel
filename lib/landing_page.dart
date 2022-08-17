@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:samaya_hotel/bottom_navbar.dart';
+import 'package:samaya_hotel/bottomnavbar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'bottom_nav.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -122,7 +121,7 @@ class _LandingPage extends State<LandingPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const BottomNavbar()));
+                            builder: (context) => const BottomNavigationBars()));
                   },
                   child: const Text(
                     'Book Now',
@@ -137,14 +136,11 @@ class _LandingPage extends State<LandingPage> {
     );
   }
 
-  Widget buildImage(String assetImage, int index) => Container(
-        color: Colors.deepPurple,
-        child: Image.asset(
-          assetImage,
-          fit: BoxFit.cover,
-          width: double.infinity,
-        ),
-      );
+  Widget buildImage(String assetImage, int index) => Image.asset(
+    assetImage,
+    fit: BoxFit.cover,
+    width: double.infinity,
+  );
 
   Widget buildIndicator() => AnimatedSmoothIndicator(
         activeIndex: activeIndex,
