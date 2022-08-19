@@ -96,7 +96,7 @@ class _AccessPage extends State<AccessPage>
                                 child: SizedBox(
                                   child: Row(
                                     children: const [
-                                      Icon(Icons.calendar_month_outlined),
+                                      Icon(Icons.calendar_month_outlined, color: Colors.deepPurple,),
                                       SizedBox(
                                         width: 10,
                                       ),
@@ -111,7 +111,7 @@ class _AccessPage extends State<AccessPage>
                                   child: SizedBox(
                                     child: Row(
                                       children: const [
-                                        Icon(Icons.bed),
+                                        Icon(Icons.bed, color: Colors.deepPurple,),
                                         SizedBox(
                                           width: 10,
                                         ),

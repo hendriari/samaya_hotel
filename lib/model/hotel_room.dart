@@ -1,4 +1,5 @@
 class HotelRoom {
+  int? id;
   String? name;
   String? bed;
   String? maxPerson;
@@ -7,6 +8,7 @@ class HotelRoom {
   String? images;
 
   HotelRoom({
+    this.id,
     this.name,
     this.bed,
     this.maxPerson,

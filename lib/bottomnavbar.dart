@@ -42,118 +42,126 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
 
   @override
   Widget build(BuildContext context) {
-    double displayWidth = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         extendBody: true,
         body: body[currentbody],
-        bottomNavigationBar: Container(
-          margin: EdgeInsets.all(displayWidth * .05),
-          height: displayWidth * .155,
-          decoration: BoxDecoration(
-            color: Colors.deepPurple,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(.1),
-                blurRadius: 30,
-                offset: const Offset(0, 10),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(50),
+        bottomNavigationBar: _navbar(context),
+      ),
+    );
+  }
+
+  Container _navbar(BuildContext context){
+    double displayWidth = MediaQuery.of(context).size.width;
+    return Container(
+      margin: EdgeInsets.fromLTRB(displayWidth * .05, 0, displayWidth * .05, 15),
+      // height: displayWidth * .155,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.deepPurple,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.1),
+            blurRadius: 30,
+            offset: const Offset(0, 10),
           ),
-          child: ListView.builder(
-            itemCount: body.length,
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
-            itemBuilder: (context, body) => InkWell(
-              onTap: () {
-                setState(() {
-                  currentbody = body;
-                  HapticFeedback.lightImpact();
-                });
-              },
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              child: Stack(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(seconds: 1),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    width: body == currentbody
-                        ? displayWidth * .32
-                        : displayWidth * .18,
-                    alignment: Alignment.center,
-                    child: AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      height: body == currentbody ? displayWidth * .12 : 0,
-                      width: body == currentbody ? displayWidth * .32 : 0,
-                      decoration: BoxDecoration(
-                        color: body == currentbody
-                            ? Colors.white.withOpacity(.2)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
+        ],
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: ListView.builder(
+        itemCount: body.length,
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
+        itemBuilder: (context, body) => InkWell(
+          onTap: () {
+            setState(() {
+              currentbody = body;
+              HapticFeedback.lightImpact();
+            });
+          },
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          child: Stack(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                curve: Curves.fastLinearToSlowEaseIn,
+                width: body == currentbody
+                    ? displayWidth * .32
+                    : displayWidth * .18,
+                alignment: Alignment.center,
+                child: AnimatedContainer(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  // height: body == currentbody ? displayWidth * .12 : 0,
+                  height: 45,
+                  width: body == currentbody ? displayWidth * .32 : 0,
+                  decoration: BoxDecoration(
+                    color: body == currentbody
+                        ? Colors.white.withOpacity(.2)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(50),
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(seconds: 1),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    width: body == currentbody
-                        ? displayWidth * .31
-                        : displayWidth * .18,
-                    alignment: Alignment.center,
-                    child: Stack(
+                ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                curve: Curves.fastLinearToSlowEaseIn,
+                // width: body == currentbody
+                //     ? displayWidth * .31
+                //     : displayWidth * .18,
+                alignment: Alignment.center,
+                child: Stack(
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width:
-                                  body == currentbody ? displayWidth * .13 : 0,
-                            ),
-                            AnimatedOpacity(
-                              opacity: body == currentbody ? 1 : 0,
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              child: Text(
-                                body == currentbody
-                                    ? listOfStrings[body]
-                                    : '',
-                                style: const TextStyle(
-                                  color: Colors.amber,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ],
+                        AnimatedContainer(
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          width:
+                          body == currentbody ? displayWidth * .15 : 0,
                         ),
-                        Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width:
-                                  body == currentbody ? displayWidth * .03 : 20,
+                        AnimatedOpacity(
+                          opacity: body == currentbody ? 1 : 0,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          child: Text(
+                            body == currentbody
+                                ? listOfStrings[body]
+                                : '',
+                            style: const TextStyle(
+                              color: Colors.amber,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
                             ),
-                            Icon(
-                              listOfIcons[body],
-                              size: displayWidth * .076,
-                              color: body == currentbody
-                                  ? Colors.amberAccent
-                                  : Colors.black26,
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                    Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          // width:
+                          // body == currentbody ? displayWidth * .03 : 20,
+                          width: 30,
+                        ),
+                        Icon(
+                          listOfIcons[body],
+                          // size: displayWidth * .076,
+                          size: 30,
+                          color: body == currentbody
+                              ? Colors.amberAccent
+                              : Colors.black26,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

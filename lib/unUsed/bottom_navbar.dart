@@ -1,16 +1,13 @@
 // diarsipkan untuk catatan pribadi
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../access/access_page.dart';
 import '../account/account_page.dart';
 import '../dialog/exit_dialog.dart';
 import '../home/home_page.dart';
 import '../myOrder/myorder_page.dart';
-
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -75,16 +72,14 @@ class _BottomNavbarState extends State<BottomNavbar> {
             children: [
               //kodingan asli
               Padding(
-                padding: EdgeInsets.fromLTRB(25, 10, 0, 10),
-                child: InkResponse(
+                padding: EdgeInsets.fromLTRB(25, 13, 0, 10),
+                child: InkWell(
                   onTap: () {
                     setState(() {
                       currentIndex = 0;
                       HapticFeedback.lightImpact();
                     });
                   },
-                  // splashColor: Colors.blue,
-                  // highlightColor: Colors.red,
                   child: Column(
                     children: [
                       SvgPicture.asset('images/navbarIcon/home.svg'),
@@ -109,7 +104,11 @@ class _BottomNavbarState extends State<BottomNavbar> {
                   // highlightColor: Colors.transparent,
                   child: Column(
                     children: [
-                      SvgPicture.asset('images/navbarIcon/home.svg'),
+                      Icon(
+                        Icons.task_alt,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                       Text(
                         'My Order',
                         style: TextStyle(color: Colors.white),
@@ -127,14 +126,18 @@ class _BottomNavbarState extends State<BottomNavbar> {
                       HapticFeedback.lightImpact();
                     });
                   },
-                  // splashColor: Colors.transparent,
-                  // highlightColor: Colors.transparent,
                   child: Column(
                     children: [
-                      SvgPicture.asset('images/navbarIcon/home.svg'),
+                      Icon(
+                        Icons.phone_android,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                       Text(
                         'Access',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: body == currentIndex
+                            ? Colors.amberAccent
+                            : Colors.white),
                       ),
                     ],
                   ),
@@ -153,7 +156,11 @@ class _BottomNavbarState extends State<BottomNavbar> {
                   // highlightColor: Colors.transparent,
                   child: Column(
                     children: [
-                      SvgPicture.asset('images/navbarIcon/home.svg'),
+                      Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                       Text(
                         'Account',
                         style: TextStyle(color: Colors.white),

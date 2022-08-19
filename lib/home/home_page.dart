@@ -15,12 +15,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  // CounterBloc bloc = CounterBloc();
+  // @override
+  // void dispose() {
+  //   bloc.dispose();
+  //   super.dispose();
+  // }
+
+
   late List<Vacation> _hiling;
   late List<Promotion> _promo;
 
-  // late List<Promotion> _promo;
   String _selectedItem = '';
+  String _selectedDate = '';
+  String _dateCount = '';
   String _range = '';
+  String _rangeCount = '';
+
   var _guest = 0;
   var _count = 0;
 
@@ -88,17 +99,38 @@ class _HomePage extends State<HomePage> {
     });
   }
 
+  //asli
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
       if (args.value is PickerDateRange) {
-        _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
+        _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
             // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
+            ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}'
+        ;
       } else if (args.value is DateTime) {
+        _selectedDate = args.value.toString();
       } else if (args.value is List<DateTime>) {
       } else {}
     });
   }
+
+  //uji single
+  // void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+  //   setState(() {
+  //     if (args.value is PickerDateRange) {
+  //       _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} '
+  //       // ignore: lines_longer_than_80_chars
+  //       //     ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}'
+  //       ;
+  //     } else if (args.value is DateTime) {
+  //       _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
+  //       // ignore: lines_longer_than_80_chars
+  //           ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}'
+  //       ;
+  //     } else if (args.value is List<DateTime>) {
+  //     } else {}
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -137,6 +169,9 @@ class _HomePage extends State<HomePage> {
               ),
             ),
             _promotionView(),
+            const SizedBox(
+              height: 70,
+            )
           ],
         ),
       ),
@@ -217,7 +252,10 @@ class _HomePage extends State<HomePage> {
                                       alignment: Alignment.topLeft,
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.location_pin),
+                                          const Icon(
+                                            Icons.location_pin,
+                                            color: Colors.deepPurple,
+                                          ),
                                           Text(
                                             _selectedItem,
                                             style:
@@ -258,7 +296,9 @@ class _HomePage extends State<HomePage> {
                                       child: Row(
                                         children: [
                                           const Icon(
-                                              Icons.calendar_month_outlined),
+                                            Icons.calendar_month_outlined,
+                                            color: Colors.deepPurple,
+                                          ),
                                           Text(
                                             _range,
                                             style:
@@ -299,7 +339,9 @@ class _HomePage extends State<HomePage> {
                                       child: Row(
                                         children: [
                                           const Icon(
-                                              Icons.calendar_month_outlined),
+                                            Icons.calendar_month_outlined,
+                                            color: Colors.deepPurple,
+                                          ),
                                           Text(
                                             _range,
                                             style:
@@ -339,7 +381,8 @@ class _HomePage extends State<HomePage> {
                                       alignment: Alignment.topLeft,
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.bed),
+                                          const Icon(Icons.bed,
+                                              color: Colors.deepPurple),
                                           Text(
                                             "$callBack Room, $_guest Guest",
                                             style:
@@ -356,7 +399,7 @@ class _HomePage extends State<HomePage> {
                           ),
                         )),
                     Positioned(
-                        bottom: 0,
+                        bottom: 8,
                         right: 0,
                         left: 0,
                         child: Center(
@@ -373,6 +416,9 @@ class _HomePage extends State<HomePage> {
                                 MaterialPageRoute(
                                     builder: (context) => HomeReservation(
                                           date: _range,
+                                          guest: _guest,
+                                          count: _count,
+                                          selectedItem: _selectedItem,
                                         )),
                               );
                             },
@@ -398,25 +444,25 @@ class _HomePage extends State<HomePage> {
         physics: const ScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    child: Container(
-                        height: 116,
-                        width: 262,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black54,
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                              )
-                            ]),
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: Stack(
+              children: <Widget>[
+                Align(
+                  child: Container(
+                      height: 116,
+                      width: 262,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black54,
+                              offset: Offset(1, 4),
+                              blurRadius: 5,
+                            )
+                          ]),
+                      child: InkResponse(
+                        onTap: () {},
                         child: Stack(children: <Widget>[
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20),
@@ -445,10 +491,10 @@ class _HomePage extends State<HomePage> {
                               ),
                             ),
                           ),
-                        ])),
-                  ),
-                ],
-              ),
+                        ]),
+                      )),
+                ),
+              ],
             ),
           );
         },
@@ -466,25 +512,25 @@ class _HomePage extends State<HomePage> {
         physics: const ScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    child: Container(
-                        height: 116,
-                        width: 262,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black54,
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                              )
-                            ]),
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: Stack(
+              children: <Widget>[
+                Align(
+                  child: Container(
+                      height: 116,
+                      width: 262,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black54,
+                              offset: Offset(1, 4),
+                              blurRadius: 5,
+                            )
+                          ]),
+                      child: InkResponse(
+                        onTap: () {},
                         child: Stack(children: <Widget>[
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20),
@@ -513,10 +559,10 @@ class _HomePage extends State<HomePage> {
                               ),
                             ),
                           ),
-                        ])),
-                  ),
-                ],
-              ),
+                        ]),
+                      )),
+                ),
+              ],
             ),
           );
         },
@@ -587,9 +633,16 @@ class _HomePage extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(Icons.location_pin),
+                          const Icon(
+                            Icons.location_pin,
+                            color: Colors.deepPurple,
+                          ),
                           InkResponse(
-                              onTap: () {}, child: const Icon(Icons.search))
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.search,
+                                color: Colors.deepPurple,
+                              ))
                         ],
                       ),
                       const Divider(
@@ -752,6 +805,7 @@ class _HomePage extends State<HomePage> {
         });
   }
 
+  //select room & guest
   void _onSelectionRoom() {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
@@ -771,6 +825,74 @@ class _HomePage extends State<HomePage> {
           );
         });
   }
+
+  //bloc management tapi gagal
+  // Widget _buildButtonSelectionRoom() {
+  //
+  //   return Container(
+  //       child: Column(
+  //     children: [
+  //       SizedBox(
+  //         width: 50,
+  //         child: Divider(
+  //           color: Colors.black,
+  //           thickness: 2,
+  //         ),
+  //       ),
+  //       Container(
+  //         padding: EdgeInsets.only(left: 20),
+  //         alignment: Alignment.centerLeft,
+  //         child: Text('Room'),
+  //       ),
+  //       Row(
+  //         children: [
+  //           Padding(
+  //             padding: EdgeInsets.only(left: 20),
+  //             child: Icon(
+  //               Icons.bed,size: 30,
+  //               color: Colors.deepPurple,
+  //             ),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.only(left: 5),
+  //             child: StreamBuilder(
+  //               stream: bloc.output.asBroadcastStream(),
+  //               builder: (context, snapshot)=>
+  //               Text('${snapshot.data}',style: TextStyle(fontSize: 20),),
+  //             )
+  //           ),
+  //           Spacer(),
+  //           Padding(
+  //             padding: EdgeInsets.only(right: 20.0),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.end,
+  //               children: [
+  //                 InkResponse(
+  //                     onTap: (){
+  //
+  //                     },
+  //                     child: Icon(Icons.add,size: 18,)),
+  //                 InkResponse(
+  //                     onTap: (){
+  //
+  //                     },
+  //                     child: Icon(Icons.minimize, size: 18,)),
+  //               ],
+  //             ),
+  //           )
+  //         ],
+  //       ),
+  //       Padding(
+  //         padding: EdgeInsets.fromLTRB(20,0,20,0),
+  //         child: Positioned(
+  //           child: Divider(
+  //             color: Colors.black,
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   ));
+  // }
 
   Widget _buildButtonSelectionRoom() {
     return Column(
@@ -802,7 +924,10 @@ class _HomePage extends State<HomePage> {
                 const Positioned(
                   left: 10,
                   top: 25,
-                  child: Icon(Icons.bed),
+                  child: Icon(
+                    Icons.bed,
+                    color: Colors.deepPurple,
+                  ),
                 ),
                 Positioned(
                   right: 10,
@@ -811,7 +936,10 @@ class _HomePage extends State<HomePage> {
                       onTap: () {
                         _incrementCount();
                       },
-                      child: const Icon(Icons.keyboard_arrow_up)),
+                      child: const Icon(
+                        Icons.keyboard_arrow_up,
+                        color: Colors.deepPurple,
+                      )),
                 ),
                 Positioned(
                     right: 10,
@@ -820,14 +948,11 @@ class _HomePage extends State<HomePage> {
                         onTap: () {
                           _decrementCount();
                         },
-                        child: const Icon(Icons.keyboard_arrow_down))),
-                Positioned(
-                    left: 40,
-                    top: 25,
-                    child: Text(
-                      "$_count",
-                      style: const TextStyle(fontSize: 16),
-                    )),
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.deepPurple,
+                        ))),
+                Positioned(left: 40, top: 25, child: Text('$_count')),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Container(
@@ -865,25 +990,34 @@ class _HomePage extends State<HomePage> {
                 const Positioned(
                   left: 10,
                   top: 25,
-                  child: Icon(Icons.person),
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.deepPurple,
+                  ),
                 ),
                 Positioned(
                   right: 10,
                   top: 10,
-                  child: InkResponse(
+                  child: InkWell(
                       onTap: () {
                         _incrementGuest();
                       },
-                      child: const Icon(Icons.keyboard_arrow_up)),
+                      child: const Icon(
+                        Icons.keyboard_arrow_up,
+                        color: Colors.deepPurple,
+                      )),
                 ),
                 Positioned(
                     right: 10,
                     bottom: 10,
-                    child: InkResponse(
+                    child: InkWell(
                         onTap: () {
                           _decrementGuest();
                         },
-                        child: const Icon(Icons.keyboard_arrow_down))),
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.deepPurple,
+                        ))),
                 Positioned(
                     left: 40,
                     top: 25,

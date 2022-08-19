@@ -310,7 +310,7 @@ class _AccountPage extends State<AccountPage> {
           ),
           const SizedBox(height: 40),
           SizedBox(
-              height: 100,
+              height: 180,
               child: Column(
                 children: <Widget>[
                   const Center(
@@ -350,7 +350,7 @@ class _AccountPage extends State<AccountPage> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               )),
         ],
@@ -385,16 +385,13 @@ class _AccountPage extends State<AccountPage> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Stack(
+                        child: Column(
                           children: const [
-                            Align(
-                              child: Text('Samaya Hotel',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 36)),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 115,
+                            Text('Samaya Hotel',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 36)),
+                            Padding(
+                              padding: EdgeInsets.only(left: 155),
                               child: Text('v 1.0.1',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 14)),
@@ -512,7 +509,7 @@ class _AccountPage extends State<AccountPage> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
+            height: MediaQuery.of(context).size.height * 0.25,
           ),
           Column(
             children: <Widget>[
@@ -570,6 +567,9 @@ class _AccountPage extends State<AccountPage> {
                   ),
                 ),
               )),
+              const SizedBox(
+                height: 80,
+              ),
             ],
           ),
         ],

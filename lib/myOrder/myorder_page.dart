@@ -193,7 +193,7 @@ class _Orderan extends State<Orderan> {
                                               MainAxisAlignment.start,
                                           children: [
                                             const Icon(
-                                                Icons.calendar_month_outlined),
+                                                Icons.calendar_month_outlined, color: Colors.deepPurple,),
                                             const SizedBox(
                                               width: 10,
                                             ),
@@ -225,7 +225,7 @@ class _Orderan extends State<Orderan> {
                                 bottom: 0,
                                 child: InkWell(
                                     onTap: () {},
-                                    child: const Icon(Icons.search))),
+                                    child: const Icon(Icons.search, color: Colors.deepPurple,))),
                             const Align(
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(8, 30, 8, 0),
@@ -301,7 +301,7 @@ class _Orderan extends State<Orderan> {
                                   left: 118,
                                   child: Row(
                                     children: <Widget>[
-                                      const Icon(Icons.calendar_month_outlined),
+                                      const Icon(Icons.calendar_month_outlined, color: Colors.deepPurple,),
                                       Text(_historyOrder[index].date!)
                                     ],
                                   ),
@@ -311,7 +311,7 @@ class _Orderan extends State<Orderan> {
                                   left: 118,
                                   child: Row(
                                     children: <Widget>[
-                                      const Icon(Icons.bed_rounded),
+                                      const Icon(Icons.bed_rounded, color: Colors.deepPurple,),
                                       Text(_historyOrder[index].guestRoom!),
                                     ],
                                   ),

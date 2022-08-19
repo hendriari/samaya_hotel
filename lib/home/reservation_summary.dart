@@ -6,8 +6,19 @@ import 'package:intl/intl.dart';
 
 class ReservationSummary extends StatefulWidget {
   final HotelRoom data;
+  final String selectedItem;
+  final String date;
+  final int guest;
+  final int count;
 
-  const ReservationSummary({Key? key, required this.data}) : super(key: key);
+  const ReservationSummary(
+      {Key? key,
+      required this.data,
+      required this.selectedItem,
+      required this.count,
+      required this.guest,
+      required this.date})
+      : super(key: key);
 
   @override
   State<ReservationSummary> createState() => _ReservationSummaryState();
@@ -16,17 +27,27 @@ class ReservationSummary extends StatefulWidget {
 class _ReservationSummaryState extends State<ReservationSummary> {
   bool loadingpayment = false;
 
+  String? _selectedItem;
+  String? date;
+  int? _count;
+  int? _guest;
+
   final int _tax = 60000;
   late final int _total;
 
   @override
   void initState() {
     super.initState();
+    _selectedItem = widget.selectedItem;
+    date=widget.date;
+    _count=widget.count;
+    _guest=widget.guest;
     _total = _tax + widget.data.price!;
   }
 
   @override
-  Widget build(BuildContext context) => loadingpayment ? const PaymentLoading()
+  Widget build(BuildContext context) => loadingpayment
+      ? const PaymentLoading()
       : Scaffold(
           body: SingleChildScrollView(
             child: Column(
@@ -90,34 +111,43 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Hotel Samaya, Semarang',
-                        style: TextStyle(fontSize: 16),
+                      Text(
+                        _selectedItem!,
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
                         child: Row(
-                          children: const [
-                            Icon(Icons.date_range),
-                            SizedBox(width: 10),
+                          children: [
+                            const Icon(
+                              Icons.date_range,
+                              color: Colors.deepPurple,
+                            ),
+                            const SizedBox(width: 10),
                             Text(
-                              '1 July 2022 - 31 July 2022',
+                              date!,
                             )
                           ],
                         ),
                       ),
                       Row(
-                        children: const [
-                          Icon(Icons.bed),
-                          SizedBox(width: 10),
-                          Text('1 Room, 1 Guest')
+                        children: [
+                          const Icon(
+                            Icons.bed,
+                            color: Colors.deepPurple,
+                          ),
+                          const SizedBox(width: 10),
+                          Text('$_count Room, $_guest Guest')
                         ],
                       ),
                       Row(
-                        children: const [
-                          Icon(Icons.accessibility),
-                          SizedBox(width: 10),
-                          Text('2 Guest')
+                        children: [
+                          const Icon(
+                            Icons.person,
+                            color: Colors.deepPurple,
+                          ),
+                          const SizedBox(width: 10),
+                          Text('$_guest Guest')
                         ],
                       ),
                       const Divider(
@@ -139,7 +169,10 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                         padding: const EdgeInsets.only(top: 5.0),
                         child: Row(
                           children: const [
-                            Icon(Icons.bed),
+                            Icon(
+                              Icons.bed,
+                              color: Colors.deepPurple,
+                            ),
                             SizedBox(width: 10),
                             Text(
                               'King Bed',
@@ -149,7 +182,10 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.money),
+                          const Icon(
+                            Icons.money,
+                            color: Colors.deepPurple,
+                          ),
                           const SizedBox(width: 10),
                           Text(
                             widget.data.refund!,
@@ -175,7 +211,10 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                         padding: const EdgeInsets.only(top: 5.0),
                         child: Row(
                           children: const [
-                            Icon(Icons.account_circle),
+                            Icon(
+                              Icons.person,
+                              color: Colors.deepPurple,
+                            ),
                             SizedBox(width: 10),
                             Text('Lilya Cordoba')
                           ],
@@ -183,7 +222,10 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       ),
                       Row(
                         children: const [
-                          Icon(Icons.mail),
+                          Icon(
+                            Icons.mail,
+                            color: Colors.deepPurple,
+                          ),
                           SizedBox(width: 10),
                           Text('lilyacordoba@gmail.com')
                         ],
@@ -207,7 +249,10 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                         padding: const EdgeInsets.only(top: 5.0),
                         child: Row(
                           children: const [
-                            Icon(Icons.check_box),
+                            Icon(
+                              Icons.check_box,
+                              color: Colors.deepPurple,
+                            ),
                             SizedBox(width: 10),
                             Text('High Floor')
                           ],
