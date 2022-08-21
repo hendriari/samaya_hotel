@@ -22,15 +22,31 @@ class _SplashScreen1State extends State<SplashScreen1> {
             setState(() {
               click = !click;
             });
-            await Future.delayed(const Duration(milliseconds: 250));
+            await Future.delayed(const Duration(milliseconds: 150));
             setState(()  {
               // await Future.delayed(const Duration(milliseconds: 480));
               if(!mounted) return;
               Navigator.pushReplacement(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animasi1, animasi2) =>
-                           const SplashScreen2()));
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondAnimation) => const SplashScreen2(),
+                  transitionDuration: Duration(milliseconds: 1),
+                  transitionsBuilder: (context, animation, secondAnimation, child) {
+                    const begin = Offset(0.0, 1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.fastLinearToSlowEaseIn;
+
+                    var tween =
+                    Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                ),
+              );
 
             });
           },

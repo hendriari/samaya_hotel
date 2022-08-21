@@ -24,7 +24,6 @@ final assetImages = [
 class _LandingPage extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
-    // final mediaQueryHeight = MediaQuery.of(context).size.height;
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(

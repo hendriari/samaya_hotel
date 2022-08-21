@@ -22,15 +22,12 @@ class _HomePage extends State<HomePage> {
   //   super.dispose();
   // }
 
-
   late List<Vacation> _hiling;
   late List<Promotion> _promo;
 
-  String _selectedItem = '';
-  String _selectedDate = '';
-  String _dateCount = '';
-  String _range = '';
-  String _rangeCount = '';
+  String _selectedItem = 'In';
+  String _range = 'On';
+  String _single = '';
 
   var _guest = 0;
   var _count = 0;
@@ -99,38 +96,18 @@ class _HomePage extends State<HomePage> {
     });
   }
 
-  //asli
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      if (args.value is PickerDateRange) {
-        _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
-            // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}'
-        ;
-      } else if (args.value is DateTime) {
-        _selectedDate = args.value.toString();
-      } else if (args.value is List<DateTime>) {
-      } else {}
+      _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
+      _single =
+          '${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}';
     });
   }
 
-  //uji single
-  // void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-  //   setState(() {
-  //     if (args.value is PickerDateRange) {
-  //       _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} '
-  //       // ignore: lines_longer_than_80_chars
-  //       //     ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}'
-  //       ;
-  //     } else if (args.value is DateTime) {
-  //       _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
-  //       // ignore: lines_longer_than_80_chars
-  //           ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}'
-  //       ;
-  //     } else if (args.value is List<DateTime>) {
-  //     } else {}
-  //   });
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -343,7 +320,7 @@ class _HomePage extends State<HomePage> {
                                             color: Colors.deepPurple,
                                           ),
                                           Text(
-                                            _range,
+                                            'On $_single',
                                             style:
                                                 const TextStyle(fontSize: 16),
                                           ),
@@ -416,6 +393,7 @@ class _HomePage extends State<HomePage> {
                                 MaterialPageRoute(
                                     builder: (context) => HomeReservation(
                                           date: _range,
+                                          cekout: _single,
                                           guest: _guest,
                                           count: _count,
                                           selectedItem: _selectedItem,
@@ -794,6 +772,9 @@ class _HomePage extends State<HomePage> {
                 padding: const EdgeInsets.all(10),
                 child: SfDateRangePicker(
                   onSelectionChanged: _onSelectionChanged,
+                  todayHighlightColor: Colors.deepPurple,
+                  startRangeSelectionColor: Colors.deepPurple,
+                  endRangeSelectionColor: Colors.deepPurple,
                   selectionMode: DateRangePickerSelectionMode.range,
                   initialSelectedRange: PickerDateRange(
                       DateTime.now().subtract(const Duration(days: 0)),
@@ -805,7 +786,6 @@ class _HomePage extends State<HomePage> {
         });
   }
 
-  //select room & guest
   void _onSelectionRoom() {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(

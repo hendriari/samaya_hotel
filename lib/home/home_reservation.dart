@@ -16,10 +16,12 @@ class HomeReservation extends StatefulWidget {
   final String selectedItem; //data lokasi hotel pilihan
   final int guest;
   final int count;
+  final String cekout;
 
   const HomeReservation(
       {Key? key,
       required this.date,
+      required this.cekout,
       required this.guest,
       required this.count,
       required this.selectedItem})
@@ -45,6 +47,7 @@ class _HomeReservationState extends State<HomeReservation> {
   late SingletonModel _model;
   String? _selectedItem;
   String? _range;
+  String? _single;
   int? _guest;
   int? _count;
 
@@ -53,6 +56,7 @@ class _HomeReservationState extends State<HomeReservation> {
   @override
   void initState() {
     super.initState();
+    _single = widget.cekout;
     _range = widget.date;
     _guest = widget.guest;
     _count = widget.count;
@@ -131,30 +135,11 @@ class _HomeReservationState extends State<HomeReservation> {
     });
   }
 
-  // void _incremen() {
-  //   setState(() {
-  //
-  //   });
-  // }
-  //
-  // void _decremen() {
-  //   if (_intAdd < 1) {
-  //     return;
-  //   }
-  //   setState(() {
-  //     _intAdd--;
-  //   });
-  // }
-
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      if (args.value is PickerDateRange) {
-        _range = '${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
-            // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}';
-      } else if (args.value is DateTime) {
-      } else if (args.value is List<DateTime>) {
-      } else {}
+      _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
+      _single =
+          '${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}';
     });
   }
 
@@ -285,6 +270,14 @@ class _HomeReservationState extends State<HomeReservation> {
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
                                           _range!,
+                                          style: const TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 6.0),
+                                        child: Text(
+                                          '- $_single',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
@@ -631,18 +624,19 @@ class _HomeReservationState extends State<HomeReservation> {
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             ReservationDetail(
-
-                                                                count: widget
-                                                                    .count,
-                                                                guest: widget
-                                                                    .guest,
-                                                                date:
-                                                                    widget.date,
-                                                                selectedItem: widget
-                                                                    .selectedItem,
-                                                                data: _hotelrooms[
-                                                                    index],
-                                                              addItems: _model.addItem!,)));
+                                                              count:
+                                                                  widget.count,
+                                                              guest:
+                                                                  widget.guest,
+                                                              cekin: widget.date,
+                                                              cekout: widget.cekout,
+                                                              selectedItem: widget
+                                                                  .selectedItem,
+                                                              data: _hotelrooms[
+                                                                  index],
+                                                              addItems: _model
+                                                                  .addItem!,
+                                                            )));
                                               },
                                               child: Container(
                                                 height: 25,
@@ -778,6 +772,14 @@ class _HomeReservationState extends State<HomeReservation> {
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
                                           _range!,
+                                          style: const TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(left: 6.0),
+                                        child: Text(
+                                          '- $_single',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),

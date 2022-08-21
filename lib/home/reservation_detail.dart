@@ -4,24 +4,27 @@ import 'package:samaya_hotel/home/reservation_summary.dart';
 import 'package:samaya_hotel/model/hotel_room.dart';
 import 'package:intl/intl.dart';
 
+import '../model/singleton_model.dart';
+
 class ReservationDetail extends StatefulWidget {
   final HotelRoom data;
   final String selectedItem;
-  final String date;
+  final String cekin;
+  final String cekout;
   final int guest;
   final int count;
   final List addItems;
 
-  const ReservationDetail(
-      {Key? key,
-      required this.data,
-      required this.selectedItem,
-      required this.count,
-      required this.guest,
-      required this.date,
-      required this.addItems,
-      })
-      : super(key: key);
+  const ReservationDetail({
+    Key? key,
+    required this.data,
+    required this.selectedItem,
+    required this.count,
+    required this.guest,
+    required this.cekin,
+    required this.cekout,
+    required this.addItems,
+  }) : super(key: key);
 
   @override
   State<ReservationDetail> createState() => _ReservationDetailState();
@@ -36,15 +39,17 @@ class _ReservationDetailState extends State<ReservationDetail> {
   late List _intAdd;
   late final int _total;
   late final int _harga;
-  String? date;
-
-
+  String? cekin;
+  String? cekout;
+  late SingletonModel _model;
 
   @override
   void initState() {
     super.initState();
+    _model = SingletonModel.withContext(context);
     _intAdd = widget.addItems;
-    date = widget.date;
+    cekout = widget.cekout;
+    cekin = widget.cekin;
     _total = _tax + widget.data.price!;
     // _harga = _intAdd * widget.data.price!;
   }
@@ -102,8 +107,6 @@ class _ReservationDetailState extends State<ReservationDetail> {
                 ],
               ),
             ),
-
-            //ini asli
             Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
@@ -205,7 +208,6 @@ class _ReservationDetailState extends State<ReservationDetail> {
                 ),
               ),
             ),
-            //ini clone
             const SizedBox(
               height: 20,
             ),
@@ -469,7 +471,8 @@ class _ReservationDetailState extends State<ReservationDetail> {
                         builder: (context) => ReservationSummary(
                               guest: widget.guest,
                               count: widget.count,
-                              date: widget.date,
+                              cekin: widget.cekin,
+                              cekout: widget.cekout,
                               selectedItem: widget.selectedItem,
                               data: widget.data,
                             )));

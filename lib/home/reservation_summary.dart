@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 class ReservationSummary extends StatefulWidget {
   final HotelRoom data;
   final String selectedItem;
-  final String date;
+  final String cekin;
+  final String cekout;
   final int guest;
   final int count;
 
@@ -17,7 +18,8 @@ class ReservationSummary extends StatefulWidget {
       required this.selectedItem,
       required this.count,
       required this.guest,
-      required this.date})
+      required this.cekin,
+      required this.cekout})
       : super(key: key);
 
   @override
@@ -28,7 +30,8 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   bool loadingpayment = false;
 
   String? _selectedItem;
-  String? date;
+  String? cekin;
+  String? cekout;
   int? _count;
   int? _guest;
 
@@ -39,7 +42,8 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   void initState() {
     super.initState();
     _selectedItem = widget.selectedItem;
-    date=widget.date;
+    cekin=widget.cekin;
+    cekout=widget.cekout;
     _count=widget.count;
     _guest=widget.guest;
     _total = _tax + widget.data.price!;
@@ -125,8 +129,11 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                             ),
                             const SizedBox(width: 10),
                             Text(
-                              date!,
-                            )
+                              cekin!,
+                            ),
+                            Text(
+                              '- $cekout'
+                            ),
                           ],
                         ),
                       ),
