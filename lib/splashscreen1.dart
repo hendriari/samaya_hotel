@@ -30,7 +30,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondAnimation) => const SplashScreen2(),
-                  transitionDuration: Duration(milliseconds: 1),
+                  transitionDuration: const Duration(milliseconds: 1),
                   transitionsBuilder: (context, animation, secondAnimation, child) {
                     const begin = Offset(0.0, 1.0);
                     const end = Offset.zero;

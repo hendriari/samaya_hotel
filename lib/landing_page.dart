@@ -3,14 +3,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:samaya_hotel/bottomnavbar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
 
   @override
   _LandingPage createState() => _LandingPage();
 }
-
 
 int activeIndex = 0;
 final assetImages = [
@@ -83,7 +81,7 @@ class _LandingPage extends State<LandingPage> {
               height: 62,
               width: double.infinity,
               child: Column(
-                children:  const <Widget>[
+                children: const <Widget>[
                   Center(
                     child: Text(
                       'Samaya Hotel',
@@ -94,7 +92,7 @@ class _LandingPage extends State<LandingPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(160,0,0,0),
+                    padding: EdgeInsets.fromLTRB(160, 0, 0, 0),
                     child: Text('v 1.0.1',
                         style: TextStyle(
                           color: Colors.deepPurple,
@@ -117,10 +115,28 @@ class _LandingPage extends State<LandingPage> {
                         borderRadius: BorderRadius.circular(20),
                       )),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const BottomNavigationBars()));
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondAnimation) =>
+                            const BottomNavigationBars(),
+                        transitionDuration: const Duration(milliseconds: 1500),
+                        transitionsBuilder:
+                            (context, animation, secondAnimation, child) {
+                          const begin = Offset(0.0, 1.0);
+                          const end = Offset.zero;
+                          const curve = Curves.elasticIn;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
                   },
                   child: const Text(
                     'Book Now',
@@ -136,10 +152,10 @@ class _LandingPage extends State<LandingPage> {
   }
 
   Widget buildImage(String assetImage, int index) => Image.asset(
-    assetImage,
-    fit: BoxFit.cover,
-    width: double.infinity,
-  );
+        assetImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+      );
 
   Widget buildIndicator() => AnimatedSmoothIndicator(
         activeIndex: activeIndex,

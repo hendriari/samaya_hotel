@@ -15,13 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  // CounterBloc bloc = CounterBloc();
-  // @override
-  // void dispose() {
-  //   bloc.dispose();
-  //   super.dispose();
-  // }
-
   late List<Vacation> _hiling;
   late List<Promotion> _promo;
 
@@ -31,8 +24,6 @@ class _HomePage extends State<HomePage> {
 
   var _guest = 0;
   var _count = 0;
-
-  get callBack => _count;
 
   @override
   void initState() {
@@ -66,41 +57,11 @@ class _HomePage extends State<HomePage> {
     ];
   }
 
-  void _incrementCount() {
-    setState(() {
-      _count++;
-    });
-  }
-
-  void _decrementCount() {
-    if (_count < 1) {
-      return;
-    }
-    setState(() {
-      _count--;
-    });
-  }
-
-  void _incrementGuest() {
-    setState(() {
-      _guest++;
-    });
-  }
-
-  void _decrementGuest() {
-    if (_guest < 1) {
-      return;
-    }
-    setState(() {
-      _guest--;
-    });
-  }
-
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
       _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
-      _single =
-          '${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}';
+      _single = DateFormat('d MMMM yyyy')
+          .format(args.value.endDate ?? args.value.startDate);
     });
   }
 
@@ -257,40 +218,41 @@ class _HomePage extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                        top: 80,
-                        left: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 40,
-                            child: InkWell(
-                              onTap: () => _pressedDate(),
-                              child: Column(
-                                children: [
-                                  Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.calendar_month_outlined,
-                                            color: Colors.deepPurple,
-                                          ),
-                                          Text(
-                                            _range,
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          ),
-                                        ],
-                                      )),
-                                  const Divider(
-                                    color: Colors.black,
+                      top: 80,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 40,
+                          child: InkWell(
+                            onTap: () => _pressedDate(),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.calendar_month_outlined,
+                                        color: Colors.deepPurple,
+                                      ),
+                                      Text(
+                                        _range,
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                              ],
                             ),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                     const Positioned(
                       left: 20,
                       top: 130,
@@ -300,40 +262,40 @@ class _HomePage extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                        top: 140,
-                        left: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 40,
-                            child: InkWell(
-                              onTap: () => _pressedDate(),
-                              child: Column(
-                                children: [
-                                  Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.calendar_month_outlined,
-                                            color: Colors.deepPurple,
-                                          ),
-                                          Text(
-                                            'On $_single',
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          ),
-                                        ],
-                                      )),
-                                  const Divider(
-                                    color: Colors.black,
-                                  ),
-                                ],
-                              ),
+                      top: 140,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 40,
+                          child: InkWell(
+                            onTap: () => _pressedDate(),
+                            child: Column(
+                              children: [
+                                Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.calendar_month_outlined,
+                                          color: Colors.deepPurple,
+                                        ),
+                                        Text(
+                                          'On $_single',
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    )),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                              ],
                             ),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                     const Positioned(
                       left: 20,
                       top: 190,
@@ -343,66 +305,69 @@ class _HomePage extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                        top: 200,
-                        left: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 40,
-                            child: InkWell(
-                              onTap: () => _onSelectionRoom(),
-                              child: Column(
-                                children: [
-                                  Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: [
-                                          const Icon(Icons.bed,
-                                              color: Colors.deepPurple),
-                                          Text(
-                                            "$callBack Room, $_guest Guest",
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          ),
-                                        ],
-                                      )),
-                                  const Divider(
-                                    color: Colors.black,
+                      top: 200,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 40,
+                          child: InkWell(
+                            onTap: () => _onSelectionRoom(),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.bed,
+                                          color: Colors.deepPurple),
+                                      Text(
+                                        "$_count Room, $_guest Guest",
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                              ],
                             ),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                     Positioned(
-                        bottom: 8,
-                        right: 0,
-                        left: 0,
-                        child: Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.deepPurple,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                      bottom: 8,
+                      right: 0,
+                      left: 0,
+                      child: Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeReservation(
-                                          date: _range,
-                                          cekout: _single,
-                                          guest: _guest,
-                                          count: _count,
-                                          selectedItem: _selectedItem,
-                                        )),
-                              );
-                            },
-                            child: const Text('Search'),
                           ),
-                        )),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeReservation(
+                                  date: _range,
+                                  cekout: _single,
+                                  guest: _guest,
+                                  count: _count,
+                                  selectedItem: _selectedItem,
+                                ),
+                              ),
+                            );
+                          },
+                          child: const Text('Search'),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -428,20 +393,21 @@ class _HomePage extends State<HomePage> {
               children: <Widget>[
                 Align(
                   child: Container(
-                      height: 116,
-                      width: 262,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black54,
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                            )
-                          ]),
-                      child: InkResponse(
-                        onTap: () {},
-                        child: Stack(children: <Widget>[
+                    height: 116,
+                    width: 262,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black54,
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                          )
+                        ]),
+                    child: InkResponse(
+                      onTap: () {},
+                      child: Stack(
+                        children: <Widget>[
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(_hiling[index].images!,
@@ -469,8 +435,10 @@ class _HomePage extends State<HomePage> {
                               ),
                             ),
                           ),
-                        ]),
-                      )),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -800,149 +768,116 @@ class _HomePage extends State<HomePage> {
               ),
               Container(
                 child: _buildButtonSelectionGuest(),
-              )
+              ),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _count;
+                      _guest;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Save'),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           );
         });
   }
 
-  //bloc management tapi gagal
-  // Widget _buildButtonSelectionRoom() {
-  //
-  //   return Container(
-  //       child: Column(
-  //     children: [
-  //       SizedBox(
-  //         width: 50,
-  //         child: Divider(
-  //           color: Colors.black,
-  //           thickness: 2,
-  //         ),
-  //       ),
-  //       Container(
-  //         padding: EdgeInsets.only(left: 20),
-  //         alignment: Alignment.centerLeft,
-  //         child: Text('Room'),
-  //       ),
-  //       Row(
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.only(left: 20),
-  //             child: Icon(
-  //               Icons.bed,size: 30,
-  //               color: Colors.deepPurple,
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.only(left: 5),
-  //             child: StreamBuilder(
-  //               stream: bloc.output.asBroadcastStream(),
-  //               builder: (context, snapshot)=>
-  //               Text('${snapshot.data}',style: TextStyle(fontSize: 20),),
-  //             )
-  //           ),
-  //           Spacer(),
-  //           Padding(
-  //             padding: EdgeInsets.only(right: 20.0),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.end,
-  //               children: [
-  //                 InkResponse(
-  //                     onTap: (){
-  //
-  //                     },
-  //                     child: Icon(Icons.add,size: 18,)),
-  //                 InkResponse(
-  //                     onTap: (){
-  //
-  //                     },
-  //                     child: Icon(Icons.minimize, size: 18,)),
-  //               ],
-  //             ),
-  //           )
-  //         ],
-  //       ),
-  //       Padding(
-  //         padding: EdgeInsets.fromLTRB(20,0,20,0),
-  //         child: Positioned(
-  //           child: Divider(
-  //             color: Colors.black,
-  //           ),
-  //         ),
-  //       )
-  //     ],
-  //   ));
-  // }
-
   Widget _buildButtonSelectionRoom() {
     return Column(
       children: <Widget>[
         const Expanded(
-            flex: 0,
-            child: SizedBox(
-              width: 50,
-              child: Divider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-            )),
+          flex: 0,
+          child: SizedBox(
+            width: 50,
+            child: Divider(
+              color: Colors.black,
+              thickness: 2,
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(10),
           child: SizedBox(
             height: 60,
             width: double.infinity,
-            child: Stack(
-              children: [
-                const Positioned(
-                  left: 10,
-                  top: 5,
-                  child: Text(
-                    'Room',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+            child: StatefulBuilder(builder: (context, setState) {
+              return Stack(
+                children: [
+                  const Positioned(
+                    left: 10,
+                    top: 5,
+                    child: Text(
+                      'Room',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
                   ),
-                ),
-                const Positioned(
-                  left: 10,
-                  top: 25,
-                  child: Icon(
-                    Icons.bed,
-                    color: Colors.deepPurple,
+                  const Positioned(
+                    left: 10,
+                    top: 25,
+                    child: Icon(
+                      Icons.bed,
+                      color: Colors.deepPurple,
+                    ),
                   ),
-                ),
-                Positioned(
-                  right: 10,
-                  top: 10,
-                  child: InkResponse(
+                  Positioned(
+                    right: 10,
+                    top: 10,
+                    child: InkResponse(
                       onTap: () {
-                        _incrementCount();
+                        setState(() {
+                          _count++;
+                        });
                       },
                       child: const Icon(
                         Icons.keyboard_arrow_up,
                         color: Colors.deepPurple,
-                      )),
-                ),
-                Positioned(
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     right: 10,
                     bottom: 10,
                     child: InkResponse(
-                        onTap: () {
-                          _decrementCount();
-                        },
-                        child: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.deepPurple,
-                        ))),
-                Positioned(left: 40, top: 25, child: Text('$_count')),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: Container(
+                      onTap: () {
+                        if (_count < 1) {
+                          return;
+                        }
+                        setState(() {
+                          _count--;
+                        });
+                      },
+                      child: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                  ),
+                  Positioned(left: 40, top: 25, child: Text('$_count')),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Container(
                       alignment: Alignment.bottomCenter,
                       child: const Divider(
                         color: Colors.black,
-                      )),
-                )
-              ],
-            ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }),
           ),
         )
       ],
@@ -957,74 +892,73 @@ class _HomePage extends State<HomePage> {
           child: SizedBox(
             height: 60,
             width: double.infinity,
-            child: Stack(
-              children: [
-                const Positioned(
-                  left: 10,
-                  top: 5,
-                  child: Text(
-                    'Guest',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+            child: StatefulBuilder(builder: (context, setState) {
+              return Stack(
+                children: [
+                  const Positioned(
+                    left: 10,
+                    top: 5,
+                    child: Text(
+                      'Guest',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
                   ),
-                ),
-                const Positioned(
-                  left: 10,
-                  top: 25,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.deepPurple,
+                  const Positioned(
+                    left: 10,
+                    top: 25,
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.deepPurple,
+                    ),
                   ),
-                ),
-                Positioned(
-                  right: 10,
-                  top: 10,
-                  child: InkWell(
-                      onTap: () {
-                        _incrementGuest();
-                      },
-                      child: const Icon(
-                        Icons.keyboard_arrow_up,
-                        color: Colors.deepPurple,
-                      )),
-                ),
-                Positioned(
+                  Positioned(
                     right: 10,
-                    bottom: 10,
-                    child: InkWell(
+                    top: 10,
+                    child: InkResponse(
                         onTap: () {
-                          _decrementGuest();
+                          setState(() {
+                            _guest++;
+                          });
                         },
                         child: const Icon(
-                          Icons.keyboard_arrow_down,
+                          Icons.keyboard_arrow_up,
                           color: Colors.deepPurple,
-                        ))),
-                Positioned(
-                    left: 40,
-                    top: 25,
-                    child: Text(
-                      "$_guest",
-                      style: const TextStyle(fontSize: 16),
-                    )),
-                Positioned(
-                    left: 40,
-                    top: 25,
-                    child: Text(
-                      "$_guest",
-                      style: const TextStyle(fontSize: 16),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: Container(
-                      alignment: Alignment.bottomCenter,
+                        )),
+                  ),
+                  Positioned(
+                      right: 10,
+                      bottom: 10,
                       child: InkResponse(
-                        onTap: () {},
+                          onTap: () {
+                            if (_guest < 1) {
+                              return;
+                            }
+                            setState(() {
+                              _guest--;
+                            });
+                          },
+                          child: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.deepPurple,
+                          ))),
+                  Positioned(
+                      left: 40,
+                      top: 25,
+                      child: Text(
+                        "$_guest",
+                        style: const TextStyle(fontSize: 16),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Container(
+                        alignment: Alignment.bottomCenter,
                         child: const Divider(
                           color: Colors.black,
-                        ),
-                      )),
-                ),
-              ],
-            ),
+                        )),
+                  ),
+                ],
+              );
+            }),
           ),
         )
       ],
