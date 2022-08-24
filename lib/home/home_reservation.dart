@@ -197,6 +197,231 @@ class _HomeReservationState extends State<HomeReservation> {
         });
   }
 
+  void _editRoomGuest() {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              child: _buildButtonEditRoom(),
+            ),
+            Container(
+              child: _buildButtonEditGuest(),
+            ),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _count;
+                    _guest;
+                  });
+                  Navigator.pop(context);
+                },
+                child: const Text('Save'),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildButtonEditRoom() {
+    return Column(
+      children: <Widget>[
+        const Expanded(
+          flex: 0,
+          child: SizedBox(
+            width: 50,
+            child: Divider(
+              color: Colors.black,
+              thickness: 2,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Stack(
+                  children: [
+                    const Positioned(
+                      left: 10,
+                      top: 5,
+                      child: Text(
+                        'Room',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ),
+                    const Positioned(
+                      left: 10,
+                      top: 25,
+                      child: Icon(
+                        Icons.bed,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            if (_count != null) {
+                              _count = _count! + 1;
+                            }
+                          });
+                        },
+                        child: const Icon(
+                          Icons.keyboard_arrow_up,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 10,
+                      bottom: 10,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            var c = _count;
+                            if (c != null && c >= 1) {
+                              c--;
+                            }
+                            _count = c;
+                          });
+                        },
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    ),
+                    Positioned(left: 40, top: 25, child: Text('$_count')),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Container(
+                        alignment: Alignment.bottomCenter,
+                        child: const Divider(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildButtonEditGuest() {
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Stack(
+                  children: [
+                    const Positioned(
+                      left: 10,
+                      top: 5,
+                      child: Text(
+                        'Guest',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ),
+                    const Positioned(
+                      left: 10,
+                      top: 25,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            if (_guest != null) {
+                              _guest = _guest! + 1;
+                            }
+                          });
+                        },
+                        child: const Icon(
+                          Icons.keyboard_arrow_up,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                        right: 10,
+                        bottom: 10,
+                        child: InkResponse(
+                            onTap: () {
+                              setState(() {
+                                var g = _guest;
+
+                                if (g != null && g >= 1) {
+                                  g--;
+                                }
+                                _guest = g;
+                              });
+                            },
+                            child: const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.deepPurple,
+                            ))),
+                    Positioned(
+                      left: 40,
+                      top: 25,
+                      child: Text(
+                        "$_guest",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Container(
+                          alignment: Alignment.bottomCenter,
+                          child: const Divider(
+                            color: Colors.black,
+                          )),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   //image hotel carousel slider
   Widget buildImage(String urlImage, int index) => SizedBox(
         width: double.infinity,
@@ -332,7 +557,9 @@ class _HomeReservationState extends State<HomeReservation> {
                                   )),
                             ),
                             InkResponse(
-                                onTap: () {},
+                                onTap: () {
+                                  _editRoomGuest();
+                                },
                                 child: const Icon(Icons.edit,
                                     color: Colors.deepPurple)),
                           ],
@@ -572,7 +799,6 @@ class _HomeReservationState extends State<HomeReservation> {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: const [
                         BoxShadow(
-                          // blurStyle: BlurStyle.outer,
                           color: Colors.black54,
                           offset: Offset(1, 4),
                           blurRadius: 5,
@@ -671,16 +897,50 @@ class _HomeReservationState extends State<HomeReservation> {
                 left: 35,
                 child: InkResponse(
                   onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const SizedBox(
-                    child: Text(
-                      'Room',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondAnimation) =>
+                            HomeReservation(
+                                date: widget.date,
+                                cekout: widget.cekout,
+                                guest: widget.guest,
+                                count: widget.count,
+                                selectedItem: widget.selectedItem),
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        transitionsBuilder:
+                            (context, animation, secondAnimation, child) {
+                          const begin = Offset(0.0, 1.0);
+                          const end = Offset.zero;
+                          const curve = Curves.easeIn;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
                       ),
-                    ),
+                    );
+                    // Navigator.pop(context);
+                  },
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.arrow_back_ios_new,
+                        size: 15,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'Room',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -695,249 +955,248 @@ class _HomeReservationState extends State<HomeReservation> {
           physics: const ScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {},
-              child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Container(
-                    height: 170,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54),
-                        ]),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: SizedBox(
-                            width: 140,
-                            height: 140,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                _hotelrooms[index].images!,
-                                fit: BoxFit.cover,
-                              ),
+            return Padding(
+                padding: const EdgeInsets.all(8),
+                child: Container(
+                  height: 170,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54),
+                      ]),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: SizedBox(
+                          width: 140,
+                          height: 140,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              _hotelrooms[index].images!,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                _hotelrooms[index].name!,
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    const Icon(Icons.bed,
-                                        color: Colors.deepPurple),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(_hotelrooms[index].bed!),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(
-                                      Icons.money,
-                                      color: Colors.deepPurple,
-                                    ),
-                                    const SizedBox(width: 5),
-                                    Text(_hotelrooms[index].refund!)
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(
-                                      Icons.person,
-                                      color: Colors.deepPurple,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(_hotelrooms[index].maxPerson!),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        6,
-                                        0,
-                                        MediaQuery.of(context).size.width *
-                                            0.15,
-                                        0),
-                                    child: Text(
-                                      NumberFormat.currency(
-                                              locale: 'id',
-                                              symbol: 'IDR ',
-                                              decimalDigits: 0)
-                                          .format(_hotelrooms[index].price!),
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _hotelrooms[index].name!,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const Icon(Icons.bed,
+                                      color: Colors.deepPurple),
+                                  const SizedBox(
+                                    width: 5,
                                   ),
-                                  _model.addItem!
-                                          .where((element) =>
-                                              element.item.id ==
-                                              _hotelrooms[index].id)
-                                          .isEmpty
-                                      ? Container(
-                                          height: 30,
-                                          width: 60,
-                                          decoration: BoxDecoration(
-                                              color: Colors.deepPurple,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: InkWell(
-                                            onTap: () => setState(() {
-                                              _model.addItem!.add(AddItem(
-                                                  item: _hotelrooms[index],
-                                                  jumlahItem: 1));
-                                            }),
-                                            child: const Center(
-                                              child: Text(
-                                                "Select",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
+                                  Text(_hotelrooms[index].bed!),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.money,
+                                    color: Colors.deepPurple,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(_hotelrooms[index].refund!)
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.person,
+                                    color: Colors.deepPurple,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(_hotelrooms[index].maxPerson!),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      6,
+                                      0,
+                                      MediaQuery.of(context).size.width * 0.15,
+                                      0),
+                                  child: Text(
+                                    NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'IDR ',
+                                            decimalDigits: 0)
+                                        .format(_hotelrooms[index].price!),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                _model.addItem!
+                                        .where((element) =>
+                                            element.item.id ==
+                                            _hotelrooms[index].id)
+                                        .isEmpty
+                                    ? Container(
+                                        height: 30,
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                          color: Colors.deepPurple,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () => setState(() {
+                                            _model.addItem!.add(AddItem(
+                                                item: _hotelrooms[index],
+                                                jumlahItem: 1));
+                                          }),
+                                          child: const Center(
+                                            child: Text(
+                                              "Select",
+                                              style: TextStyle(
+                                                color: Colors.white,
                                               ),
                                             ),
                                           ),
-                                        )
-                                      : Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                InkResponse(
-                                                  onTap: () {
-                                                    AddItem select = _model
-                                                        .addItem!
-                                                        .where((element) =>
-                                                            element.item.id ==
-                                                            _hotelrooms[index]
-                                                                .id)
-                                                        .first;
-                                                    setState(() {
-                                                      if (select.jumlahItem ==
-                                                          1) {
-                                                        _model.addItem!
-                                                            .removeWhere(
-                                                                (element) =>
-                                                                    element.item
-                                                                        .id ==
-                                                                    _hotelrooms[
-                                                                            index]
-                                                                        .id);
-                                                      } else {
-                                                        _model.addItem!
-                                                            .where((element) =>
-                                                                element
-                                                                    .item.id ==
-                                                                _hotelrooms[
-                                                                        index]
-                                                                    .id)
-                                                            .first
-                                                            .jumlahItem--;
-                                                      }
-                                                    });
-                                                  },
-                                                  child: Container(
-                                                    height: 25,
-                                                    width: 25,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            color: Colors
-                                                                .deepPurple,
-                                                            shape: BoxShape
-                                                                .circle),
-                                                    child: const Center(
-                                                      child: Icon(
-                                                        Icons.arrow_left,
-                                                        size: 25,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    "${_model.addItem!.where((element) => element.item.id == _hotelrooms[index].id).first.jumlahItem}",
-                                                    style: const TextStyle(
-                                                        fontSize: 16),
-                                                  ),
-                                                ),
-                                                InkResponse(
-                                                  onTap: () {
-                                                    setState(() {
+                                        ),
+                                      )
+                                    : Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              InkResponse(
+                                                onTap: () {
+                                                  AddItem select = _model
+                                                      .addItem!
+                                                      .where((element) =>
+                                                          element.item.id ==
+                                                          _hotelrooms[index].id)
+                                                      .first;
+                                                  setState(() {
+                                                    if (select.jumlahItem ==
+                                                        1) {
+                                                      _model.addItem!
+                                                          .removeWhere(
+                                                              (element) =>
+                                                                  element.item
+                                                                      .id ==
+                                                                  _hotelrooms[
+                                                                          index]
+                                                                      .id);
+                                                    } else {
                                                       _model.addItem!
                                                           .where((element) =>
                                                               element.item.id ==
                                                               _hotelrooms[index]
                                                                   .id)
                                                           .first
-                                                          .jumlahItem++;
-                                                    });
-                                                  },
-                                                  child: Container(
-                                                    height: 25,
-                                                    width: 25,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            color: Colors
-                                                                .deepPurple,
-                                                            shape: BoxShape
-                                                                .circle),
-                                                    child: const Center(
-                                                      child: Icon(
-                                                        Icons.arrow_right,
-                                                        size: 25,
-                                                        color: Colors.white,
-                                                      ),
+                                                          .jumlahItem--;
+                                                    }
+                                                  });
+                                                },
+                                                child: Container(
+                                                  height: 25,
+                                                  width: 25,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color:
+                                                              Colors.deepPurple,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.arrow_left,
+                                                      size: 25,
+                                                      color: Colors.white,
                                                     ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-            );
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  "${_model.addItem!.where((element) => element.item.id == _hotelrooms[index].id).first.jumlahItem}",
+                                                  style: const TextStyle(
+                                                      fontSize: 16),
+                                                ),
+                                              ),
+                                              InkResponse(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _model.addItem!
+                                                        .where((element) =>
+                                                            element.item.id ==
+                                                            _hotelrooms[index]
+                                                                .id)
+                                                        .first
+                                                        .jumlahItem++;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  height: 25,
+                                                  width: 25,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color:
+                                                              Colors.deepPurple,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.arrow_right,
+                                                      size: 25,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ));
           },
           itemCount: _hotelrooms.length,
         ),
         const SizedBox(
-          height: 20,
+          height: 60,
+          child: Center(
+              child: Text(
+            'No more data',
+            style: TextStyle(color: Colors.grey),
+          )),
         ),
       ],
     );
@@ -946,15 +1205,21 @@ class _HomeReservationState extends State<HomeReservation> {
   //select room
   Widget _selectedRoom() {
     int price = 0;
-    _model.addItem!.forEach((element) {
+    for (var element in _model.addItem!) {
       price += element.item.price! * element.jumlahItem;
       element.item.totalPrice = price;
-    });
+    }
+
+    int roomPrice = 0;
+    for (var element in _model.addItem!) {
+      roomPrice = element.item.price! * element.jumlahItem;
+      element.item.selectedRoomPrice = roomPrice;
+    }
 
     int room = 0;
-    _model.addItem!.forEach((element) {
+    for (var element in _model.addItem!) {
       room += element.jumlahItem;
-    });
+    }
 
     return InkResponse(
       onTap: () async {
@@ -974,35 +1239,39 @@ class _HomeReservationState extends State<HomeReservation> {
           _model = SingletonModel.shared;
         });
       },
-      child: Container(
-        height: 55,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Colors.deepPurpleAccent,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: Text(
-                '$room Room Selected',
-                style: const TextStyle(color: Colors.white, fontSize: 18),
-              ),
+      child: Column(
+        children: [
+          Container(
+            height: 55,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.deepPurpleAccent,
+              borderRadius: BorderRadius.circular(20),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Text(
-                "$price",
-                style: const TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            )
-          ],
-        ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    '$room Room Selected',
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Text(
+                    NumberFormat.currency(locale: 'id', symbol: 'IDR ', decimalDigits: 0).format(price),
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          )
+        ],
       ),
     );
   }

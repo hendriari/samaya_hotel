@@ -729,6 +729,9 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                  height: 20,
+              ),
             ],
           ),
         )
@@ -767,6 +770,7 @@ class _HomePage extends State<HomePage> {
                 todayHighlightColor: Colors.deepPurple,
                 startRangeSelectionColor: Colors.deepPurple,
                 endRangeSelectionColor: Colors.deepPurple,
+                rangeSelectionColor: Colors.deepPurple.withOpacity(0.1),
                 selectionMode: DateRangePickerSelectionMode.range,
                 initialSelectedRange: PickerDateRange(
                     DateTime.now().subtract(const Duration(days: 0)),

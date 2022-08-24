@@ -52,10 +52,17 @@ class _ReservationSummaryState extends State<ReservationSummary> {
 
   @override
   Widget build(BuildContext context) {
+    //memanggil isi model tanpa mengeksekusi nilai dari model tersebut
     HotelRoom? model;
     _model.addItem!.forEach((element) {
       model = element.item;
     });
+
+    int? subTotalRoom;
+    for(var element in _model.addItem!){
+     subTotalRoom = element.item.totalPrice!;
+    }
+
     int? totalPrice;
     _model.addItem!.forEach((element) {
       totalPrice = element.item.totalPrice! + _tax;
@@ -173,7 +180,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Superior King Bed Room',
+                          'Room Specifications',
                           style: TextStyle(fontSize: 16),
                         ),
                         Padding(
@@ -285,20 +292,20 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(model!.name!),
+                        Text('Sub Total Room'),
                         Text(
                           NumberFormat.currency(
                                   locale: 'id',
                                   symbol: 'IDR ',
                                   decimalDigits: 0)
-                              .format(model!.price!),
+                              .format(subTotalRoom),
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 2, 2, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -329,7 +336,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Amount'),
+                        const Text('Total Payment'),
                         Text(
                           NumberFormat.currency(
                                   locale: 'id',

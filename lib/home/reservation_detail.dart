@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/home/reservation_summary.dart';
-import 'package:samaya_hotel/model/hotel_room.dart';
 import 'package:intl/intl.dart';
 import 'package:samaya_hotel/model/singleton_model.dart';
 
@@ -53,14 +52,16 @@ class _ReservationDetailState extends State<ReservationDetail> {
 
   @override
   Widget build(BuildContext context) {
-    HotelRoom? model;
-    for (var element in _model.addItem!) {
-      model = element.item;
-    }
     int? totalPrice;
     for (var element in _model.addItem!) {
       totalPrice = element.item.totalPrice! + _tax;
     }
+
+    int? subTotal;
+    for (var element in _model.addItem!) {
+      subTotal = element.item.totalPrice!;
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -115,13 +116,13 @@ class _ReservationDetailState extends State<ReservationDetail> {
 
             //kamar dipilih
             ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8),
                   child: Container(
-                    height: 150,
+                    height: 160,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -168,7 +169,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    Text(model!.bed!),
+                                    Text(_model.addItem![index].item.bed!),
                                   ],
                                 ),
                               ),
@@ -204,25 +205,73 @@ class _ReservationDetailState extends State<ReservationDetail> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Container(
-                                alignment: Alignment.bottomRight,
-                                height: 20,
-                                width: MediaQuery.of(context).size.width * 0.5,
+                              SizedBox(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width * 0.58,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(left: 5),
-                                      child: Text(
-                                          '${_model.addItem![index].jumlahItem} Item'),
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: SizedBox(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const Text(
+                                              'Price',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Text(NumberFormat.currency(
+                                                    locale: 'id',
+                                                    symbol: 'IDR ',
+                                                    decimalDigits: 0)
+                                                .format(_model.addItem![index]
+                                                    .item.price!)),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    Text(NumberFormat.currency(
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                      child: SizedBox(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const Text(
+                                              'Amount',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Text(
+                                                '${_model.addItem![index].jumlahItem} Room'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            'Sub Total',
+                                            style:
+                                                TextStyle(color: Colors.grey),
+                                          ),
+                                          Text(NumberFormat.currency(
                                             locale: 'id',
                                             symbol: 'IDR ',
-                                            decimalDigits: 0)
-                                        .format(_model
-                                            .addItem![index].item.price!)),
+                                            decimalDigits: 0,
+                                          ).format(_model.addItem![index].item
+                                              .selectedRoomPrice!)),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               )
@@ -437,19 +486,19 @@ class _ReservationDetailState extends State<ReservationDetail> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 2, 12, 0),
+              padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(model!.name!),
+                  const Text('Sub Total Price'),
                   Text(NumberFormat.currency(
                           locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                      .format(model.price!)),
+                      .format(subTotal)),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 2, 10, 0),
+              padding: const EdgeInsets.fromLTRB(8, 2, 2, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -474,8 +523,8 @@ class _ReservationDetailState extends State<ReservationDetail> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Amount'),
-                  Spacer(),
+                  const Text('Total Payment'),
+                  const Spacer(),
                   SizedBox(
                     // width: 70,
                     child: Text(
@@ -517,6 +566,9 @@ class _ReservationDetailState extends State<ReservationDetail> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),

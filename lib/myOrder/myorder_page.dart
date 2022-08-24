@@ -15,11 +15,13 @@ class _Orderan extends State<Orderan> {
   late List<HotelsInfo> _historyOrder;
 
   String? _range;
+  DateTime dateNow= DateTime.now();
+  final dates = DateFormat.yMMMEd().format(DateTime.now());
 
   @override
   void initState() {
     super.initState();
-    _range = '';
+    _range = dates;
     _historyOrder = [
       HotelsInfo(
         nameHotel: 'Hotel Samaya, Semarang',

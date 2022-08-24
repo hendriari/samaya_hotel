@@ -96,7 +96,10 @@ class _AccessPage extends State<AccessPage>
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text('1 July 2022 - 31 July 2022'),
+                                    Text(
+                                      '1 July 2022 - 31 July 2022',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -149,11 +152,16 @@ class _AccessPage extends State<AccessPage>
                   _anim = true;
                   _status = 'Proccess';
                 });
-                await Future.delayed(const Duration(milliseconds: 4000));
+                await Future.delayed(const Duration(milliseconds: 1000));
+                setState(() {
+                  _anim = true;
+                  _status = 'Success';
+                });
+                await Future.delayed(const Duration(milliseconds: 1000));
                 setState(
                   () {
                     _anim = false;
-                    _status = 'Complete';
+                    _status = 'Tap to Unlock Room';
                   },
                 );
               },
