@@ -34,27 +34,28 @@ class _EmailSentState extends State<EmailSent> {
             ),
           ),
           Expanded(
-              child: Stack(
-            children: [
-              _loading(),
-              Positioned(
-                left: 0,
-                right: 0,
-                top: MediaQuery.of(context).size.height * 0.5,
-                child: Column(
-                  children: const [
-                    Text(
-                      'CHECK YOUR EMAIL',
-                      style: TextStyle(
-                        fontSize: 24,
+            child: Stack(
+              children: [
+                _loading(),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: MediaQuery.of(context).size.height * 0.5,
+                  child: Column(
+                    children: const [
+                      Text(
+                        'CHECK YOUR EMAIL',
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
-                    Text('Lorem Ipsum is simply dummy')
-                  ],
+                      Text('Lorem Ipsum is simply dummy')
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:samaya_hotel/splashscreen1.dart';
@@ -10,8 +9,7 @@ void main() {
   HttpOverrides.global = MyHttpOverrides();
 
   //kunci potrait device
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -28,5 +26,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

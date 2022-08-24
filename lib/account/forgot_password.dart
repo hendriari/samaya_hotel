@@ -29,25 +29,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                   ),
                   Positioned(
-                      top: 56,
-                      left: 15,
-                      child: InkResponse(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Row(
-                          children: const [
-                            Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.white,
-                              size: 15,
-                            ),
-                            Text('Forgot Password',
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 22)),
-                          ],
-                        ),
-                      )),
+                    top: 56,
+                    left: 15,
+                    child: InkResponse(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Text('Forgot Password',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 22)),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -66,29 +67,31 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         height: 60,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                                color: Colors.black54,
-                              ),
-                            ]),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(1, 4),
+                              blurRadius: 5,
+                              color: Colors.black54,
+                            ),
+                          ],
+                        ),
                         child: TextField(
                           cursorColor: Colors.deepPurple,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                               labelText: 'Email',
-                              labelStyle: const TextStyle(color: Colors.deepPurple),
+                              labelStyle:
+                                  const TextStyle(color: Colors.deepPurple),
                               focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
+                                  borderSide: const BorderSide(
+                                      color: Colors.deepPurple),
                                   borderRadius: BorderRadius.circular(20)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  borderSide:
-                                  const BorderSide(color: Colors.deepPurple))),
+                                  borderSide: const BorderSide(
+                                      color: Colors.deepPurple))),
                         ),
                       ),
                     ),
@@ -101,28 +104,30 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               width: double.infinity,
               child: Container(
                 alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
-                onPressed: () {
-                  Navigator.pushReplacement(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.deepPurple,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    Navigator.pushReplacement(
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation1, animation2) =>
                             const EmailSent(),
                         transitionDuration: Duration.zero,
                         reverseTransitionDuration: Duration.zero,
-                      ));
-                },
-                child: const Text(
-                  'Send',
-                  style: TextStyle(
-                    fontSize: 22,
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Send',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
                   ),
                 ),
-              )),
+              ),
             ),
           ],
         ),

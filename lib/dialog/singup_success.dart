@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
@@ -36,27 +34,28 @@ class _SignUpSuccessState extends State<SignUpSuccess> {
             ),
           ),
           Expanded(
-              child: Stack(
-            children: [
-              _loading(),
-              Positioned(
-                left: 0,
-                right: 0,
-                top: MediaQuery.of(context).size.height * 0.5,
-                child: Column(
-                  children: const [
-                    Text(
-                      'SIGN UP SUCCESS',
-                      style: TextStyle(
-                        fontSize: 24,
+            child: Stack(
+              children: [
+                _loading(),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: MediaQuery.of(context).size.height * 0.5,
+                  child: Column(
+                    children: const [
+                      Text(
+                        'SIGN UP SUCCESS',
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
-                    Text('Lorem Ipsum is simply dummy')
-                  ],
+                      Text('Lorem Ipsum is simply dummy')
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -67,7 +66,7 @@ class _SignUpSuccessState extends State<SignUpSuccess> {
       left: 0,
       right: 0,
       top: MediaQuery.of(context).size.height * 0.28,
-      child: Container(
+      child: SizedBox(
         height: 200,
         width: 200,
         child:

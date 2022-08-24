@@ -6,6 +6,7 @@ class HotelRoom {
   int? price;
   String? refund;
   String? images;
+  int? totalPrice;
 
   HotelRoom({
     this.id,
@@ -15,5 +16,6 @@ class HotelRoom {
     this.price,
     this.refund,
     this.images,
+    this.totalPrice,
   });
 }

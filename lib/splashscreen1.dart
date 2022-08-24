@@ -11,7 +11,6 @@ class SplashScreen1 extends StatefulWidget {
 class _SplashScreen1State extends State<SplashScreen1> {
   bool click = false;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,22 +22,23 @@ class _SplashScreen1State extends State<SplashScreen1> {
               click = !click;
             });
             await Future.delayed(const Duration(milliseconds: 150));
-            setState(()  {
+            setState(() {
               // await Future.delayed(const Duration(milliseconds: 480));
-              if(!mounted) return;
+              if (!mounted) return;
               Navigator.pushReplacement(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (context, animation, secondAnimation) => const SplashScreen2(),
+                  pageBuilder: (context, animation, secondAnimation) =>
+                      const SplashScreen2(),
                   transitionDuration: const Duration(milliseconds: 1),
-                  transitionsBuilder: (context, animation, secondAnimation, child) {
+                  transitionsBuilder:
+                      (context, animation, secondAnimation, child) {
                     const begin = Offset(0.0, 1.0);
                     const end = Offset.zero;
                     const curve = Curves.fastLinearToSlowEaseIn;
 
-                    var tween =
-                    Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
 
                     return SlideTransition(
                       position: animation.drive(tween),
@@ -47,23 +47,21 @@ class _SplashScreen1State extends State<SplashScreen1> {
                   },
                 ),
               );
-
             });
           },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 500),
-            height: click ? MediaQuery.of(context).size.height * 1 : 130 ,
-            width: click ? MediaQuery.of(context).size.width * 1 : 130  ,
+            height: click ? MediaQuery.of(context).size.height * 1 : 130,
+            width: click ? MediaQuery.of(context).size.width * 1 : 130,
             curve: Curves.fastOutSlowIn,
             decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(1, 4),
-                      blurRadius: 5,
-                      color: Colors.black45)
-                ]),
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                    offset: Offset(1, 4), blurRadius: 5, color: Colors.black45)
+              ],
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -74,7 +72,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                 Text(
                   'Hotel',
                   style: TextStyle(fontSize: 20),
-                )
+                ),
               ],
             ),
           ),
@@ -83,4 +81,3 @@ class _SplashScreen1State extends State<SplashScreen1> {
     );
   }
 }
-

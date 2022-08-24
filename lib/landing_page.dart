@@ -47,30 +47,33 @@ class _LandingPage extends State<LandingPage> {
                             setState(() => activeIndex = index)),
                   ),
                   Positioned(
-                      bottom: 20,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Enjoy Your Quality Time',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                            ),
+                    bottom: 20,
+                    left: 0,
+                    right: 0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Enjoy Your Quality Time',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
                           ),
-                          const Text('With Our Services',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              )),
-                          const SizedBox(
-                            height: 10,
+                        ),
+                        const Text(
+                          'With Our Services',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
                           ),
-                          buildIndicator(),
-                        ],
-                      )),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildIndicator(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -93,11 +96,13 @@ class _LandingPage extends State<LandingPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(160, 0, 0, 0),
-                    child: Text('v 1.0.1',
-                        style: TextStyle(
-                          color: Colors.deepPurple,
-                          fontSize: 14,
-                        )),
+                    child: Text(
+                      'v 1.0.1',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -108,12 +113,13 @@ class _LandingPage extends State<LandingPage> {
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                            width: 1, color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(20),
-                      )),
+                    primary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side:
+                          const BorderSide(width: 1, color: Colors.deepPurple),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,

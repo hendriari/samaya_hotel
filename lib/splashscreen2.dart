@@ -18,11 +18,12 @@ class _SplashScreen2State extends State<SplashScreen2> {
 
   _splashscreen() async {
     await Future.delayed(const Duration(milliseconds: 50), () {});
-    if(!mounted) return;
+    if (!mounted) return;
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondAnimation) => const LandingPage(),
+        pageBuilder: (context, animation, secondAnimation) =>
+            const LandingPage(),
         transitionDuration: const Duration(seconds: 2),
         transitionsBuilder: (context, animation, secondAnimation, child) {
           const begin = Offset(0.0, 1.0);
@@ -31,7 +32,6 @@ class _SplashScreen2State extends State<SplashScreen2> {
 
           var tween =
               Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
 
           return SlideTransition(
             position: animation.drive(tween),

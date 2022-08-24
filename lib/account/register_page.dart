@@ -48,24 +48,25 @@ class _RegisterAccountState extends State<RegisterAccount> {
             ),
           ),
           Positioned(
-              top: 56,
-              left: 15,
-              child: InkResponse(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Row(
-                  children: const [
-                    Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.white,
-                      size: 15,
-                    ),
-                    Text('Sign Up',
-                        style: TextStyle(color: Colors.white, fontSize: 22)),
-                  ],
-                ),
-              )),
+            top: 56,
+            left: 15,
+            child: InkResponse(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                  Text('Sign Up',
+                      style: TextStyle(color: Colors.white, fontSize: 22)),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -84,15 +85,16 @@ class _RegisterAccountState extends State<RegisterAccount> {
                 height: 60,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        blurRadius: 5,
-                        color: Colors.black54,
-                      ),
-                    ]),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      blurRadius: 5,
+                      color: Colors.black54,
+                    ),
+                  ],
+                ),
                 child: TextField(
                   cursorColor: Colors.deepPurple,
                   decoration: InputDecoration(
@@ -115,33 +117,35 @@ class _RegisterAccountState extends State<RegisterAccount> {
             child: Padding(
               padding: const EdgeInsets.all(11.0),
               child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          blurRadius: 5,
-                          color: Colors.black54,
-                        ),
-                      ]),
-                  child: TextField(
-                    cursorColor: Colors.deepPurple,
-                    keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
-                        labelText: 'Date of Birth',
-                        labelStyle: const TextStyle(color: Colors.deepPurple),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide:
-                                const BorderSide(color: Colors.deepPurple))),
-                  )),
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      blurRadius: 5,
+                      color: Colors.black54,
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple,
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                      labelText: 'Date of Birth',
+                      labelStyle: const TextStyle(color: Colors.deepPurple),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple),
+                          borderRadius: BorderRadius.circular(20)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple))),
+                ),
+              ),
             ),
           ),
           SizedBox(
@@ -149,33 +153,35 @@ class _RegisterAccountState extends State<RegisterAccount> {
             child: Padding(
               padding: const EdgeInsets.all(11.0),
               child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          blurRadius: 5,
-                          color: Colors.black54,
-                        ),
-                      ]),
-                  child: TextField(
-                    cursorColor: Colors.deepPurple,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: const TextStyle(color: Colors.deepPurple),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide:
-                                const BorderSide(color: Colors.deepPurple))),
-                  )),
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      blurRadius: 5,
+                      color: Colors.black54,
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: const TextStyle(color: Colors.deepPurple),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple),
+                          borderRadius: BorderRadius.circular(20)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple))),
+                ),
+              ),
             ),
           ),
           SizedBox(
@@ -183,37 +189,42 @@ class _RegisterAccountState extends State<RegisterAccount> {
             child: Padding(
               padding: const EdgeInsets.all(11.0),
               child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          blurRadius: 5,
-                          color: Colors.black54,
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      blurRadius: 5,
+                      color: Colors.black54,
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.remove_red_eye,
+                          color: Colors.deepPurple,
                         ),
-                      ]),
-                  child: TextField(
-                    cursorColor: Colors.deepPurple,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.remove_red_eye, color: Colors.deepPurple,),
-                        ),
-                        labelText: 'Password',
-                        labelStyle: const TextStyle(color: Colors.deepPurple),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide:
-                                const BorderSide(color: Colors.deepPurple))),
-                  )),
+                      ),
+                      labelText: 'Password',
+                      labelStyle: const TextStyle(color: Colors.deepPurple),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple),
+                          borderRadius: BorderRadius.circular(20)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple))),
+                ),
+              ),
             ),
           ),
         ],
@@ -227,36 +238,36 @@ class _RegisterAccountState extends State<RegisterAccount> {
       child: Stack(
         children: <Widget>[
           Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Already have an account ?',
-                            style: TextStyle(fontSize: 18)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        InkResponse(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Login',
-                              style: TextStyle(
-                                  fontSize: 18, color: Colors.deepPurple)),
-                        ),
-                      ],
-                    ),
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Already have an account ?',
+                          style: TextStyle(fontSize: 18)),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkResponse(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Login',
+                            style: TextStyle(
+                                fontSize: 18, color: Colors.deepPurple)),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Center(
-                        child: ElevatedButton(
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Center(
+                    child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.deepPurple,
                           shape: RoundedRectangleBorder(
@@ -277,10 +288,12 @@ class _RegisterAccountState extends State<RegisterAccount> {
                           fontSize: 22,
                         ),
                       ),
-                    )),
+                    ),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -13,23 +13,16 @@ class AccessPage extends StatefulWidget {
 class _AccessPage extends State<AccessPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late final width = MediaQuery.of(context).size.width;
-
-  bool _anim = false;
-
-  String _status = 'Tap to Unlock Room';
+  bool? _anim;
+  String? _status;
 
   @override
   void initState() {
     super.initState();
+    _anim = false;
+    _status = 'Tap to Unlock Room';
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 900));
-    // _animationController.addStatusListener((status) {
-    //   if (status == AnimationStatus.completed)
-    //     setState(() {
-    //       _anim = true;
-    //     });
-    // });
   }
 
   @override
@@ -65,62 +58,70 @@ class _AccessPage extends State<AccessPage>
                     right: 0,
                     child: Align(
                       child: Container(
-                          height: 82,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                // blurStyle: BlurStyle.outer,
-                                color: Colors.black54,
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
+                        height: 82,
+                        width: 350,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              // blurStyle: BlurStyle.outer,
+                              color: Colors.black54,
+                              offset: Offset(1, 4),
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: Stack(
+                          children: [
+                            const Positioned(
+                              top: 10,
+                              left: 10,
+                              child: Text(
+                                'Hotel Samaya, Semarang',
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 16),
                               ),
-                            ],
-                          ),
-                          child: Stack(
-                            children: [
-                              const Positioned(
-                                top: 10,
-                                left: 10,
-                                child: Text(
-                                  'Hotel Samaya, Semarang',
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 16),
-                                ),
-                              ),
-                              Positioned(
-                                top: 30,
-                                left: 10,
-                                child: SizedBox(
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.calendar_month_outlined, color: Colors.deepPurple,),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text('1 July 2022 - 31 July 2022'),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                  top: 30,
-                                  right: 10,
-                                  child: SizedBox(
-                                    child: Row(
-                                      children: const [
-                                        Icon(Icons.bed, color: Colors.deepPurple,),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text('Room 0311')
-                                      ],
+                            ),
+                            Positioned(
+                              top: 30,
+                              left: 10,
+                              child: SizedBox(
+                                child: Row(
+                                  children: const [
+                                    Icon(
+                                      Icons.calendar_month_outlined,
+                                      color: Colors.deepPurple,
                                     ),
-                                  ))
-                            ],
-                          )),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text('1 July 2022 - 31 July 2022'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 30,
+                              right: 10,
+                              child: SizedBox(
+                                child: Row(
+                                  children: const [
+                                    Icon(
+                                      Icons.bed,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text('Room 0311')
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   const Positioned(
@@ -141,38 +142,42 @@ class _AccessPage extends State<AccessPage>
               height: MediaQuery.of(context).size.height * 0.15,
             ),
             GestureDetector(
-                onTap:
-                    // _onLoading
-                    () async {
-                  setState(() {
-                    _anim = true;
-                    _status = 'Proccess';
-                  });
-                  await Future.delayed(const Duration(milliseconds: 4000));
-                  setState(() {
+              onTap:
+                  // _onLoading
+                  () async {
+                setState(() {
+                  _anim = true;
+                  _status = 'Proccess';
+                });
+                await Future.delayed(const Duration(milliseconds: 4000));
+                setState(
+                  () {
                     _anim = false;
                     _status = 'Complete';
-                  });
-                },
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      child: _anim
-                          ? Lottie.asset('images/assets/unlock2.json')
-                          : Lottie.asset(
-                              'images/assets/unlock2.json',
-                              controller: _animationController,
-                            ),
+                  },
+                );
+              },
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    child: _anim!
+                        ? Lottie.asset('images/assets/unlock2.json')
+                        : Lottie.asset(
+                            'images/assets/unlock2.json',
+                            controller: _animationController,
+                          ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                    child: Text(
+                      _status!,
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
-                        child: Text(
-                          _status,
-                          style: const TextStyle(fontSize: 18),
-                        )),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:samaya_hotel/account/setting_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
-
 import 'forgot_password.dart';
 
 class AccountPage extends StatefulWidget {
@@ -17,8 +16,6 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPage extends State<AccountPage> {
-  File? image;
-
   Future getImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedImage =
@@ -27,14 +24,15 @@ class _AccountPage extends State<AccountPage> {
     setState(() {});
   }
 
-  bool checkbox = false;
-
+  File? image;
+  bool? checkbox;
   late bool _isLogin;
 
   //pengecekan kondisi untuk login
   @override
   void initState() {
     super.initState();
+    checkbox = false;
     _isLogin = false;
   }
 
@@ -68,14 +66,14 @@ class _AccountPage extends State<AccountPage> {
                   left: 0,
                   child: Center(
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Container(
-                          color: Colors.white,
-                          height: 190,
-                          width: 190,
-                        )),
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        color: Colors.white,
+                        height: 190,
+                        width: 190,
+                      ),
+                    ),
                   ),
-                  // ),
                 ),
                 Positioned(
                   bottom: 70,
@@ -99,48 +97,48 @@ class _AccountPage extends State<AccountPage> {
                       ),
                     ),
                   ),
-                  // ),
                 ),
                 Positioned(
-                    top: 280,
-                    right: 0,
-                    left: 150,
-                    child: SizedBox(
-                      height: 70,
-                      width: 70,
-                      child: InkResponse(
-                          onTap: () async {
-                            await getImage();
-                          },
-                          child: SvgPicture.asset('images/iconcamera.svg')),
-                    )),
+                  top: 280,
+                  right: 0,
+                  left: 150,
+                  child: SizedBox(
+                    height: 70,
+                    width: 70,
+                    child: InkResponse(
+                        onTap: () async {
+                          await getImage();
+                        },
+                        child: SvgPicture.asset('images/iconcamera.svg')),
+                  ),
+                ),
                 Positioned(
-                    bottom: 10,
-                    left: 0,
-                    right: 0,
-                    child: SizedBox(
-                      height: 50,
-                      child: Column(
-                        children: const [
-                          Center(
-                            child: Text(
-                              'Lilya Cordoba',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 20,
-                              ),
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: SizedBox(
+                    height: 50,
+                    child: Column(
+                      children: const [
+                        Center(
+                          child: Text(
+                            'Lilya Cordoba',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 20,
                             ),
                           ),
-                          Center(
-                            child: Text(
-                              'lilyacordoba@gmail.com',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
+                        ),
+                        Center(
+                          child: Text(
+                            'lilyacordoba@gmail.com',
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -161,15 +159,16 @@ class _AccountPage extends State<AccountPage> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              color: Colors.black54,
-                              blurRadius: 5,
-                            ),
-                          ]),
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            color: Colors.black54,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
                       child: Stack(
                         children: const [
                           Positioned(
@@ -192,9 +191,10 @@ class _AccountPage extends State<AccountPage> {
                     onTap: () {
                       showModalBottomSheet(
                           shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          )),
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                          ),
                           context: context,
                           builder: (context) => membershipSheet());
                     },
@@ -202,15 +202,16 @@ class _AccountPage extends State<AccountPage> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              color: Colors.black54,
-                              blurRadius: 5,
-                            ),
-                          ]),
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            color: Colors.black54,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
                       child: Stack(
                         children: const [
                           Positioned(
@@ -240,15 +241,16 @@ class _AccountPage extends State<AccountPage> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              color: Colors.black54,
-                              blurRadius: 5,
-                            ),
-                          ]),
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            color: Colors.black54,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
                       child: Stack(
                         children: const [
                           Positioned(
@@ -280,15 +282,16 @@ class _AccountPage extends State<AccountPage> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              color: Colors.black54,
-                              blurRadius: 5,
-                            ),
-                          ]),
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            color: Colors.black54,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
                       child: Stack(
                         children: const [
                           Positioned(
@@ -310,49 +313,53 @@ class _AccountPage extends State<AccountPage> {
           ),
           const SizedBox(height: 40),
           SizedBox(
-              height: 180,
-              child: Column(
-                children: <Widget>[
-                  const Center(
-                    child: Text(
-                      'Samaya Hotel',
-                      style: TextStyle(color: Colors.deepPurple, fontSize: 22),
-                    ),
+            height: 180,
+            child: Column(
+              children: <Widget>[
+                const Center(
+                  child: Text(
+                    'Samaya Hotel',
+                    style: TextStyle(color: Colors.deepPurple, fontSize: 22),
                   ),
-                  SizedBox(
-                    height: 20,
-                    child: Stack(
-                      children: const <Widget>[
-                        Positioned(
-                            right: 150,
-                            child: Text(
-                              'v 1.0.1',
-                              style: TextStyle(color: Colors.deepPurple),
-                            ))
-                      ],
-                    ),
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.deepPurple,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                      onPressed: () {
-                        setState(() {
-                          _isLogin = false;
-                        });
-                      },
-                      child: const Text(
-                        'Log Out',
-                        style: TextStyle(
-                          fontSize: 22,
+                ),
+                SizedBox(
+                  height: 20,
+                  child: Stack(
+                    children: const <Widget>[
+                      Positioned(
+                        right: 150,
+                        child: Text(
+                          'v 1.0.1',
+                          style: TextStyle(color: Colors.deepPurple),
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                    onPressed: () {
+                      setState(
+                        () {
+                          _isLogin = false;
+                        },
+                      );
+                    },
+                    child: const Text(
+                      'Log Out',
+                      style: TextStyle(
+                        fontSize: 22,
                       ),
                     ),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -376,30 +383,31 @@ class _AccountPage extends State<AccountPage> {
                   ),
                 ),
                 Positioned(
-                    top: 35,
-                    left: 0,
-                    right: 0,
-                    child: SizedBox(
-                      height: 70,
-                      child: InkResponse(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Column(
-                          children: const [
-                            Text('Samaya Hotel',
+                  top: 35,
+                  left: 0,
+                  right: 0,
+                  child: SizedBox(
+                    height: 70,
+                    child: InkResponse(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Column(
+                        children: const [
+                          Text('Samaya Hotel',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 36)),
+                          Padding(
+                            padding: EdgeInsets.only(left: 155),
+                            child: Text('v 1.0.1',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 36)),
-                            Padding(
-                              padding: EdgeInsets.only(left: 155),
-                              child: Text('v 1.0.1',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 14)),
-                            ),
-                          ],
-                        ),
+                                    color: Colors.white, fontSize: 14)),
+                          ),
+                        ],
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -422,33 +430,36 @@ class _AccountPage extends State<AccountPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(11.0),
                     child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                                color: Colors.black54,
-                              ),
-                            ]),
-                        child: TextField(
-                          cursorColor: Colors.deepPurple,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                              labelText: 'Email',
-                              labelStyle: const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide:
-                                  const BorderSide(color: Colors.deepPurple))),
-                        )),
+                      height: 60,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        cursorColor: Colors.deepPurple,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            labelText: 'Email',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -456,37 +467,43 @@ class _AccountPage extends State<AccountPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(11.0),
                     child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                                color: Colors.black54,
+                      height: 60,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        obscureText: true,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.deepPurple,
                               ),
-                            ]),
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove_red_eye, color: Colors.deepPurple,),
-                              ),
-                              labelText: 'Password',
-                              labelStyle: const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide:
-                                  const BorderSide(color: Colors.deepPurple))),
-                        )),
+                            ),
+                            labelText: 'Password',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -497,13 +514,16 @@ class _AccountPage extends State<AccountPage> {
             child: Row(
               children: <Widget>[
                 Checkbox(
-                    activeColor: Colors.deepPurple,
-                    value: checkbox,
-                    onChanged: (value) {
-                      setState(() {
+                  activeColor: Colors.deepPurple,
+                  value: checkbox,
+                  onChanged: (value) {
+                    setState(
+                      () {
                         checkbox = value!;
-                      });
-                    }),
+                      },
+                    );
+                  },
+                ),
                 const Text('Remember Me')
               ],
             ),
@@ -550,23 +570,26 @@ class _AccountPage extends State<AccountPage> {
                 ),
               ),
               Center(
-                  child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
-                onPressed: () {
-                  setState(() {
-                    _isLogin = true;
-                  });
-                },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 22,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.deepPurple,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    setState(
+                      () {
+                        _isLogin = true;
+                      },
+                    );
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
                   ),
                 ),
-              )),
+              ),
               const SizedBox(
                 height: 80,
               ),

@@ -3,27 +3,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/home/reservation_summary.dart';
 import 'package:samaya_hotel/model/hotel_room.dart';
 import 'package:intl/intl.dart';
+import 'package:samaya_hotel/model/singleton_model.dart';
 
-import '../model/singleton_model.dart';
+// import '../model/singleton_model.dart';
 
 class ReservationDetail extends StatefulWidget {
-  final HotelRoom data;
   final String selectedItem;
   final String cekin;
   final String cekout;
   final int guest;
   final int count;
-  final List addItems;
 
   const ReservationDetail({
     Key? key,
-    required this.data,
     required this.selectedItem,
     required this.count,
     required this.guest,
     required this.cekin,
     required this.cekout,
-    required this.addItems,
+    // required this.addItems,
   }) : super(key: key);
 
   @override
@@ -31,31 +29,48 @@ class ReservationDetail extends StatefulWidget {
 }
 
 class _ReservationDetailState extends State<ReservationDetail> {
-  bool checkbox1 = false;
-  bool checkbox2 = false;
-  bool checkbox3 = false;
+  bool? checkbox1;
+  bool? checkbox2;
+  bool? checkbox3;
 
   final int _tax = 60000;
-  late List _intAdd;
-  late final int _total;
-  late final int _harga;
+
+  // late final int _total;
+
   String? cekin;
   String? cekout;
+
   late SingletonModel _model;
+
+  // late List _intAdd;
+  // late final int _harga;
+  // late SingletonModel _model;
 
   @override
   void initState() {
     super.initState();
+    checkbox1 = false;
+    checkbox2 = false;
+    checkbox3 = false;
     _model = SingletonModel.withContext(context);
-    _intAdd = widget.addItems;
     cekout = widget.cekout;
     cekin = widget.cekin;
-    _total = _tax + widget.data.price!;
+    // _total = _tax + widget.data.price!;
+    // _model = SingletonModel.withContext(context);
+    // _intAdd = widget.addItems;
     // _harga = _intAdd * widget.data.price!;
   }
 
   @override
   Widget build(BuildContext context) {
+    HotelRoom? model;
+    _model.addItem!.forEach((element) {
+      model = element.item;
+    });
+    int? totalPrice;
+    _model.addItem!.forEach((element) {
+      totalPrice = element.item.totalPrice;
+    });
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -107,107 +122,118 @@ class _ReservationDetailState extends State<ReservationDetail> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 4),
-                          blurRadius: 5,
-                          color: Colors.black54),
-                    ]),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: SizedBox(
-                        width: 140,
-                        height: 140,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              widget.data.images!,
-                              fit: BoxFit.cover,
-                            )),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.data.name!,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const Icon(
-                                  Icons.bed,
-                                  color: Colors.deepPurple,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(widget.data.bed!),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const Icon(
-                                  Icons.money,
-                                  color: Colors.deepPurple,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(widget.data.refund!)
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const Icon(
-                                  Icons.person,
-                                  color: Colors.deepPurple,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(widget.data.maxPerson!),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            alignment: Alignment.bottomRight,
-                            height: 20,
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Text(NumberFormat.currency(
-                                    locale: 'id',
-                                    symbol: 'IDR ',
-                                    decimalDigits: 0)
-                                .format(widget.data.price!)),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+
+            //kamar dipilih
+            // ListView.builder(
+            //     itemBuilder: (context, index){
+            //      return InkWell(
+            //          onTap: (){},
+            //        child:
+                   Padding(
+                     padding: const EdgeInsets.all(8),
+                     child: Container(
+                       height: 150,
+                       width: double.infinity,
+                       decoration: BoxDecoration(
+                         color: Colors.white,
+                         borderRadius: BorderRadius.circular(10),
+                         boxShadow: const [
+                           BoxShadow(
+                               offset: Offset(1, 4),
+                               blurRadius: 5,
+                               color: Colors.black54),
+                         ],
+                       ),
+                       child: Row(
+                         children: <Widget>[
+                           Padding(
+                             padding: const EdgeInsets.all(5),
+                             child: SizedBox(
+                               width: 140,
+                               height: 140,
+                               child: ClipRRect(
+                                   borderRadius: BorderRadius.circular(10),
+                                   child: Image.asset(
+                                     model!.images!,
+                                     fit: BoxFit.cover,
+                                   )),
+                             ),
+                           ),
+                           Padding(
+                             padding: const EdgeInsets.all(5),
+                             child: Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                               children: [
+                                 Text(
+                                   model!.name!,
+                                   style: const TextStyle(fontSize: 16),
+                                 ),
+                                 SizedBox(
+                                   child: Row(
+                                     mainAxisAlignment: MainAxisAlignment.start,
+                                     children: [
+                                       const Icon(
+                                         Icons.bed,
+                                         color: Colors.deepPurple,
+                                       ),
+                                       const SizedBox(
+                                         width: 5,
+                                       ),
+                                       Text(model!.bed!),
+                                     ],
+                                   ),
+                                 ),
+                                 SizedBox(
+                                   child: Row(
+                                     mainAxisAlignment: MainAxisAlignment.start,
+                                     children: [
+                                       const Icon(
+                                         Icons.money,
+                                         color: Colors.deepPurple,
+                                       ),
+                                       const SizedBox(width: 5),
+                                       Text(model!.refund!)
+                                     ],
+                                   ),
+                                 ),
+                                 SizedBox(
+                                   child: Row(
+                                     mainAxisAlignment: MainAxisAlignment.start,
+                                     children: [
+                                       const Icon(
+                                         Icons.person,
+                                         color: Colors.deepPurple,
+                                       ),
+                                       const SizedBox(
+                                         width: 5,
+                                       ),
+                                       Text(model!.maxPerson!),
+                                     ],
+                                   ),
+                                 ),
+                                 const SizedBox(
+                                   height: 10,
+                                 ),
+                                 Container(
+                                   alignment: Alignment.bottomRight,
+                                   height: 20,
+                                   width: MediaQuery.of(context).size.width * 0.5,
+                                   child: Text(NumberFormat.currency(
+                                       locale: 'id',
+                                       symbol: 'IDR ',
+                                       decimalDigits: 0)
+                                       .format(model!.price!)),
+                                 )
+                               ],
+                             ),
+                           ),
+                         ],
+                       ),
+                     ),
+                   ),
+            //      );
+            //     }, itemCount: _model.addItem!.length,
+            // ),
             const SizedBox(
               height: 20,
             ),
@@ -229,12 +255,13 @@ class _ReservationDetailState extends State<ReservationDetail> {
                     child: Stack(
                       children: const [
                         Positioned(
-                            left: 0,
-                            top: 10,
-                            child: Icon(
-                              Icons.person,
-                              color: Colors.deepPurple,
-                            )),
+                          left: 0,
+                          top: 10,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
                         Align(
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(25, 0, 23, 10),
@@ -266,12 +293,13 @@ class _ReservationDetailState extends State<ReservationDetail> {
                     child: Stack(
                       children: const [
                         Positioned(
-                            left: 0,
-                            top: 10,
-                            child: Icon(
-                              Icons.email,
-                              color: Colors.deepPurple,
-                            )),
+                          left: 0,
+                          top: 10,
+                          child: Icon(
+                            Icons.email,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
                         Align(
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(25, 0, 23, 10),
@@ -312,9 +340,11 @@ class _ReservationDetailState extends State<ReservationDetail> {
                         activeColor: Colors.deepPurple,
                         value: checkbox1,
                         onChanged: (value) {
-                          setState(() {
-                            checkbox1 = value!;
-                          });
+                          setState(
+                            () {
+                              checkbox1 = value!;
+                            },
+                          );
                         }),
                     const Text(
                       'Good View',
@@ -382,12 +412,13 @@ class _ReservationDetailState extends State<ReservationDetail> {
                               ),
                             ),
                             Positioned(
-                                right: 0,
-                                top: 10,
-                                child: Icon(
-                                  Icons.check_rounded,
-                                  color: Colors.green,
-                                )),
+                              right: 0,
+                              top: 10,
+                              child: Icon(
+                                Icons.check_rounded,
+                                color: Colors.green,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -408,14 +439,13 @@ class _ReservationDetailState extends State<ReservationDetail> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.data.name!),
+                  Text(model!.name!),
                   Text(NumberFormat.currency(
                           locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                      .format(widget.data.price!)),
+                      .format(model!.price!)),
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 2, 10, 0),
               child: Row(
@@ -443,12 +473,13 @@ class _ReservationDetailState extends State<ReservationDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Amount'),
+                  Spacer(),
                   SizedBox(
-                    width: 70,
+                    // width: 70,
                     child: Text(
                       NumberFormat.currency(
                               locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                          .format(_total),
+                          .format(totalPrice),
                     ),
                   ),
                 ],
@@ -458,32 +489,33 @@ class _ReservationDetailState extends State<ReservationDetail> {
               height: 50,
             ),
             Center(
-                child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20))),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        //mengirim antar page, kirim data ke page 3
-                        builder: (context) => ReservationSummary(
-                              guest: widget.guest,
-                              count: widget.count,
-                              cekin: widget.cekin,
-                              cekout: widget.cekout,
-                              selectedItem: widget.selectedItem,
-                              data: widget.data,
-                            )));
-              },
-              child: const Text(
-                'Submit',
-                style: TextStyle(
-                  fontSize: 22,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          //mengirim antar page, kirim data ke page 3
+                          builder: (context) => ReservationSummary(
+                                guest: widget.guest,
+                                count: widget.count,
+                                cekin: widget.cekin,
+                                cekout: widget.cekout,
+                                selectedItem: widget.selectedItem,
+
+                              )));
+                },
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:samaya_hotel/model/promotion.dart';
 import 'package:samaya_hotel/model/vacation.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -18,12 +19,12 @@ class _HomePage extends State<HomePage> {
   late List<Vacation> _hiling;
   late List<Promotion> _promo;
 
-  String _selectedItem = 'In';
-  String _range = 'On';
-  String _single = '';
+  String? _selectedItem;
+  String? _range;
+  String? _single;
 
-  var _guest = 0;
-  var _count = 0;
+  int _guest = 0;
+  int _count = 0;
 
   @override
   void initState() {
@@ -63,6 +64,31 @@ class _HomePage extends State<HomePage> {
       _single = DateFormat('d MMMM yyyy')
           .format(args.value.endDate ?? args.value.startDate);
     });
+  }
+
+  void _onSearch() {
+    if (_selectedItem != null && _range != null && _single != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeReservation(
+            date: _range!,
+            cekout: _single!,
+            guest: _guest,
+            count: _count,
+            selectedItem: _selectedItem!,
+          ),
+        ),
+      );
+    } else {
+      Fluttertoast.showToast(
+          msg: "Field cannot be empty",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 
   @override
@@ -175,40 +201,40 @@ class _HomePage extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                        top: 20,
-                        left: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 40,
-                            child: InkWell(
-                              onTap: () => _onButtonPressed(),
-                              child: Column(
-                                children: [
-                                  Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.location_pin,
-                                            color: Colors.deepPurple,
-                                          ),
-                                          Text(
-                                            _selectedItem,
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          ),
-                                        ],
-                                      )),
-                                  const Divider(
-                                    color: Colors.black,
-                                  ),
-                                ],
-                              ),
+                      top: 20,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 40,
+                          child: InkWell(
+                            onTap: () => _onButtonPressed(),
+                            child: Column(
+                              children: [
+                                Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_pin,
+                                          color: Colors.deepPurple,
+                                        ),
+                                        Text(
+                                          _selectedItem ?? 'In ',
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    )),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                              ],
                             ),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                     const Positioned(
                       left: 20,
                       top: 70,
@@ -238,7 +264,7 @@ class _HomePage extends State<HomePage> {
                                         color: Colors.deepPurple,
                                       ),
                                       Text(
-                                        _range,
+                                        _range ?? 'On ',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -274,19 +300,20 @@ class _HomePage extends State<HomePage> {
                             child: Column(
                               children: [
                                 Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.calendar_month_outlined,
-                                          color: Colors.deepPurple,
-                                        ),
-                                        Text(
-                                          'On $_single',
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    )),
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.calendar_month_outlined,
+                                        color: Colors.deepPurple,
+                                      ),
+                                      Text(
+                                        _single ?? 'On ',
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 const Divider(
                                   color: Colors.black,
                                 ),
@@ -350,20 +377,7 @@ class _HomePage extends State<HomePage> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomeReservation(
-                                  date: _range,
-                                  cekout: _single,
-                                  guest: _guest,
-                                  count: _count,
-                                  selectedItem: _selectedItem,
-                                ),
-                              ),
-                            );
-                          },
+                          onPressed: _onSearch,
                           child: const Text('Search'),
                         ),
                       ),
@@ -396,14 +410,15 @@ class _HomePage extends State<HomePage> {
                     height: 116,
                     width: 262,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black54,
-                            offset: Offset(1, 4),
-                            blurRadius: 5,
-                          )
-                        ]),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black54,
+                          offset: Offset(1, 4),
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
                     child: InkResponse(
                       onTap: () {},
                       child: Stack(
@@ -464,20 +479,21 @@ class _HomePage extends State<HomePage> {
               children: <Widget>[
                 Align(
                   child: Container(
-                      height: 116,
-                      width: 262,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black54,
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                            )
-                          ]),
-                      child: InkResponse(
-                        onTap: () {},
-                        child: Stack(children: <Widget>[
+                    height: 116,
+                    width: 262,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black54,
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                          )
+                        ]),
+                    child: InkResponse(
+                      onTap: () {},
+                      child: Stack(
+                        children: <Widget>[
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(_promo[index].images!,
@@ -505,8 +521,10 @@ class _HomePage extends State<HomePage> {
                               ),
                             ),
                           ),
-                        ]),
-                      )),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -520,22 +538,23 @@ class _HomePage extends State<HomePage> {
   //for location hotels
   void _onButtonPressed() {
     showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-        context: context,
-        builder: (context) {
-          return ListView(
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              SizedBox(
-                height: double.maxFinite,
-                child: Container(
-                  child: _buildBottomNavigationMenu(),
-                ),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      context: context,
+      builder: (context) {
+        return ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            SizedBox(
+              height: double.maxFinite,
+              child: Container(
+                child: _buildBottomNavigationMenu(),
               ),
-            ],
-          );
-        });
+            ),
+          ],
+        );
+      },
+    );
   }
 
   //select location hotels
@@ -572,31 +591,32 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
                 Positioned(
-                    child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(
-                            Icons.location_pin,
-                            color: Colors.deepPurple,
-                          ),
-                          InkResponse(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.search,
-                                color: Colors.deepPurple,
-                              ))
-                        ],
-                      ),
-                      const Divider(
-                        color: Colors.black,
-                      )
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Icon(
+                              Icons.location_pin,
+                              color: Colors.deepPurple,
+                            ),
+                            InkResponse(
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.search,
+                                  color: Colors.deepPurple,
+                                ))
+                          ],
+                        ),
+                        const Divider(
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
                   ),
-                ))
+                ),
               ],
             ),
           ),
@@ -609,15 +629,16 @@ class _HomePage extends State<HomePage> {
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          color: Colors.black54,
-                          blurRadius: 5,
-                        )
-                      ]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(1, 4),
+                        color: Colors.black54,
+                        blurRadius: 5,
+                      )
+                    ],
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ListTile(
@@ -634,15 +655,16 @@ class _HomePage extends State<HomePage> {
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          color: Colors.black54,
-                          blurRadius: 5,
-                        )
-                      ]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(1, 4),
+                        color: Colors.black54,
+                        blurRadius: 5,
+                      )
+                    ],
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ListTile(
@@ -659,15 +681,16 @@ class _HomePage extends State<HomePage> {
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          color: Colors.black54,
-                          blurRadius: 5,
-                        )
-                      ]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(1, 4),
+                        color: Colors.black54,
+                        blurRadius: 5,
+                      )
+                    ],
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ListTile(
@@ -684,15 +707,16 @@ class _HomePage extends State<HomePage> {
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 4),
-                          color: Colors.black54,
-                          blurRadius: 5,
-                        )
-                      ]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(1, 4),
+                        color: Colors.black54,
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ListTile(
@@ -722,77 +746,79 @@ class _HomePage extends State<HomePage> {
   //select date
   void _pressedDate() {
     showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-        context: context,
-        builder: (context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(
-                width: 50,
-                child: Divider(
-                  color: Colors.black,
-                  thickness: 2.0,
-                ),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(
+              width: 50,
+              child: Divider(
+                color: Colors.black,
+                thickness: 2.0,
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SfDateRangePicker(
-                  onSelectionChanged: _onSelectionChanged,
-                  todayHighlightColor: Colors.deepPurple,
-                  startRangeSelectionColor: Colors.deepPurple,
-                  endRangeSelectionColor: Colors.deepPurple,
-                  selectionMode: DateRangePickerSelectionMode.range,
-                  initialSelectedRange: PickerDateRange(
-                      DateTime.now().subtract(const Duration(days: 0)),
-                      DateTime.now().add(const Duration(days: 0))),
-                ),
-              )
-            ],
-          );
-        });
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: SfDateRangePicker(
+                onSelectionChanged: _onSelectionChanged,
+                todayHighlightColor: Colors.deepPurple,
+                startRangeSelectionColor: Colors.deepPurple,
+                endRangeSelectionColor: Colors.deepPurple,
+                selectionMode: DateRangePickerSelectionMode.range,
+                initialSelectedRange: PickerDateRange(
+                    DateTime.now().subtract(const Duration(days: 0)),
+                    DateTime.now().add(const Duration(days: 0))),
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 
   void _onSelectionRoom() {
     showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-        context: context,
-        builder: (context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                child: _buildButtonSelectionRoom(),
-              ),
-              Container(
-                child: _buildButtonSelectionGuest(),
-              ),
-              Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              child: _buildButtonSelectionRoom(),
+            ),
+            Container(
+              child: _buildButtonSelectionGuest(),
+            ),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _count;
-                      _guest;
-                    });
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Save'),
                 ),
+                onPressed: () {
+                  setState(() {
+                    _count;
+                    _guest;
+                  });
+                  Navigator.pop(context);
+                },
+                child: const Text('Save'),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
-          );
-        });
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildButtonSelectionRoom() {
@@ -813,71 +839,73 @@ class _HomePage extends State<HomePage> {
           child: SizedBox(
             height: 60,
             width: double.infinity,
-            child: StatefulBuilder(builder: (context, setState) {
-              return Stack(
-                children: [
-                  const Positioned(
-                    left: 10,
-                    top: 5,
-                    child: Text(
-                      'Room',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Stack(
+                  children: [
+                    const Positioned(
+                      left: 10,
+                      top: 5,
+                      child: Text(
+                        'Room',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
                     ),
-                  ),
-                  const Positioned(
-                    left: 10,
-                    top: 25,
-                    child: Icon(
-                      Icons.bed,
-                      color: Colors.deepPurple,
-                    ),
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: InkResponse(
-                      onTap: () {
-                        setState(() {
-                          _count++;
-                        });
-                      },
-                      child: const Icon(
-                        Icons.keyboard_arrow_up,
+                    const Positioned(
+                      left: 10,
+                      top: 25,
+                      child: Icon(
+                        Icons.bed,
                         color: Colors.deepPurple,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    right: 10,
-                    bottom: 10,
-                    child: InkResponse(
-                      onTap: () {
-                        if (_count < 1) {
-                          return;
-                        }
-                        setState(() {
-                          _count--;
-                        });
-                      },
-                      child: const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.deepPurple,
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            _count++;
+                          });
+                        },
+                        child: const Icon(
+                          Icons.keyboard_arrow_up,
+                          color: Colors.deepPurple,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(left: 40, top: 25, child: Text('$_count')),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Container(
-                      alignment: Alignment.bottomCenter,
-                      child: const Divider(
-                        color: Colors.black,
+                    Positioned(
+                      right: 10,
+                      bottom: 10,
+                      child: InkResponse(
+                        onTap: () {
+                          if (_count < 1) {
+                            return;
+                          }
+                          setState(() {
+                            _count--;
+                          });
+                        },
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.deepPurple,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            }),
+                    Positioned(left: 40, top: 25, child: Text('$_count')),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Container(
+                        alignment: Alignment.bottomCenter,
+                        child: const Divider(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         )
       ],
@@ -892,29 +920,30 @@ class _HomePage extends State<HomePage> {
           child: SizedBox(
             height: 60,
             width: double.infinity,
-            child: StatefulBuilder(builder: (context, setState) {
-              return Stack(
-                children: [
-                  const Positioned(
-                    left: 10,
-                    top: 5,
-                    child: Text(
-                      'Guest',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Stack(
+                  children: [
+                    const Positioned(
+                      left: 10,
+                      top: 5,
+                      child: Text(
+                        'Guest',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
                     ),
-                  ),
-                  const Positioned(
-                    left: 10,
-                    top: 25,
-                    child: Icon(
-                      Icons.person,
-                      color: Colors.deepPurple,
+                    const Positioned(
+                      left: 10,
+                      top: 25,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.deepPurple,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: InkResponse(
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: InkResponse(
                         onTap: () {
                           setState(() {
                             _guest++;
@@ -923,42 +952,45 @@ class _HomePage extends State<HomePage> {
                         child: const Icon(
                           Icons.keyboard_arrow_up,
                           color: Colors.deepPurple,
-                        )),
-                  ),
-                  Positioned(
-                      right: 10,
-                      bottom: 10,
-                      child: InkResponse(
-                          onTap: () {
-                            if (_guest < 1) {
-                              return;
-                            }
-                            setState(() {
-                              _guest--;
-                            });
-                          },
-                          child: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
-                          ))),
-                  Positioned(
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                        right: 10,
+                        bottom: 10,
+                        child: InkResponse(
+                            onTap: () {
+                              if (_guest < 1) {
+                                return;
+                              }
+                              setState(() {
+                                _guest--;
+                              });
+                            },
+                            child: const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.deepPurple,
+                            ))),
+                    Positioned(
                       left: 40,
                       top: 25,
                       child: Text(
                         "$_guest",
                         style: const TextStyle(fontSize: 16),
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Container(
-                        alignment: Alignment.bottomCenter,
-                        child: const Divider(
-                          color: Colors.black,
-                        )),
-                  ),
-                ],
-              );
-            }),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Container(
+                          alignment: Alignment.bottomCenter,
+                          child: const Divider(
+                            color: Colors.black,
+                          )),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         )
       ],

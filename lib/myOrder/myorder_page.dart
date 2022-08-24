@@ -12,25 +12,14 @@ class Orderan extends StatefulWidget {
 }
 
 class _Orderan extends State<Orderan> {
-  String _range = '';
-
-  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-    setState(() {
-      if (args.value is PickerDateRange) {
-        _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
-            // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
-      } else if (args.value is DateTime) {
-      } else if (args.value is List<DateTime>) {
-      } else {}
-    });
-  }
-
   late List<HotelsInfo> _historyOrder;
+
+  String? _range;
 
   @override
   void initState() {
     super.initState();
+    _range = '';
     _historyOrder = [
       HotelsInfo(
         nameHotel: 'Hotel Samaya, Semarang',
@@ -133,6 +122,17 @@ class _Orderan extends State<Orderan> {
     ];
   }
 
+  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+    setState(() {
+      if (args.value is PickerDateRange) {
+        _range =
+            'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
+            // ignore: lines_longer_than_80_chars
+            ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}';
+      } else {}
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,12 +193,14 @@ class _Orderan extends State<Orderan> {
                                               MainAxisAlignment.start,
                                           children: [
                                             const Icon(
-                                                Icons.calendar_month_outlined, color: Colors.deepPurple,),
+                                              Icons.calendar_month_outlined,
+                                              color: Colors.deepPurple,
+                                            ),
                                             const SizedBox(
                                               width: 10,
                                             ),
                                             Text(
-                                              _range,
+                                              _range!,
                                               style:
                                                   const TextStyle(fontSize: 16),
                                             ),
@@ -225,7 +227,10 @@ class _Orderan extends State<Orderan> {
                                 bottom: 0,
                                 child: InkWell(
                                     onTap: () {},
-                                    child: const Icon(Icons.search, color: Colors.deepPurple,))),
+                                    child: const Icon(
+                                      Icons.search,
+                                      color: Colors.deepPurple,
+                                    ))),
                             const Align(
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(8, 30, 8, 0),
@@ -301,7 +306,10 @@ class _Orderan extends State<Orderan> {
                                   left: 118,
                                   child: Row(
                                     children: <Widget>[
-                                      const Icon(Icons.calendar_month_outlined, color: Colors.deepPurple,),
+                                      const Icon(
+                                        Icons.calendar_month_outlined,
+                                        color: Colors.deepPurple,
+                                      ),
                                       Text(_historyOrder[index].date!)
                                     ],
                                   ),
@@ -311,26 +319,30 @@ class _Orderan extends State<Orderan> {
                                   left: 118,
                                   child: Row(
                                     children: <Widget>[
-                                      const Icon(Icons.bed_rounded, color: Colors.deepPurple,),
+                                      const Icon(
+                                        Icons.bed_rounded,
+                                        color: Colors.deepPurple,
+                                      ),
                                       Text(_historyOrder[index].guestRoom!),
                                     ],
                                   ),
                                 ),
                                 Positioned(
-                                    bottom: 10,
-                                    right: 20,
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          child:
-                                              _historyOrder[index].historyIcon!,
-                                        ),
-                                        SizedBox(
-                                          width: 50,
-                                          child: _historyOrder[index].history!,
-                                        )
-                                      ],
-                                    ))
+                                  bottom: 10,
+                                  right: 20,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        child:
+                                            _historyOrder[index].historyIcon!,
+                                      ),
+                                      SizedBox(
+                                        width: 50,
+                                        child: _historyOrder[index].history!,
+                                      )
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -364,16 +376,17 @@ class _Orderan extends State<Orderan> {
                   thickness: 2.0,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SfDateRangePicker(
-                  onSelectionChanged: _onSelectionChanged,
-                  selectionMode: DateRangePickerSelectionMode.range,
-                  initialSelectedRange: PickerDateRange(
-                      DateTime.now().subtract(const Duration(days: 0)),
-                      DateTime.now().add(const Duration(days: 0))),
-                ),
-              )
+              SfDateRangePicker(
+                todayHighlightColor: Colors.deepPurple,
+                startRangeSelectionColor: Colors.deepPurple,
+                endRangeSelectionColor: Colors.deepPurple,
+                rangeSelectionColor: Colors.deepPurple.withOpacity(0.2),
+                onSelectionChanged: _onSelectionChanged,
+                selectionMode: DateRangePickerSelectionMode.range,
+                initialSelectedRange: PickerDateRange(
+                    DateTime.now().subtract(const Duration(days: 0)),
+                    DateTime.now().add(const Duration(days: 0))),
+              ),
             ],
           );
         });

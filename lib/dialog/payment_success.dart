@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:samaya_hotel/bottomnavbar.dart';
-import 'package:samaya_hotel/unUsed/bottom_navbar.dart';
 
 class PaymentSuccess extends StatefulWidget {
   const PaymentSuccess({Key? key}) : super(key: key);
@@ -39,17 +38,18 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
             ),
           ),
           Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _loading(),
-              const Text(
-                'PAYMENT SUCCESS',
-                style: TextStyle(fontSize: 24),
-              ),
-              const Center(child: Text('Lorem Ipsum is simply dummy'))
-            ],
-          )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _loading(),
+                const Text(
+                  'PAYMENT SUCCESS',
+                  style: TextStyle(fontSize: 24),
+                ),
+                const Center(child: Text('Lorem Ipsum is simply dummy'))
+              ],
+            ),
+          ),
         ],
       ),
     );

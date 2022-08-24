@@ -19,7 +19,8 @@ class _PaymentLoadingState extends State<PaymentLoading> {
       Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-              pageBuilder: (context, animated1, animated2) => const PaymentSuccess(),
+              pageBuilder: (context, animated1, animated2) =>
+                  const PaymentSuccess(),
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero));
     });
@@ -41,19 +42,20 @@ class _PaymentLoadingState extends State<PaymentLoading> {
             ),
           ),
           Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _loading(),
-              const Text(
-                'TRANSACTION IN PROGRESS',
-                style: TextStyle(
-                  fontSize: 24,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _loading(),
+                const Text(
+                  'TRANSACTION IN PROGRESS',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
                 ),
-              ),
-              const Center(child: Text('Lorem Ipsum is simply dummy'))
-            ],
-          )),
+                const Center(child: Text('Lorem Ipsum is simply dummy'))
+              ],
+            ),
+          ),
         ],
       ),
     );

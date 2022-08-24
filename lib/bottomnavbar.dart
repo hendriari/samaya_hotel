@@ -52,10 +52,11 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
     );
   }
 
-  Container _navbar(BuildContext context){
+  Container _navbar(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.fromLTRB(displayWidth * .05, 0, displayWidth * .05, 15),
+      margin:
+          EdgeInsets.fromLTRB(displayWidth * .05, 0, displayWidth * .05, 15),
       // height: displayWidth * .155,
       height: 60,
       decoration: BoxDecoration(
@@ -119,17 +120,14 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
                         AnimatedContainer(
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          width:
-                          body == currentbody ? displayWidth * .15 : 0,
+                          width: body == currentbody ? displayWidth * .15 : 0,
                         ),
                         AnimatedOpacity(
                           opacity: body == currentbody ? 1 : 0,
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
                           child: Text(
-                            body == currentbody
-                                ? listOfStrings[body]
-                                : '',
+                            body == currentbody ? listOfStrings[body] : '',
                             style: const TextStyle(
                               color: Colors.amber,
                               fontWeight: FontWeight.w600,
