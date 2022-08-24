@@ -21,7 +21,6 @@ class ReservationDetail extends StatefulWidget {
     required this.guest,
     required this.cekin,
     required this.cekout,
-    // required this.addItems,
   }) : super(key: key);
 
   @override
@@ -35,16 +34,10 @@ class _ReservationDetailState extends State<ReservationDetail> {
 
   final int _tax = 60000;
 
-  // late final int _total;
-
   String? cekin;
   String? cekout;
 
   late SingletonModel _model;
-
-  // late List _intAdd;
-  // late final int _harga;
-  // late SingletonModel _model;
 
   @override
   void initState() {
@@ -55,22 +48,19 @@ class _ReservationDetailState extends State<ReservationDetail> {
     _model = SingletonModel.withContext(context);
     cekout = widget.cekout;
     cekin = widget.cekin;
-    // _total = _tax + widget.data.price!;
-    // _model = SingletonModel.withContext(context);
-    // _intAdd = widget.addItems;
-    // _harga = _intAdd * widget.data.price!;
+    _model = SingletonModel.withContext(context);
   }
 
   @override
   Widget build(BuildContext context) {
     HotelRoom? model;
-    _model.addItem!.forEach((element) {
+    for (var element in _model.addItem!) {
       model = element.item;
-    });
+    }
     int? totalPrice;
-    _model.addItem!.forEach((element) {
-      totalPrice = element.item.totalPrice;
-    });
+    for (var element in _model.addItem!) {
+      totalPrice = element.item.totalPrice! + _tax;
+    }
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -124,116 +114,128 @@ class _ReservationDetailState extends State<ReservationDetail> {
             ),
 
             //kamar dipilih
-            // ListView.builder(
-            //     itemBuilder: (context, index){
-            //      return InkWell(
-            //          onTap: (){},
-            //        child:
-                   Padding(
-                     padding: const EdgeInsets.all(8),
-                     child: Container(
-                       height: 150,
-                       width: double.infinity,
-                       decoration: BoxDecoration(
-                         color: Colors.white,
-                         borderRadius: BorderRadius.circular(10),
-                         boxShadow: const [
-                           BoxShadow(
-                               offset: Offset(1, 4),
-                               blurRadius: 5,
-                               color: Colors.black54),
-                         ],
-                       ),
-                       child: Row(
-                         children: <Widget>[
-                           Padding(
-                             padding: const EdgeInsets.all(5),
-                             child: SizedBox(
-                               width: 140,
-                               height: 140,
-                               child: ClipRRect(
-                                   borderRadius: BorderRadius.circular(10),
-                                   child: Image.asset(
-                                     model!.images!,
-                                     fit: BoxFit.cover,
-                                   )),
-                             ),
-                           ),
-                           Padding(
-                             padding: const EdgeInsets.all(5),
-                             child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 Text(
-                                   model!.name!,
-                                   style: const TextStyle(fontSize: 16),
-                                 ),
-                                 SizedBox(
-                                   child: Row(
-                                     mainAxisAlignment: MainAxisAlignment.start,
-                                     children: [
-                                       const Icon(
-                                         Icons.bed,
-                                         color: Colors.deepPurple,
-                                       ),
-                                       const SizedBox(
-                                         width: 5,
-                                       ),
-                                       Text(model!.bed!),
-                                     ],
-                                   ),
-                                 ),
-                                 SizedBox(
-                                   child: Row(
-                                     mainAxisAlignment: MainAxisAlignment.start,
-                                     children: [
-                                       const Icon(
-                                         Icons.money,
-                                         color: Colors.deepPurple,
-                                       ),
-                                       const SizedBox(width: 5),
-                                       Text(model!.refund!)
-                                     ],
-                                   ),
-                                 ),
-                                 SizedBox(
-                                   child: Row(
-                                     mainAxisAlignment: MainAxisAlignment.start,
-                                     children: [
-                                       const Icon(
-                                         Icons.person,
-                                         color: Colors.deepPurple,
-                                       ),
-                                       const SizedBox(
-                                         width: 5,
-                                       ),
-                                       Text(model!.maxPerson!),
-                                     ],
-                                   ),
-                                 ),
-                                 const SizedBox(
-                                   height: 10,
-                                 ),
-                                 Container(
-                                   alignment: Alignment.bottomRight,
-                                   height: 20,
-                                   width: MediaQuery.of(context).size.width * 0.5,
-                                   child: Text(NumberFormat.currency(
-                                       locale: 'id',
-                                       symbol: 'IDR ',
-                                       decimalDigits: 0)
-                                       .format(model!.price!)),
-                                 )
-                               ],
-                             ),
-                           ),
-                         ],
-                       ),
-                     ),
-                   ),
-            //      );
-            //     }, itemCount: _model.addItem!.length,
-            // ),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54),
+                      ],
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: SizedBox(
+                            width: 140,
+                            height: 140,
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  _model.addItem![index].item.images!,
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _model.addItem![index].item.name!,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.bed,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(model!.bed!),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.money,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(_model.addItem![index].item.refund!)
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.person,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                        _model.addItem![index].item.maxPerson!),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.bottomRight,
+                                height: 20,
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 5),
+                                      child: Text(
+                                          '${_model.addItem![index].jumlahItem} Item'),
+                                    ),
+                                    Text(NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'IDR ',
+                                            decimalDigits: 0)
+                                        .format(_model
+                                            .addItem![index].item.price!)),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              itemCount: _model.addItem!.length,
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -442,7 +444,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                   Text(model!.name!),
                   Text(NumberFormat.currency(
                           locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                      .format(model!.price!)),
+                      .format(model.price!)),
                 ],
               ),
             ),
@@ -505,7 +507,6 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                 cekin: widget.cekin,
                                 cekout: widget.cekout,
                                 selectedItem: widget.selectedItem,
-
                               )));
                 },
                 child: const Text(

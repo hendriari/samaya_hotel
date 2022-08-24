@@ -58,7 +58,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
     });
     int? totalPrice;
     _model.addItem!.forEach((element) {
-      totalPrice = element.item.totalPrice!;
+      totalPrice = element.item.totalPrice! + _tax;
     });
     return loadingpayment!
         ? const PaymentLoading()
@@ -330,16 +330,13 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('Amount'),
-                        SizedBox(
-                          width: 70,
-                          child: Text(
-                            NumberFormat.currency(
-                                    locale: 'id',
-                                    symbol: 'IDR ',
-                                    decimalDigits: 0)
-                                .format(totalPrice),
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'IDR ',
+                                  decimalDigits: 0)
+                              .format(totalPrice),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
