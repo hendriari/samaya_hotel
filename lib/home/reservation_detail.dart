@@ -8,8 +8,7 @@ import 'package:samaya_hotel/model/singleton_model.dart';
 
 class ReservationDetail extends StatefulWidget {
   final String selectedItem;
-  final String cekin;
-  final String cekout;
+
   final int guest;
   final int count;
 
@@ -18,8 +17,7 @@ class ReservationDetail extends StatefulWidget {
     required this.selectedItem,
     required this.count,
     required this.guest,
-    required this.cekin,
-    required this.cekout,
+
   }) : super(key: key);
 
   @override
@@ -31,7 +29,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
   bool? checkbox2;
   bool? checkbox3;
 
-  final int _tax = 60000;
+  int? _tax;
 
   String? cekin;
   String? cekout;
@@ -44,23 +42,27 @@ class _ReservationDetailState extends State<ReservationDetail> {
     checkbox1 = false;
     checkbox2 = false;
     checkbox3 = false;
+    _tax = 60000;
     _model = SingletonModel.withContext(context);
-    cekout = widget.cekout;
-    cekin = widget.cekin;
-    _model = SingletonModel.withContext(context);
+    cekin = _model.addItem?.cekin;
+    cekout = _model.addItem?.cekout;
   }
 
   @override
   Widget build(BuildContext context) {
     int? totalPrice;
-    for (var element in _model.addItem!) {
-      totalPrice = element.item.totalPrice! + _tax;
+    for (var element in _model.hotelModel!) {
+      totalPrice = element.totalPrice! + _tax!;
     }
 
     int? subTotal;
-    for (var element in _model.addItem!) {
-      subTotal = element.item.totalPrice!;
+    for (var element in _model.hotelModel!) {
+      subTotal = element.totalPrice!;
     }
+    // int room = 0;
+    // _model.hotelModel!.forEach((element) {
+    //   room += element.jumlahItem;
+    // });
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -144,7 +146,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
-                                  _model.addItem![index].item.images!,
+                                  _model.hotelModel![index].images!,
                                   fit: BoxFit.cover,
                                 )),
                           ),
@@ -155,7 +157,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _model.addItem![index].item.name!,
+                                _model.hotelModel![index].name!,
                                 style: const TextStyle(fontSize: 16),
                               ),
                               SizedBox(
@@ -169,7 +171,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    Text(_model.addItem![index].item.bed!),
+                                    Text(_model.hotelModel![index].bed!),
                                   ],
                                 ),
                               ),
@@ -182,7 +184,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                       color: Colors.deepPurple,
                                     ),
                                     const SizedBox(width: 5),
-                                    Text(_model.addItem![index].item.refund!)
+                                    Text(_model.hotelModel![index].refund!)
                                   ],
                                 ),
                               ),
@@ -198,7 +200,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                       width: 5,
                                     ),
                                     Text(
-                                        _model.addItem![index].item.maxPerson!),
+                                        _model.hotelModel![index].maxPerson!),
                                   ],
                                 ),
                               ),
@@ -207,7 +209,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                               ),
                               SizedBox(
                                 height: 40,
-                                width: MediaQuery.of(context).size.width * 0.58,
+                                width: MediaQuery.of(context).size.width * 0.55,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -228,8 +230,8 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                                     locale: 'id',
                                                     symbol: 'IDR ',
                                                     decimalDigits: 0)
-                                                .format(_model.addItem![index]
-                                                    .item.price!)),
+                                                .format(_model.hotelModel![index]
+                                                    .price!)),
                                           ],
                                         ),
                                       ),
@@ -248,7 +250,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                                   TextStyle(color: Colors.grey),
                                             ),
                                             Text(
-                                                '${_model.addItem![index].jumlahItem} Room'),
+                                                '${_model.hotelModel![index].jumlahItem} Room'),
                                           ],
                                         ),
                                       ),
@@ -267,7 +269,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                             locale: 'id',
                                             symbol: 'IDR ',
                                             decimalDigits: 0,
-                                          ).format(_model.addItem![index].item
+                                          ).format(_model.hotelModel![index]
                                               .selectedRoomPrice!)),
                                         ],
                                       ),
@@ -283,7 +285,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                   ),
                 );
               },
-              itemCount: _model.addItem!.length,
+              itemCount: _model.hotelModel!.length,
             ),
             const SizedBox(
               height: 20,
@@ -553,8 +555,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                           builder: (context) => ReservationSummary(
                                 guest: widget.guest,
                                 count: widget.count,
-                                cekin: widget.cekin,
-                                cekout: widget.cekout,
+
                                 selectedItem: widget.selectedItem,
                               )));
                 },

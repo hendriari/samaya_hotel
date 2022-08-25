@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/home/reservation_detail.dart';
-import 'package:samaya_hotel/model/add_item.dart';
 import 'package:samaya_hotel/model/faclities.dart';
 import 'package:samaya_hotel/model/singleton_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -11,20 +10,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../model/hotel_room.dart';
 
 class HomeReservation extends StatefulWidget {
-  final String date;
   final String selectedItem; //data lokasi hotel pilihan
   final int guest;
   final int count;
-  final String cekout;
 
-  const HomeReservation(
-      {Key? key,
-      required this.date,
-      required this.cekout,
-      required this.guest,
-      required this.count,
-      required this.selectedItem})
-      : super(key: key);
+  // final String cekin;
+  // final String cekout;
+
+  const HomeReservation({
+    Key? key,
+    // required this.cekin,
+    // required this.cekout,
+    required this.guest,
+    required this.count,
+    required this.selectedItem,
+  }) : super(key: key);
 
   @override
   State<HomeReservation> createState() => _HomeReservationState();
@@ -39,10 +39,10 @@ class _HomeReservationState extends State<HomeReservation> {
   late ScrollController _scrollController;
   late SingletonModel _model;
   String? _selectedItem;
-  String? _range;
-  String? _single;
   int? _guest;
   int? _count;
+  late String _cekin;
+  late String _cekout;
   final urlImages = [
     'images/hotels/landingimages4.jpg',
     'images/hotels/hotelloby.jpg',
@@ -52,20 +52,19 @@ class _HomeReservationState extends State<HomeReservation> {
   @override
   void initState() {
     super.initState();
-    _single = widget.cekout;
-    _range = widget.date;
     _guest = widget.guest;
     _count = widget.count;
     _selectedItem = widget.selectedItem;
     _model = SingletonModel.withContext(context);
-    _model.addItem = [];
+    _model.hotelModel = [];
     _facilitiesImg = [
       Facilities(
           image: 'images/facilities/playground.jpg', name: 'Swimming Pool'),
       Facilities(image: 'images/facilities/relaxroom.jpg', name: 'Relax Room'),
       Facilities(image: 'images/facilities/rooftop.jpg', name: 'Rooftop'),
     ];
-
+    _cekin = _model.addItem?.cekin ?? "null";
+    _cekout = _model.addItem?.cekout ?? "null";
     _hotelrooms = [
       HotelRoom(
         id: 0,
@@ -75,6 +74,7 @@ class _HomeReservationState extends State<HomeReservation> {
         price: 450000,
         refund: 'Non Refundable',
         images: 'images/hotels/hotelroom.jpg',
+        jumlahItem: 0,
       ),
       HotelRoom(
         id: 1,
@@ -84,6 +84,7 @@ class _HomeReservationState extends State<HomeReservation> {
         price: 550000,
         refund: 'Non Refundable',
         images: 'images/hotels/hotelroom.jpg',
+          jumlahItem: 0,
       ),
       HotelRoom(
         id: 2,
@@ -93,6 +94,7 @@ class _HomeReservationState extends State<HomeReservation> {
         price: 650000,
         refund: 'Non Refundable',
         images: 'images/hotels/hotelroom.jpg',
+          jumlahItem: 0,
       ),
       HotelRoom(
         id: 3,
@@ -102,6 +104,7 @@ class _HomeReservationState extends State<HomeReservation> {
         price: 750000,
         refund: 'Non Refundable',
         images: 'images/hotels/hotelroom.jpg',
+        jumlahItem: 0,
       ),
       HotelRoom(
         id: 4,
@@ -111,6 +114,7 @@ class _HomeReservationState extends State<HomeReservation> {
         price: 850000,
         refund: 'Non Refundable',
         images: 'images/hotels/hotelroom.jpg',
+        jumlahItem: 0,
       ),
     ];
     _scrollController = ScrollController();
@@ -133,8 +137,8 @@ class _HomeReservationState extends State<HomeReservation> {
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
-      _single = DateFormat('d MMMM yyyy')
+      _cekin = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
+      _cekout = DateFormat('d MMMM yyyy')
           .format(args.value.endDate ?? args.value.startDate);
     });
   }
@@ -153,7 +157,7 @@ class _HomeReservationState extends State<HomeReservation> {
               scrollDirection: Axis.vertical,
               children: [_homeReservation(), _reservationRoom()],
             ),
-            if (_model.addItem!.isNotEmpty)
+            if (_model.hotelModel!.isNotEmpty)
               Positioned(bottom: 0, left: 10, right: 10, child: _selectedRoom())
           ],
         ),
@@ -488,10 +492,9 @@ class _HomeReservationState extends State<HomeReservation> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -504,7 +507,7 @@ class _HomeReservationState extends State<HomeReservation> {
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          _range!,
+                                          _cekin,
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
@@ -512,56 +515,63 @@ class _HomeReservationState extends State<HomeReservation> {
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          '- $_single',
+                                          '- $_cekout',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
                                   )),
                             ),
-                            InkResponse(
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: InkResponse(
                                 onTap: () {
                                   _pressedDate();
                                 },
                                 child: const Icon(
                                   Icons.edit,
                                   color: Colors.deepPurple,
-                                )),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
+                              padding: const EdgeInsets.fromLTRB(8, 5, 0, 0),
                               child: SizedBox(
-                                  height: 30,
-                                  width: 320,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      const Icon(
-                                        Icons.bed,
-                                        color: Colors.deepPurple,
+                                height: 30,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    const Icon(
+                                      Icons.bed,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 6.0),
+                                      child: Text(
+                                        '$_count Room, $_guest Guest',
+                                        style: const TextStyle(fontSize: 18),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 6.0),
-                                        child: Text(
-                                          '$_count Room, $_guest Guest',
-                                          style: const TextStyle(fontSize: 18),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            InkResponse(
-                                onTap: () {
-                                  _editRoomGuest();
-                                },
-                                child: const Icon(Icons.edit,
-                                    color: Colors.deepPurple)),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: InkResponse(
+                                  onTap: () {
+                                    _editRoomGuest();
+                                  },
+                                  child: const Icon(Icons.edit,
+                                      color: Colors.deepPurple)),
+                            ),
                           ],
                         ),
                       ],
@@ -811,10 +821,9 @@ class _HomeReservationState extends State<HomeReservation> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -827,7 +836,7 @@ class _HomeReservationState extends State<HomeReservation> {
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          _range!,
+                                          _cekin,
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
@@ -835,31 +844,33 @@ class _HomeReservationState extends State<HomeReservation> {
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          '- $_single',
+                                          '- $_cekout',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
                                   )),
                             ),
-                            InkResponse(
-                                onTap: () {
-                                  _pressedDate();
-                                },
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.deepPurple,
-                                )),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: InkResponse(
+                                  onTap: () {
+                                    _pressedDate();
+                                  },
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.deepPurple,
+                                  )),
+                            ),
                           ],
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
+                              padding: const EdgeInsets.fromLTRB(8, 5.0, 0, 0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -879,12 +890,18 @@ class _HomeReservationState extends State<HomeReservation> {
                                     ],
                                   )),
                             ),
-                            InkResponse(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.deepPurple,
-                                )),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: InkResponse(
+                                  onTap: () {
+                                    _editRoomGuest();
+                                  },
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.deepPurple,
+                                  )),
+                            ),
                           ],
                         ),
                       ],
@@ -902,8 +919,8 @@ class _HomeReservationState extends State<HomeReservation> {
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondAnimation) =>
                             HomeReservation(
-                                date: widget.date,
-                                cekout: widget.cekout,
+                                // cekin: widget.cekin,
+                                // cekout: widget.cekout,
                                 guest: widget.guest,
                                 count: widget.count,
                                 selectedItem: widget.selectedItem),
@@ -1055,10 +1072,9 @@ class _HomeReservationState extends State<HomeReservation> {
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                 ),
-                                _model.addItem!
+                                _model.hotelModel!
                                         .where((element) =>
-                                            element.item.id ==
-                                            _hotelrooms[index].id)
+                                            element.id == _hotelrooms[index].id)
                                         .isEmpty
                                     ? Container(
                                         height: 30,
@@ -1070,8 +1086,16 @@ class _HomeReservationState extends State<HomeReservation> {
                                         ),
                                         child: InkWell(
                                           onTap: () => setState(() {
-                                            _model.addItem!.add(AddItem(
-                                                item: _hotelrooms[index],
+                                            _model.hotelModel!.add(HotelRoom(
+                                                // item: _hotelrooms![index],
+                                              id: _hotelrooms[index].id,
+                                                name: _hotelrooms[index].name,
+                                                bed: _hotelrooms[index].bed,
+                                                maxPerson: _hotelrooms[index].maxPerson,
+                                                price: _hotelrooms[index].price,
+                                                refund: _hotelrooms[index].refund,
+                                                images: _hotelrooms[index].images,
+                                                totalPrice: _hotelrooms[index].totalPrice,
                                                 jumlahItem: 1));
                                           }),
                                           child: const Center(
@@ -1090,27 +1114,26 @@ class _HomeReservationState extends State<HomeReservation> {
                                             children: [
                                               InkResponse(
                                                 onTap: () {
-                                                  AddItem select = _model
-                                                      .addItem!
+                                                  HotelRoom select = _model
+                                                      .hotelModel!
                                                       .where((element) =>
-                                                          element.item.id ==
+                                                          element.id ==
                                                           _hotelrooms[index].id)
                                                       .first;
                                                   setState(() {
                                                     if (select.jumlahItem ==
                                                         1) {
-                                                      _model.addItem!
+                                                      _model.hotelModel!
                                                           .removeWhere(
                                                               (element) =>
-                                                                  element.item
-                                                                      .id ==
+                                                                  element.id ==
                                                                   _hotelrooms[
                                                                           index]
                                                                       .id);
                                                     } else {
-                                                      _model.addItem!
+                                                      _model.hotelModel!
                                                           .where((element) =>
-                                                              element.item.id ==
+                                                              element.id ==
                                                               _hotelrooms[index]
                                                                   .id)
                                                           .first
@@ -1140,7 +1163,7 @@ class _HomeReservationState extends State<HomeReservation> {
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(
-                                                  "${_model.addItem!.where((element) => element.item.id == _hotelrooms[index].id).first.jumlahItem}",
+                                                  "${_model.hotelModel!.where((element) => element.id == _hotelrooms[index].id).first.jumlahItem}",
                                                   style: const TextStyle(
                                                       fontSize: 16),
                                                 ),
@@ -1148,9 +1171,9 @@ class _HomeReservationState extends State<HomeReservation> {
                                               InkResponse(
                                                 onTap: () {
                                                   setState(() {
-                                                    _model.addItem!
+                                                    _model.hotelModel!
                                                         .where((element) =>
-                                                            element.item.id ==
+                                                            element.id ==
                                                             _hotelrooms[index]
                                                                 .id)
                                                         .first
@@ -1205,19 +1228,19 @@ class _HomeReservationState extends State<HomeReservation> {
   //select room
   Widget _selectedRoom() {
     int price = 0;
-    for (var element in _model.addItem!) {
-      price += element.item.price! * element.jumlahItem;
-      element.item.totalPrice = price;
+    for (var element in _model.hotelModel!) {
+      price += element.price! * element.jumlahItem;
+      element.totalPrice = price;
     }
 
-    int roomPrice = 0;
-    for (var element in _model.addItem!) {
-      roomPrice = element.item.price! * element.jumlahItem;
-      element.item.selectedRoomPrice = roomPrice;
+    int? roomPrice = 0;
+    for (var element in _model.hotelModel!) {
+      roomPrice = element.price! * element.jumlahItem;
+      element.selectedRoomPrice = roomPrice;
     }
 
     int room = 0;
-    for (var element in _model.addItem!) {
+    for (var element in _model.hotelModel!) {
       room += element.jumlahItem;
     }
 
@@ -1229,8 +1252,7 @@ class _HomeReservationState extends State<HomeReservation> {
             builder: (context) => ReservationDetail(
               count: widget.count,
               guest: widget.guest,
-              cekin: widget.date,
-              cekout: widget.cekout,
+
               selectedItem: widget.selectedItem,
             ),
           ),
@@ -1245,7 +1267,7 @@ class _HomeReservationState extends State<HomeReservation> {
             height: 55,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.deepPurpleAccent,
+              color: Colors.deepPurple,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -1261,7 +1283,9 @@ class _HomeReservationState extends State<HomeReservation> {
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: Text(
-                    NumberFormat.currency(locale: 'id', symbol: 'IDR ', decimalDigits: 0).format(price),
+                    NumberFormat.currency(
+                            locale: 'id', symbol: 'IDR ', decimalDigits: 0)
+                        .format(price),
                     style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 )

@@ -16,7 +16,7 @@ class _Orderan extends State<Orderan> {
 
   String? _range;
   DateTime dateNow= DateTime.now();
-  final dates = DateFormat.yMMMEd().format(DateTime.now());
+  final dates = DateFormat('EEEE, d MMMM yyyy').format(DateTime.now());
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _Orderan extends State<Orderan> {
           style: TextStyle(color: Colors.deepPurpleAccent),
         ),
         historyIcon: const Icon(
-          Icons.access_time_filled,
+          Icons.check_circle,
           color: Colors.deepPurpleAccent,
         ),
       ),

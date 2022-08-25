@@ -8,16 +8,18 @@ class HotelRoom {
   String? images;
   int? totalPrice;
   int? selectedRoomPrice;
+ int jumlahItem;
 
-  HotelRoom({
-    this.id,
-    this.name,
-    this.bed,
-    this.maxPerson,
-    this.price,
-    this.refund,
-    this.images,
-    this.totalPrice,
-    this.selectedRoomPrice,
-  });
+  HotelRoom(
+      {this.id,
+      this.name,
+      this.bed,
+      this.maxPerson,
+      this.price,
+      this.refund,
+      this.images,
+      this.totalPrice,
+      this.selectedRoomPrice,
+     required this.jumlahItem,
+      });
 }

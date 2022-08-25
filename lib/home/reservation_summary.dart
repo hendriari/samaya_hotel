@@ -8,20 +8,17 @@ import 'package:samaya_hotel/model/singleton_model.dart';
 class ReservationSummary extends StatefulWidget {
   // final HotelRoom data;
   final String selectedItem;
-  final String cekin;
-  final String cekout;
+
   final int guest;
   final int count;
 
-  const ReservationSummary(
-      {Key? key,
-      // required this.data,
-      required this.selectedItem,
-      required this.count,
-      required this.guest,
-      required this.cekin,
-      required this.cekout})
-      : super(key: key);
+  const ReservationSummary({
+    Key? key,
+    // required this.data,
+    required this.selectedItem,
+    required this.count,
+    required this.guest,
+  }) : super(key: key);
 
   @override
   State<ReservationSummary> createState() => _ReservationSummaryState();
@@ -42,10 +39,11 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   void initState() {
     super.initState();
     _model = SingletonModel.withContext(context);
+    cekin = _model.addItem?.cekin;
+    cekout = _model.addItem?.cekout;
     loadingpayment = false;
     _selectedItem = widget.selectedItem;
-    cekin = widget.cekin;
-    cekout = widget.cekout;
+
     _count = widget.count;
     _guest = widget.guest;
   }
@@ -54,18 +52,18 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   Widget build(BuildContext context) {
     //memanggil isi model tanpa mengeksekusi nilai dari model tersebut
     HotelRoom? model;
-    _model.addItem!.forEach((element) {
-      model = element.item;
+    _model.hotelModel!.forEach((element) {
+      model = element;
     });
 
     int? subTotalRoom;
-    for(var element in _model.addItem!){
-     subTotalRoom = element.item.totalPrice!;
+    for (var element in _model.hotelModel!) {
+      subTotalRoom = element.totalPrice!;
     }
 
     int? totalPrice;
-    _model.addItem!.forEach((element) {
-      totalPrice = element.item.totalPrice! + _tax;
+    _model.hotelModel!.forEach((element) {
+      totalPrice = element.totalPrice! + _tax;
     });
     return loadingpayment!
         ? const PaymentLoading()
@@ -142,7 +140,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                               ),
                               const SizedBox(width: 10),
                               Text(
-                                cekin!,
+                                '$cekin',
                               ),
                               Text('- $cekout'),
                             ],
@@ -349,7 +347,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     ),
                   ),
                   const SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
                   Center(
                     child: ElevatedButton(
@@ -368,6 +366,9 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  )
                 ],
               ),
             ),

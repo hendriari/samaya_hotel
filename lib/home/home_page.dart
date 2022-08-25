@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:samaya_hotel/model/promotion.dart';
+import 'package:samaya_hotel/model/singleton_model.dart';
 import 'package:samaya_hotel/model/vacation.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
@@ -20,15 +21,20 @@ class _HomePage extends State<HomePage> {
   late List<Promotion> _promo;
 
   String? _selectedItem;
-  String? _range;
-  String? _single;
+  String? _cekin;
+  String? _cekout;
 
-  int _guest = 0;
-  int _count = 0;
+  late int _guest;
+  late int _count;
+
+  late SingletonModel _model;
 
   @override
   void initState() {
     super.initState();
+    _model = SingletonModel.withContext(context);
+    _guest = 0;
+    _count = 0;
     _promo = [
       Promotion(images: 'images/promotion/gomart.png', promo: 'Go-Mart'),
       Promotion(
@@ -60,20 +66,26 @@ class _HomePage extends State<HomePage> {
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
-      _single = DateFormat('d MMMM yyyy')
+      _cekin = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
+      _cekout = DateFormat('d MMMM yyyy')
           .format(args.value.endDate ?? args.value.startDate);
     });
   }
 
-  void _onSearch() {
-    if (_selectedItem != null && _range != null && _single != null) {
-      Navigator.push(
+  void _onSearch() async {
+    if (_selectedItem != null && _cekin != null && _cekout != null) {
+      setState(() {
+        SingletonModel.shared.addItem?.cekin = _cekin;
+        SingletonModel.shared.addItem?.cekout = _cekout;
+      });
+      print("IKI PRINT $_cekin");
+      print("IKI PRINT $_cekout");
+      await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => HomeReservation(
-            date: _range!,
-            cekout: _single!,
+            // cekin: _cekin!,
+            // cekout: _cekout!,
             guest: _guest,
             count: _count,
             selectedItem: _selectedItem!,
@@ -264,7 +276,7 @@ class _HomePage extends State<HomePage> {
                                         color: Colors.deepPurple,
                                       ),
                                       Text(
-                                        _range ?? 'On ',
+                                        _cekin ?? 'On ',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -308,7 +320,7 @@ class _HomePage extends State<HomePage> {
                                         color: Colors.deepPurple,
                                       ),
                                       Text(
-                                        _single ?? 'On ',
+                                        _cekout ?? 'On ',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -543,13 +555,10 @@ class _HomePage extends State<HomePage> {
       context: context,
       builder: (context) {
         return ListView(
-          physics: const NeverScrollableScrollPhysics(),
+          physics: ScrollPhysics(),
           children: [
-            SizedBox(
-              height: double.maxFinite,
-              child: Container(
-                child: _buildBottomNavigationMenu(),
-              ),
+            Container(
+              child: _buildBottomNavigationMenu(),
             ),
           ],
         );
@@ -621,119 +630,122 @@ class _HomePage extends State<HomePage> {
             ),
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Semarang'),
-                      onTap: () => _selectItem('Hotel Samaya, Semarang'),
-                    ),
+        Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Semarang'),
+                    onTap: () => _selectItem('Hotel Samaya, Semarang'),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Kab. Semarang'),
-                      onTap: () => _selectItem('Hotel Samaya, Kab. Semarang'),
-                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Kab. Semarang'),
+                    onTap: () => _selectItem('Hotel Samaya, Kab. Semarang'),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Klaten'),
-                      onTap: () => _selectItem('Hotel Samaya, Klaten'),
-                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Klaten'),
+                    onTap: () => _selectItem('Hotel Samaya, Klaten'),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Solo'),
-                      onTap: () => _selectItem('Hotel Samaya, Solo'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
                     ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Solo'),
+                    onTap: () => _selectItem('Hotel Samaya, Solo'),
                   ),
                 ),
               ),
-              const SizedBox(
-                  height: 20,
+            ),
+            const SizedBox(
+              height: 40,
+              child: Center(
+                child: Text(
+                  'No more data',
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         )
       ],
     );

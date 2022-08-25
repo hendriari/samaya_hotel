@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:samaya_hotel/model/add_item.dart';
+import 'package:samaya_hotel/model/hotel_room.dart';
 
 class SingletonModel {
   static final SingletonModel _singleton = SingletonModel._internal();
@@ -18,5 +19,6 @@ class SingletonModel {
   static SingletonModel get shared => _singleton;
 
   late BuildContext? context;
-  List<AddItem>? addItem;
+  AddItem? addItem;
+  List<HotelRoom>? hotelModel;
 }
