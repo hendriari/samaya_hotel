@@ -11,18 +11,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../model/hotel_room.dart';
 
 class HomeReservation extends StatefulWidget {
-  final String date;
+  final String? cekin;
   final String selectedItem; //data lokasi hotel pilihan
-  final int guest;
-  final int count;
-  final String cekout;
+  final int? guest;
+  final int? room;
+  final String? cekout;
 
-  const HomeReservation(
+  HomeReservation(
       {Key? key,
-      required this.date,
+      required this.cekin,
       required this.cekout,
       required this.guest,
-      required this.count,
+      required this.room,
       required this.selectedItem})
       : super(key: key);
 
@@ -39,10 +39,10 @@ class _HomeReservationState extends State<HomeReservation> {
   late ScrollController _scrollController;
   late SingletonModel _model;
   String? _selectedItem;
-  String? _range;
-  String? _single;
+  String? _cekin;
+  String? _cekout;
   int? _guest;
-  int? _count;
+  int? _room;
   final urlImages = [
     'images/hotels/landingimages4.jpg',
     'images/hotels/hotelloby.jpg',
@@ -52,10 +52,10 @@ class _HomeReservationState extends State<HomeReservation> {
   @override
   void initState() {
     super.initState();
-    _single = widget.cekout;
-    _range = widget.date;
+    _cekout = widget.cekout;
+    _cekin = widget.cekin;
     _guest = widget.guest;
-    _count = widget.count;
+    _room = widget.room;
     _selectedItem = widget.selectedItem;
     _model = SingletonModel.withContext(context);
     _model.addItem = [];
@@ -133,8 +133,8 @@ class _HomeReservationState extends State<HomeReservation> {
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
-      _single = DateFormat('d MMMM yyyy')
+      _cekin = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
+      _cekout = DateFormat('d MMMM yyyy')
           .format(args.value.endDate ?? args.value.startDate);
     });
   }
@@ -222,7 +222,7 @@ class _HomeReservationState extends State<HomeReservation> {
                 ),
                 onPressed: () {
                   setState(() {
-                    _count;
+                    _room;
                     _guest;
                   });
                   Navigator.pop(context);
@@ -280,11 +280,11 @@ class _HomeReservationState extends State<HomeReservation> {
                     Positioned(
                       right: 10,
                       top: 10,
-                      child: InkResponse(
+                      child: InkWell(
                         onTap: () {
                           setState(() {
-                            if (_count != null) {
-                              _count = _count! + 1;
+                            if (_room != null) {
+                              _room = _room! + 1;
                             }
                           });
                         },
@@ -297,14 +297,14 @@ class _HomeReservationState extends State<HomeReservation> {
                     Positioned(
                       right: 10,
                       bottom: 10,
-                      child: InkResponse(
+                      child: InkWell(
                         onTap: () {
                           setState(() {
-                            var c = _count;
-                            if (c != null && c >= 1) {
-                              c--;
+                            var r = _room;
+                            if (r != null && r >= 1) {
+                              r--;
                             }
-                            _count = c;
+                            _room = r;
                           });
                         },
                         child: const Icon(
@@ -313,7 +313,7 @@ class _HomeReservationState extends State<HomeReservation> {
                         ),
                       ),
                     ),
-                    Positioned(left: 40, top: 25, child: Text('$_count')),
+                    Positioned(left: 40, top: 25, child: Text('$_room')),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Container(
@@ -364,7 +364,7 @@ class _HomeReservationState extends State<HomeReservation> {
                     Positioned(
                       right: 10,
                       top: 10,
-                      child: InkResponse(
+                      child: InkWell(
                         onTap: () {
                           setState(() {
                             if (_guest != null) {
@@ -381,7 +381,7 @@ class _HomeReservationState extends State<HomeReservation> {
                     Positioned(
                         right: 10,
                         bottom: 10,
-                        child: InkResponse(
+                        child: InkWell(
                             onTap: () {
                               setState(() {
                                 var g = _guest;
@@ -491,20 +491,22 @@ class _HomeReservationState extends State<HomeReservation> {
                               padding: const EdgeInsets.only(top: 8.0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      const Icon(
-                                        Icons.calendar_month_outlined,
-                                        color: Colors.deepPurple,
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 8.0),
+                                        child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          color: Colors.deepPurple,
+                                        ),
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          _range!,
+                                          _cekin!,
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
@@ -512,20 +514,24 @@ class _HomeReservationState extends State<HomeReservation> {
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          '- $_single',
+                                          '- $_cekout',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
                                   )),
                             ),
-                            InkResponse(
+                            const Spacer(),
+                            InkWell(
                                 onTap: () {
                                   _pressedDate();
                                 },
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.deepPurple,
+                                child: const Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.deepPurple,
+                                  ),
                                 )),
                           ],
                         ),
@@ -536,32 +542,39 @@ class _HomeReservationState extends State<HomeReservation> {
                               padding: const EdgeInsets.only(top: 5.0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      const Icon(
-                                        Icons.bed,
-                                        color: Colors.deepPurple,
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 8.0),
+                                        child: Icon(
+                                          Icons.bed,
+                                          color: Colors.deepPurple,
+                                        ),
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          '$_count Room, $_guest Guest',
+                                          '$_room Room, $_guest Guest',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
-                                  )),
+                                  ),
+                              ),
                             ),
-                            InkResponse(
+                            const Spacer(),
+                            InkWell(
                                 onTap: () {
                                   _editRoomGuest();
                                 },
-                                child: const Icon(Icons.edit,
-                                    color: Colors.deepPurple)),
+                                child: const Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Icon(Icons.edit,
+                                      color: Colors.deepPurple),
+                                )),
                           ],
                         ),
                       ],
@@ -572,7 +585,7 @@ class _HomeReservationState extends State<HomeReservation> {
               Positioned(
                 top: 50,
                 left: 35,
-                child: InkResponse(
+                child: InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -714,7 +727,7 @@ class _HomeReservationState extends State<HomeReservation> {
                                       blurRadius: 5,
                                     )
                                   ]),
-                              child: InkResponse(
+                              child: InkWell(
                                 onTap: () {},
                                 child: Stack(children: <Widget>[
                                   ClipRRect(
@@ -814,20 +827,22 @@ class _HomeReservationState extends State<HomeReservation> {
                               padding: const EdgeInsets.only(top: 8.0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      const Icon(
-                                        Icons.calendar_month_outlined,
-                                        color: Colors.deepPurple,
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 8.0),
+                                        child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          color: Colors.deepPurple,
+                                        ),
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          _range!,
+                                          _cekin!,
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
@@ -835,20 +850,25 @@ class _HomeReservationState extends State<HomeReservation> {
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          '- $_single',
+                                          '- $_cekout',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
-                                  )),
+                                  ),
+                              ),
                             ),
-                            InkResponse(
+                            const Spacer(),
+                            InkWell(
                                 onTap: () {
                                   _pressedDate();
                                 },
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.deepPurple,
+                                child: const Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.deepPurple,
+                                  ),
                                 )),
                           ],
                         ),
@@ -859,31 +879,39 @@ class _HomeReservationState extends State<HomeReservation> {
                               padding: const EdgeInsets.only(top: 5.0),
                               child: SizedBox(
                                   height: 30,
-                                  width: 320,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      const Icon(
-                                        Icons.bed,
-                                        color: Colors.deepPurple,
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 8.0),
+                                        child: Icon(
+                                          Icons.bed,
+                                          color: Colors.deepPurple,
+                                        ),
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 6.0),
                                         child: Text(
-                                          '$_count Room, $_guest Guest',
+                                          '$_room Room, $_guest Guest',
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
                                   )),
                             ),
-                            InkResponse(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.deepPurple,
+                            const Spacer(),
+                            InkWell(
+                                onTap: () {
+                                  _editRoomGuest();
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.deepPurple,
+                                  ),
                                 )),
                           ],
                         ),
@@ -895,17 +923,17 @@ class _HomeReservationState extends State<HomeReservation> {
               Positioned(
                 top: 50,
                 left: 35,
-                child: InkResponse(
+                child: InkWell(
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondAnimation) =>
                             HomeReservation(
-                                date: widget.date,
+                                cekin: widget.cekin,
                                 cekout: widget.cekout,
                                 guest: widget.guest,
-                                count: widget.count,
+                                room: widget.room,
                                 selectedItem: widget.selectedItem),
                         transitionDuration: const Duration(milliseconds: 1000),
                         transitionsBuilder:
@@ -1039,6 +1067,7 @@ class _HomeReservationState extends State<HomeReservation> {
                               height: 20,
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
@@ -1088,7 +1117,7 @@ class _HomeReservationState extends State<HomeReservation> {
                                         children: [
                                           Row(
                                             children: [
-                                              InkResponse(
+                                              InkWell(
                                                 onTap: () {
                                                   AddItem select = _model
                                                       .addItem!
@@ -1145,7 +1174,7 @@ class _HomeReservationState extends State<HomeReservation> {
                                                       fontSize: 16),
                                                 ),
                                               ),
-                                              InkResponse(
+                                              InkWell(
                                                 onTap: () {
                                                   setState(() {
                                                     _model.addItem!
@@ -1221,16 +1250,16 @@ class _HomeReservationState extends State<HomeReservation> {
       room += element.jumlahItem;
     }
 
-    return InkResponse(
+    return InkWell(
       onTap: () async {
         await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ReservationDetail(
-              count: widget.count,
-              guest: widget.guest,
-              cekin: widget.date,
-              cekout: widget.cekout,
+              room: widget.room!,
+              guest: widget.guest!,
+              cekin: widget.cekin!,
+              cekout: widget.cekout!,
               selectedItem: widget.selectedItem,
             ),
           ),
@@ -1245,7 +1274,7 @@ class _HomeReservationState extends State<HomeReservation> {
             height: 55,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.deepPurpleAccent,
+              color: Colors.deepPurple,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(

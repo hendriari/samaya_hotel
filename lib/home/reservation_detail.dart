@@ -8,15 +8,15 @@ import 'package:samaya_hotel/model/singleton_model.dart';
 
 class ReservationDetail extends StatefulWidget {
   final String selectedItem;
-  final String cekin;
-  final String cekout;
-  final int guest;
-  final int count;
+  final String? cekin;
+  final String? cekout;
+  final int? guest;
+  final int? room;
 
   const ReservationDetail({
     Key? key,
     required this.selectedItem,
-    required this.count,
+    required this.room,
     required this.guest,
     required this.cekin,
     required this.cekout,
@@ -31,7 +31,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
   bool? checkbox2;
   bool? checkbox3;
 
-  final int _tax = 60000;
+  int? _tax;
 
   String? cekin;
   String? cekout;
@@ -44,6 +44,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
     checkbox1 = false;
     checkbox2 = false;
     checkbox3 = false;
+    _tax = 60000;
     _model = SingletonModel.withContext(context);
     cekout = widget.cekout;
     cekin = widget.cekin;
@@ -54,7 +55,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
   Widget build(BuildContext context) {
     int? totalPrice;
     for (var element in _model.addItem!) {
-      totalPrice = element.item.totalPrice! + _tax;
+      totalPrice = element.item.totalPrice! + _tax!;
     }
 
     int? subTotal;
@@ -207,7 +208,7 @@ class _ReservationDetailState extends State<ReservationDetail> {
                               ),
                               SizedBox(
                                 height: 40,
-                                width: MediaQuery.of(context).size.width * 0.58,
+                                width: MediaQuery.of(context).size.width * 0.55,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -551,10 +552,10 @@ class _ReservationDetailState extends State<ReservationDetail> {
                       MaterialPageRoute(
                           //mengirim antar page, kirim data ke page 3
                           builder: (context) => ReservationSummary(
-                                guest: widget.guest,
-                                count: widget.count,
-                                cekin: widget.cekin,
-                                cekout: widget.cekout,
+                                guest: widget.guest!,
+                                room: widget.room!,
+                                cekin: widget.cekin!,
+                                cekout: widget.cekout!,
                                 selectedItem: widget.selectedItem,
                               )));
                 },

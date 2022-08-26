@@ -39,7 +39,7 @@ class _LandingPage extends State<LandingPage> {
                       return buildImage(assetImage, index);
                     },
                     options: CarouselOptions(
-                        height: 650,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         viewportFraction: 1,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 3),

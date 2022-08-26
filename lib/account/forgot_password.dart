@@ -59,72 +59,65 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               width: double.infinity,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          cursorColor: Colors.deepPurple,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                              labelText: 'Email',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        cursorColor: Colors.deepPurple,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            labelText: 'Email',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: double.infinity,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) =>
-                            const EmailSent(),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Send',
-                    style: TextStyle(
-                      fontSize: 22,
+            SizedBox(height: MediaQuery.of(context).size.height * 0.55),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          const EmailSent(),
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero,
                     ),
+                  );
+                },
+                child: const Text(
+                  'Send',
+                  style: TextStyle(
+                    fontSize: 22,
                   ),
                 ),
               ),

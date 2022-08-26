@@ -8,16 +8,15 @@ import 'package:samaya_hotel/model/singleton_model.dart';
 class ReservationSummary extends StatefulWidget {
   // final HotelRoom data;
   final String selectedItem;
-  final String cekin;
-  final String cekout;
-  final int guest;
-  final int count;
+  final String? cekin;
+  final String? cekout;
+  final int? guest;
+  final int? room;
 
   const ReservationSummary(
       {Key? key,
-      // required this.data,
       required this.selectedItem,
-      required this.count,
+      required this.room,
       required this.guest,
       required this.cekin,
       required this.cekout})
@@ -32,7 +31,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   String? _selectedItem;
   String? cekin;
   String? cekout;
-  int? _count;
+  int? _room;
   int? _guest;
   late SingletonModel _model;
 
@@ -46,7 +45,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
     _selectedItem = widget.selectedItem;
     cekin = widget.cekin;
     cekout = widget.cekout;
-    _count = widget.count;
+    _room = widget.room;
     _guest = widget.guest;
   }
 
@@ -155,7 +154,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                               color: Colors.deepPurple,
                             ),
                             const SizedBox(width: 10),
-                            Text('$_count Room, $_guest Guest')
+                            Text('$_room Room, $_guest Guest')
                           ],
                         ),
                         Row(
@@ -292,7 +291,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Sub Total Room'),
+                        const Text('Sub Total Room'),
                         Text(
                           NumberFormat.currency(
                                   locale: 'id',
@@ -349,7 +348,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     ),
                   ),
                   const SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
                   Center(
                     child: ElevatedButton(
@@ -368,6 +367,9 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30,
+                  )
                 ],
               ),
             ),

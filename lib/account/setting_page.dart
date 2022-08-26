@@ -59,91 +59,83 @@ class _SettingAccountState extends State<SettingAccount> {
               width: double.infinity,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.deepPurple,
-                                ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        obscureText: true,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.deepPurple,
                               ),
-                              labelText: 'New Password',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                            ),
+                            labelText: 'New Password',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.deepPurple,
-                                ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        obscureText: true,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.deepPurple,
                               ),
-                              labelText: 'Confirm Password',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                            ),
+                            labelText: 'Confirm Password',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),

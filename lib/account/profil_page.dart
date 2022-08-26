@@ -59,14 +59,78 @@ class _ProfileAccountState extends State<ProfileAccount> {
               width: double.infinity,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            hintText: 'Lilya Cordoba',
+                            labelText: 'Full Name',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.datetime,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            hintText: '12/12/2099',
+                            labelText: 'Date of Birth',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: const [
@@ -75,35 +139,31 @@ class _ProfileAccountState extends State<ProfileAccount> {
                               blurRadius: 5,
                               color: Colors.black54,
                             ),
-                          ],
-                        ),
-                        child: TextField(
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              hintText: 'Lilya Cordoba',
-                              labelText: 'Full Name',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                          ]),
+                      child: TextField(
+                        keyboardType: TextInputType.phone,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            hintText: '+621345678910',
+                            labelText: 'Phone Number',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: const [
@@ -112,137 +172,57 @@ class _ProfileAccountState extends State<ProfileAccount> {
                               blurRadius: 5,
                               color: Colors.black54,
                             ),
-                          ],
-                        ),
-                        child: TextField(
-                          keyboardType: TextInputType.datetime,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              hintText: '12/12/2099',
-                              labelText: 'Date of Birth',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                          ]),
+                      child: TextField(
+                        keyboardType: TextInputType.emailAddress,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            hintText: 'lilyacordoba@gmail.com',
+                            labelText: 'Email',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                                color: Colors.black54,
-                              ),
-                            ]),
-                        child: TextField(
-                          keyboardType: TextInputType.phone,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              hintText: '+621345678910',
-                              labelText: 'Phone Number',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(1, 4),
-                                blurRadius: 5,
-                                color: Colors.black54,
-                              ),
-                            ]),
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              hintText: 'lilyacordoba@gmail.com',
-                              labelText: 'Email',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          keyboardType: TextInputType.streetAddress,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              hintText: 'Brooklyn, United States of America',
-                              labelText: 'Address',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                      child: TextField(
+                        keyboardType: TextInputType.streetAddress,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            hintText: 'Brooklyn, United States of America',
+                            labelText: 'Address',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),

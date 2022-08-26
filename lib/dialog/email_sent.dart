@@ -13,7 +13,7 @@ class EmailSent extends StatefulWidget {
 class _EmailSentState extends State<EmailSent> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(milliseconds: 3500), () {
       Navigator.pop(context);
     });
     super.initState();

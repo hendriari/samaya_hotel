@@ -20,15 +20,17 @@ class _HomePage extends State<HomePage> {
   late List<Promotion> _promo;
 
   String? _selectedItem;
-  String? _range;
-  String? _single;
+  String? _cekin;
+  String? _cekout;
 
-  int _guest = 0;
-  int _count = 0;
+  int? _guest;
+  int? _room;
 
   @override
   void initState() {
     super.initState();
+    _guest = 0;
+    _room = 0;
     _promo = [
       Promotion(images: 'images/promotion/gomart.png', promo: 'Go-Mart'),
       Promotion(
@@ -60,22 +62,22 @@ class _HomePage extends State<HomePage> {
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      _range = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
-      _single = DateFormat('d MMMM yyyy')
+      _cekin = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
+      _cekout = DateFormat('d MMMM yyyy')
           .format(args.value.endDate ?? args.value.startDate);
     });
   }
 
   void _onSearch() {
-    if (_selectedItem != null && _range != null && _single != null) {
+    if (_selectedItem != null && _cekin != null && _cekout != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => HomeReservation(
-            date: _range!,
-            cekout: _single!,
-            guest: _guest,
-            count: _count,
+            cekin: _cekin!,
+            cekout: _cekout!,
+            guest: _guest!,
+            room: _room!,
             selectedItem: _selectedItem!,
           ),
         ),
@@ -264,7 +266,7 @@ class _HomePage extends State<HomePage> {
                                         color: Colors.deepPurple,
                                       ),
                                       Text(
-                                        _range ?? 'On ',
+                                        _cekin ?? 'On ',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -308,7 +310,7 @@ class _HomePage extends State<HomePage> {
                                         color: Colors.deepPurple,
                                       ),
                                       Text(
-                                        _single ?? 'On ',
+                                        _cekout ?? 'On ',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -350,7 +352,7 @@ class _HomePage extends State<HomePage> {
                                       const Icon(Icons.bed,
                                           color: Colors.deepPurple),
                                       Text(
-                                        "$_count Room, $_guest Guest",
+                                        "$_room Room, $_guest Guest",
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ],
@@ -543,13 +545,10 @@ class _HomePage extends State<HomePage> {
       context: context,
       builder: (context) {
         return ListView(
-          physics: const NeverScrollableScrollPhysics(),
+          physics: const ScrollPhysics(),
           children: [
-            SizedBox(
-              height: double.maxFinite,
-              child: Container(
-                child: _buildBottomNavigationMenu(),
-              ),
+            Container(
+              child: _buildBottomNavigationMenu(),
             ),
           ],
         );
@@ -621,119 +620,117 @@ class _HomePage extends State<HomePage> {
             ),
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Semarang'),
-                      onTap: () => _selectItem('Hotel Samaya, Semarang'),
-                    ),
+        Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Semarang'),
+                    onTap: () => _selectItem('Hotel Samaya, Semarang'),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Kab. Semarang'),
-                      onTap: () => _selectItem('Hotel Samaya, Kab. Semarang'),
-                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Kab. Semarang'),
+                    onTap: () => _selectItem('Hotel Samaya, Kab. Semarang'),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Klaten'),
-                      onTap: () => _selectItem('Hotel Samaya, Klaten'),
-                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Klaten'),
+                    onTap: () => _selectItem('Hotel Samaya, Klaten'),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Colors.black54,
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('images/hotel.png')),
-                      title: const Text('Hotel Samaya, Solo'),
-                      onTap: () => _selectItem('Hotel Samaya, Solo'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(1, 4),
+                      color: Colors.black54,
+                      blurRadius: 5,
                     ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset('images/hotel.png')),
+                    title: const Text('Hotel Samaya, Solo'),
+                    onTap: () => _selectItem('Hotel Samaya, Solo'),
                   ),
                 ),
               ),
-              const SizedBox(
-                  height: 20,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+                height: 40,
+              child: Center(child: Text('No more data',style: TextStyle(color: Colors.grey),)),
+            ),
+          ],
         )
       ],
     );
@@ -808,7 +805,7 @@ class _HomePage extends State<HomePage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    _count;
+                    _room;
                     _guest;
                   });
                   Navigator.pop(context);
@@ -869,7 +866,9 @@ class _HomePage extends State<HomePage> {
                       child: InkResponse(
                         onTap: () {
                           setState(() {
-                            _count++;
+                            if (_room != null) {
+                              _room = _room! + 1;
+                            }
                           });
                         },
                         child: const Icon(
@@ -883,11 +882,12 @@ class _HomePage extends State<HomePage> {
                       bottom: 10,
                       child: InkResponse(
                         onTap: () {
-                          if (_count < 1) {
-                            return;
-                          }
                           setState(() {
-                            _count--;
+                            var r = _room;
+                            if (r != null && r >= 1) {
+                              r--;
+                            }
+                            _room = r;
                           });
                         },
                         child: const Icon(
@@ -896,7 +896,7 @@ class _HomePage extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Positioned(left: 40, top: 25, child: Text('$_count')),
+                    Positioned(left: 40, top: 25, child: Text('$_room')),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Container(
@@ -950,7 +950,9 @@ class _HomePage extends State<HomePage> {
                       child: InkResponse(
                         onTap: () {
                           setState(() {
-                            _guest++;
+                            if (_guest != null) {
+                              _guest = _guest! + 1;
+                            }
                           });
                         },
                         child: const Icon(
@@ -964,11 +966,12 @@ class _HomePage extends State<HomePage> {
                         bottom: 10,
                         child: InkResponse(
                             onTap: () {
-                              if (_guest < 1) {
-                                return;
-                              }
                               setState(() {
-                                _guest--;
+                                var g = _guest;
+                                if (g != null && g >= 1) {
+                                  g--;
+                                }
+                                _guest = g;
                               });
                             },
                             child: const Icon(

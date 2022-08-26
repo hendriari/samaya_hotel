@@ -105,7 +105,7 @@ class _AccountPage extends State<AccountPage> {
                   child: SizedBox(
                     height: 70,
                     width: 70,
-                    child: InkResponse(
+                    child: InkWell(
                         onTap: () async {
                           await getImage();
                         },
@@ -148,7 +148,7 @@ class _AccountPage extends State<AccountPage> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: InkResponse(
+                  child: InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -187,7 +187,7 @@ class _AccountPage extends State<AccountPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: InkResponse(
+                  child: InkWell(
                     onTap: () {
                       showModalBottomSheet(
                           shape: const RoundedRectangleBorder(
@@ -230,7 +230,7 @@ class _AccountPage extends State<AccountPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: InkResponse(
+                  child: InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -269,7 +269,7 @@ class _AccountPage extends State<AccountPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: InkResponse(
+                  child: InkWell(
                     onTap: () {
                       showModalBottomSheet(
                           shape: const RoundedRectangleBorder(
@@ -388,7 +388,7 @@ class _AccountPage extends State<AccountPage> {
                   right: 0,
                   child: SizedBox(
                     height: 70,
-                    child: InkResponse(
+                    child: InkWell(
                       onTap: () {
                         Navigator.pop(context);
                       },
@@ -421,88 +421,80 @@ class _AccountPage extends State<AccountPage> {
             ),
           ),
           SizedBox(
-            height: 160,
+            height: 170,
             width: double.infinity,
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 80,
-                  child: Padding(
-                    padding: const EdgeInsets.all(11.0),
-                    child: Container(
-                      height: 60,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(1, 4),
-                            blurRadius: 5,
-                            color: Colors.black54,
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        cursorColor: Colors.deepPurple,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                            labelText: 'Email',
-                            labelStyle:
-                                const TextStyle(color: Colors.deepPurple),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.deepPurple),
-                                borderRadius: BorderRadius.circular(20)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(
-                                    color: Colors.deepPurple))),
-                      ),
+                Padding(
+                  padding: const EdgeInsets.all(11.0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          offset: Offset(1, 4),
+                          blurRadius: 5,
+                          color: Colors.black54,
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      cursorColor: Colors.deepPurple,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle:
+                              const TextStyle(color: Colors.deepPurple),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(
+                                  color: Colors.deepPurple))),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 80,
-                  child: Padding(
-                    padding: const EdgeInsets.all(11.0),
-                    child: Container(
-                      height: 60,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(1, 4),
-                            blurRadius: 5,
-                            color: Colors.black54,
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        obscureText: true,
-                        cursorColor: Colors.deepPurple,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.deepPurple,
-                              ),
+                Padding(
+                  padding: const EdgeInsets.all(11.0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          offset: Offset(1, 4),
+                          blurRadius: 5,
+                          color: Colors.black54,
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      obscureText: true,
+                      cursorColor: Colors.deepPurple,
+                      decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.remove_red_eye,
+                              color: Colors.deepPurple,
                             ),
-                            labelText: 'Password',
-                            labelStyle:
-                                const TextStyle(color: Colors.deepPurple),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.deepPurple),
-                                borderRadius: BorderRadius.circular(20)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(
-                                    color: Colors.deepPurple))),
-                      ),
+                          ),
+                          labelText: 'Password',
+                          labelStyle:
+                              const TextStyle(color: Colors.deepPurple),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(
+                                  color: Colors.deepPurple))),
                     ),
                   ),
                 ),
@@ -533,7 +525,7 @@ class _AccountPage extends State<AccountPage> {
           ),
           Column(
             children: <Widget>[
-              InkResponse(
+              InkWell(
                 onTap: () {
                   Navigator.push(
                       context,
@@ -555,7 +547,7 @@ class _AccountPage extends State<AccountPage> {
                     const SizedBox(
                       width: 10,
                     ),
-                    InkResponse(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                             context,
