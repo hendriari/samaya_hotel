@@ -1,20 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:samaya_hotel/dialog/payment_success.dart';
 
-class PaymentLoading extends StatefulWidget {
+class PaymentLoading extends StatelessWidget {
   const PaymentLoading({Key? key}) : super(key: key);
 
   @override
-  State<PaymentLoading> createState() => _PaymentLoadingState();
-}
+  Widget build(BuildContext context) {
+    late double sizeWidth = MediaQuery.of(context).size.width;
 
-class _PaymentLoadingState extends State<PaymentLoading> {
-  @override
-  void initState() {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context,
@@ -24,21 +19,19 @@ class _PaymentLoadingState extends State<PaymentLoading> {
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero));
     });
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          SizedBox(
-            height: 120,
-            width: MediaQuery.of(context).size.width * 1,
-            child: SvgPicture.asset(
-              'images/rectangle1.svg',
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width * 1,
+          Container(
+            height: 100,
+            width: sizeWidth * 1,
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(107, 83, 204, 1),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.elliptical(50, 30),
+                bottomLeft: Radius.elliptical(50, 30),
+              ),
             ),
           ),
           Expanded(

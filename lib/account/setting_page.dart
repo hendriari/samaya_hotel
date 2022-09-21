@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingAccount extends StatefulWidget {
   const SettingAccount({Key? key}) : super(key: key);
@@ -9,6 +8,9 @@ class SettingAccount extends StatefulWidget {
 }
 
 class _SettingAccountState extends State<SettingAccount> {
+  late double sizeHeight = MediaQuery.of(context).size.height;
+  late double sizeWidth = MediaQuery.of(context).size.width;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,14 +19,20 @@ class _SettingAccountState extends State<SettingAccount> {
           children: <Widget>[
             SizedBox(
               height: 120,
-              width: MediaQuery.of(context).size.width * 1,
+              width: sizeWidth * 1,
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: SvgPicture.asset(
-                      'images/rectangle1.svg',
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width * 1,
+                    child: Container(
+                      height: 100,
+                      width: sizeWidth,
+                      decoration: const BoxDecoration(
+                        color: Color.fromRGBO(107, 83, 204, 1),
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.elliptical(50, 30),
+                          bottomLeft: Radius.elliptical(50, 30),
+                        ),
+                      ),
                     ),
                   ),
                   Positioned(
@@ -41,9 +49,14 @@ class _SettingAccountState extends State<SettingAccount> {
                             color: Colors.white,
                             size: 15,
                           ),
-                          Text('Setting',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 22)),
+                          Text(
+                            'Setting',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -55,95 +68,87 @@ class _SettingAccountState extends State<SettingAccount> {
               height: 20,
             ),
             SizedBox(
-              height: 400,
+              height: 200,
               width: double.infinity,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.deepPurple,
-                                ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        obscureText: true,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.deepPurple,
                               ),
-                              labelText: 'New Password',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                            ),
+                            labelText: 'New Password',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Container(
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(1, 4),
-                              blurRadius: 5,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: Colors.deepPurple,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.deepPurple,
-                                ),
+                  Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            blurRadius: 5,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        obscureText: true,
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.deepPurple,
                               ),
-                              labelText: 'Confirm Password',
-                              labelStyle:
-                                  const TextStyle(color: Colors.deepPurple),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple),
-                                  borderRadius: BorderRadius.circular(20)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                      color: Colors.deepPurple))),
-                        ),
+                            ),
+                            labelText: 'Confirm Password',
+                            labelStyle:
+                                const TextStyle(color: Colors.deepPurple),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.deepPurple),
+                                borderRadius: BorderRadius.circular(20)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                    color: Colors.deepPurple))),
                       ),
                     ),
                   ),
@@ -151,21 +156,34 @@ class _SettingAccountState extends State<SettingAccount> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.25,
+              height: sizeHeight * 0.3,
             ),
             Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
-                onPressed: () {
+              child: InkWell(
+                onTap: () {
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                    fontSize: 22,
+                child: Container(
+                  width: 141,
+                  height: 37,
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(107, 83, 204, 1),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                            offset: Offset(2, 3),
+                            color: Colors.black38,
+                            blurRadius: 2)
+                      ]),
+                  child: const Center(
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
               ),

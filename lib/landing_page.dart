@@ -7,7 +7,7 @@ class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
 
   @override
-  _LandingPage createState() => _LandingPage();
+  State<LandingPage> createState() => _LandingPage();
 }
 
 int activeIndex = 0;
@@ -39,7 +39,7 @@ class _LandingPage extends State<LandingPage> {
                       return buildImage(assetImage, index);
                     },
                     options: CarouselOptions(
-                        height: 650,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         viewportFraction: 1,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 3),
@@ -113,7 +113,7 @@ class _LandingPage extends State<LandingPage> {
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       side:
                           const BorderSide(width: 1, color: Colors.deepPurple),
@@ -131,7 +131,7 @@ class _LandingPage extends State<LandingPage> {
                             (context, animation, secondAnimation, child) {
                           const begin = Offset(0.0, 1.0);
                           const end = Offset.zero;
-                          const curve = Curves.elasticIn;
+                          const curve = Curves.easeInOut;
 
                           var tween = Tween(begin: begin, end: end)
                               .chain(CurveTween(curve: curve));

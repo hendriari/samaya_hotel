@@ -1,40 +1,34 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:samaya_hotel/bottomnavbar.dart';
 
-class PaymentSuccess extends StatefulWidget {
+class PaymentSuccess extends StatelessWidget {
   const PaymentSuccess({Key? key}) : super(key: key);
 
   @override
-  State<PaymentSuccess> createState() => _PaymentSuccessState();
-}
+  Widget build(BuildContext context) {
+    late double sizeWidth = MediaQuery.of(context).size.width;
 
-class _PaymentSuccessState extends State<PaymentSuccess> {
-  @override
-  void initState() {
     Timer(const Duration(milliseconds: 2500), () {
       //push and delete the preveious route
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomNavigationBars()),
+          MaterialPageRoute(builder: (context) => const BottomNavigationBars()),
           (Route<dynamic> route) => false);
     });
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          SizedBox(
-            height: 120,
-            width: MediaQuery.of(context).size.width * 1,
-            child: SvgPicture.asset(
-              'images/rectangle1.svg',
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width * 1,
+          Container(
+            height: 100,
+            width: sizeWidth * 1,
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(107, 83, 204, 1),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.elliptical(50, 30),
+                bottomLeft: Radius.elliptical(50, 30),
+              ),
             ),
           ),
           Expanded(

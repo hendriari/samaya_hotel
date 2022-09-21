@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const SplashScreen1(),
       title: 'Samaya Hotel',
-      theme: ThemeData(),
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

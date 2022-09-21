@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/dialog/payment_loading.dart';
 import 'package:samaya_hotel/model/hotel_room.dart';
 import 'package:intl/intl.dart';
@@ -8,16 +7,15 @@ import 'package:samaya_hotel/model/singleton_model.dart';
 class ReservationSummary extends StatefulWidget {
   // final HotelRoom data;
   final String selectedItem;
-  final String cekin;
-  final String cekout;
-  final int guest;
-  final int count;
+  final String? cekin;
+  final String? cekout;
+  final int? guest;
+  final int? room;
 
   const ReservationSummary(
       {Key? key,
-      // required this.data,
       required this.selectedItem,
-      required this.count,
+      required this.room,
       required this.guest,
       required this.cekin,
       required this.cekout})
@@ -32,7 +30,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   String? _selectedItem;
   String? cekin;
   String? cekout;
-  int? _count;
+  int? _room;
   int? _guest;
   late SingletonModel _model;
 
@@ -46,7 +44,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
     _selectedItem = widget.selectedItem;
     cekin = widget.cekin;
     cekout = widget.cekout;
-    _count = widget.count;
+    _room = widget.room;
     _guest = widget.guest;
   }
 
@@ -54,9 +52,9 @@ class _ReservationSummaryState extends State<ReservationSummary> {
   Widget build(BuildContext context) {
     //memanggil isi model tanpa mengeksekusi nilai dari model tersebut
     HotelRoom? model;
-    _model.addItem!.forEach((element) {
+    for (var element in _model.addItem!) {
       model = element.item;
-    });
+    }
 
     int? subTotalRoom;
     for(var element in _model.addItem!){
@@ -64,9 +62,9 @@ class _ReservationSummaryState extends State<ReservationSummary> {
     }
 
     int? totalPrice;
-    _model.addItem!.forEach((element) {
+    for (var element in _model.addItem!) {
       totalPrice = element.item.totalPrice! + _tax;
-    });
+    }
     return loadingpayment!
         ? const PaymentLoading()
         : Scaffold(
@@ -79,14 +77,14 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     width: MediaQuery.of(context).size.width * 1,
                     child: Stack(
                       children: <Widget>[
-                        Positioned(
-                          child: SizedBox(
-                            height: 120,
-                            width: MediaQuery.of(context).size.width * 1,
-                            child: SvgPicture.asset(
-                              'images/rectangle1.svg',
-                              fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 1,
+                        Container(
+                          height: 100,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Color.fromRGBO(107, 83, 204, 1),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.elliptical(50, 30),
+                              bottomLeft: Radius.elliptical(50, 30),
                             ),
                           ),
                         ),
@@ -155,7 +153,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                               color: Colors.deepPurple,
                             ),
                             const SizedBox(width: 10),
-                            Text('$_count Room, $_guest Guest')
+                            Text('$_room Room, $_guest Guest')
                           ],
                         ),
                         Row(
@@ -232,7 +230,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                                 color: Colors.deepPurple,
                               ),
                               SizedBox(width: 10),
-                              Text('Lilya Cordoba')
+                              Text('Hendri Ari')
                             ],
                           ),
                         ),
@@ -243,7 +241,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                               color: Colors.deepPurple,
                             ),
                             SizedBox(width: 10),
-                            Text('lilyacordoba@gmail.com')
+                            Text('hendriari@gmail.com')
                           ],
                         ),
                         const Divider(
@@ -292,7 +290,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Sub Total Room'),
+                        const Text('Sub Total Room'),
                         Text(
                           NumberFormat.currency(
                                   locale: 'id',
@@ -305,7 +303,7 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 2, 2, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -349,12 +347,12 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                     ),
                   ),
                   const SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
                   Center(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.deepPurple,
+                          backgroundColor: Colors.deepPurple,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
                       onPressed: () {
@@ -368,6 +366,9 @@ class _ReservationSummaryState extends State<ReservationSummary> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30,
+                  )
                 ],
               ),
             ),

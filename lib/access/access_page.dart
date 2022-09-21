@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 
 class AccessPage extends StatefulWidget {
   const AccessPage({Key? key}) : super(key: key);
 
   @override
-  _AccessPage createState() => _AccessPage();
+  State<AccessPage> createState() => _AccessPage();
 }
 
 class _AccessPage extends State<AccessPage>
@@ -22,7 +21,9 @@ class _AccessPage extends State<AccessPage>
     _anim = false;
     _status = 'Tap to Unlock Room';
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 900));
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
   }
 
   @override
@@ -43,17 +44,20 @@ class _AccessPage extends State<AccessPage>
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: SizedBox(
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: SvgPicture.asset(
-                        'images/rectangle1.svg',
-                        fit: BoxFit.cover,
+                    child: Container(
+                      height: 100,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color.fromRGBO(107, 83, 204, 1),
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.elliptical(50, 30),
+                          bottomLeft: Radius.elliptical(50, 30),
+                        ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 90,
+                    top: 83,
                     left: 0,
                     right: 0,
                     child: Align(
@@ -65,63 +69,69 @@ class _AccessPage extends State<AccessPage>
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: const [
                             BoxShadow(
-                              // blurStyle: BlurStyle.outer,
                               color: Colors.black54,
                               offset: Offset(1, 4),
                               blurRadius: 5,
                             ),
                           ],
                         ),
-                        child: Stack(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Positioned(
-                              top: 10,
-                              left: 10,
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10.0),
                               child: Text(
                                 'Hotel Samaya, Semarang',
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 16),
                               ),
                             ),
-                            Positioned(
-                              top: 30,
-                              left: 10,
-                              child: SizedBox(
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.calendar_month_outlined,
-                                      color: Colors.deepPurple,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.calendar_month_outlined,
+                                          color:
+                                              Color.fromRGBO(107, 83, 204, 1),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          '1 July 2022 - 31 July 2022',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 10,
+                                  ),
+                                  SizedBox(
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.bed,
+                                          color:
+                                              Color.fromRGBO(107, 83, 204, 1),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          'Room 0311',
+                                          style: TextStyle(fontSize: 12),
+                                        )
+                                      ],
                                     ),
-                                    Text(
-                                      '1 July 2022 - 31 July 2022',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Positioned(
-                              top: 30,
-                              right: 10,
-                              child: SizedBox(
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.bed,
-                                      color: Colors.deepPurple,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text('Room 0311')
-                                  ],
-                                ),
-                              ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -157,7 +167,9 @@ class _AccessPage extends State<AccessPage>
                   _anim = true;
                   _status = 'Success';
                 });
-                await Future.delayed(const Duration(milliseconds: 1000));
+                await Future.delayed(
+                  const Duration(milliseconds: 1000),
+                );
                 setState(
                   () {
                     _anim = false;

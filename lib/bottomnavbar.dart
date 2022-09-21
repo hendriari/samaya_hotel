@@ -60,7 +60,7 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
       // height: displayWidth * .155,
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.deepPurple,
+        color: const Color.fromRGBO(107, 83, 204, 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(.1),
@@ -95,7 +95,6 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
                 child: AnimatedContainer(
                   duration: const Duration(seconds: 1),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  // height: body == currentbody ? displayWidth * .12 : 0,
                   height: 45,
                   width: body == currentbody ? displayWidth * .32 : 0,
                   decoration: BoxDecoration(
@@ -109,9 +108,6 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
               AnimatedContainer(
                 duration: const Duration(seconds: 1),
                 curve: Curves.fastLinearToSlowEaseIn,
-                // width: body == currentbody
-                //     ? displayWidth * .31
-                //     : displayWidth * .18,
                 alignment: Alignment.center,
                 child: Stack(
                   children: [
@@ -142,13 +138,10 @@ class BottomNavigationBarsState extends State<BottomNavigationBars> {
                         AnimatedContainer(
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          // width:
-                          // body == currentbody ? displayWidth * .03 : 20,
                           width: 30,
                         ),
                         Icon(
                           listOfIcons[body],
-                          // size: displayWidth * .076,
                           size: 30,
                           color: body == currentbody
                               ? Colors.amberAccent
