@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:samaya_hotel/model/promotion.dart';
 import 'package:samaya_hotel/model/vacation.dart';
@@ -12,7 +11,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePage createState() => _HomePage();
+  State<HomePage> createState() => _HomePage();
 }
 
 class _HomePage extends State<HomePage> {
@@ -62,8 +61,8 @@ class _HomePage extends State<HomePage> {
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
-      _cekin = 'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)}';
-      _cekout = DateFormat('d MMMM yyyy')
+      _cekin = 'On ${DateFormat('d MMM y').format(args.value.startDate)}';
+      _cekout = DateFormat('d MMM y')
           .format(args.value.endDate ?? args.value.startDate);
     });
   }
@@ -94,16 +93,12 @@ class _HomePage extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            /// split header
             _header(),
             const SizedBox(
               height: 10,
@@ -148,18 +143,19 @@ class _HomePage extends State<HomePage> {
   Widget _header() {
     return SizedBox(
       height: 400,
-      // height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 1,
       child: Stack(
         children: <Widget>[
           Positioned(
-            child: SizedBox(
-              height: 120,
-              width: MediaQuery.of(context).size.width * 1,
-              child: SvgPicture.asset(
-                'images/rectangle1.svg',
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width * 1,
+            child: Container(
+              height: 100,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(107, 83, 204, 1),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.elliptical(50, 30),
+                  bottomLeft: Radius.elliptical(50, 30),
+                ),
               ),
             ),
           ),
@@ -167,7 +163,7 @@ class _HomePage extends State<HomePage> {
             top: 50,
             left: 35,
             child: Text(
-              'Hi, Lilya',
+              'Hi, Hendri Ari',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -175,7 +171,7 @@ class _HomePage extends State<HomePage> {
             ),
           ),
           Positioned(
-            top: 90,
+            top: 83,
             left: 0,
             right: 0,
             child: Align(
@@ -220,7 +216,8 @@ class _HomePage extends State<HomePage> {
                                       children: [
                                         const Icon(
                                           Icons.location_pin,
-                                          color: Colors.deepPurple,
+                                          color:
+                                              Color.fromRGBO(107, 83, 204, 1),
                                         ),
                                         Text(
                                           _selectedItem ?? 'In ',
@@ -263,7 +260,7 @@ class _HomePage extends State<HomePage> {
                                     children: [
                                       const Icon(
                                         Icons.calendar_month_outlined,
-                                        color: Colors.deepPurple,
+                                        color: Color.fromRGBO(107, 83, 204, 1),
                                       ),
                                       Text(
                                         _cekin ?? 'On ',
@@ -307,7 +304,7 @@ class _HomePage extends State<HomePage> {
                                     children: [
                                       const Icon(
                                         Icons.calendar_month_outlined,
-                                        color: Colors.deepPurple,
+                                        color: Color.fromRGBO(107, 83, 204, 1),
                                       ),
                                       Text(
                                         _cekout ?? 'On ',
@@ -349,8 +346,10 @@ class _HomePage extends State<HomePage> {
                                   alignment: Alignment.topLeft,
                                   child: Row(
                                     children: [
-                                      const Icon(Icons.bed,
-                                          color: Colors.deepPurple),
+                                      const Icon(
+                                        Icons.bed,
+                                        color: Color.fromRGBO(107, 83, 204, 1),
+                                      ),
                                       Text(
                                         "$_room Room, $_guest Guest",
                                         style: const TextStyle(fontSize: 16),
@@ -368,19 +367,37 @@ class _HomePage extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                      bottom: 8,
+                      bottom: 10,
                       right: 0,
                       left: 0,
                       child: Center(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.deepPurple,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                        child: InkWell(
+                          onTap: () {
+                            _onSearch();
+                          },
+                          child: Container(
+                            width: 141,
+                            height: 37,
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(107, 83, 204, 1),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: const [
+                                  BoxShadow(
+                                      offset: Offset(2, 3),
+                                      color: Colors.black38,
+                                      blurRadius: 2)
+                                ]),
+                            child: const Center(
+                              child: Text(
+                                'Search',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
                           ),
-                          onPressed: _onSearch,
-                          child: const Text('Search'),
                         ),
                       ),
                     ),
@@ -394,7 +411,7 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  //vacation
+  /// vacation
   Widget _vacation() {
     return SizedBox(
       height: 150,
@@ -466,7 +483,7 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  //promotion images
+  /// promotion images
   Widget _promotionView() {
     return SizedBox(
       height: 150,
@@ -537,26 +554,33 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  //for location hotels
+  /// for location hotels
   void _onButtonPressed() {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       context: context,
+      isScrollControlled: true,
       builder: (context) {
-        return ListView(
-          physics: const ScrollPhysics(),
-          children: [
-            Container(
-              child: _buildBottomNavigationMenu(),
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: SingleChildScrollView(
+            physics: const ScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  child: _buildBottomNavigationMenu(),
+                ),
+              ],
             ),
-          ],
+          ),
         );
       },
     );
   }
 
-  //select location hotels
+  /// select location hotels
   Column _buildBottomNavigationMenu() {
     return Column(
       children: <Widget>[
@@ -599,13 +623,13 @@ class _HomePage extends State<HomePage> {
                           children: [
                             const Icon(
                               Icons.location_pin,
-                              color: Colors.deepPurple,
+                              color: Color.fromRGBO(107, 83, 204, 1),
                             ),
                             InkResponse(
                                 onTap: () {},
                                 child: const Icon(
                                   Icons.search,
-                                  color: Colors.deepPurple,
+                                  color: Color.fromRGBO(107, 83, 204, 1),
                                 ))
                           ],
                         ),
@@ -625,6 +649,7 @@ class _HomePage extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -636,21 +661,23 @@ class _HomePage extends State<HomePage> {
                     )
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListTile(
-                    leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset('images/hotel.png')),
-                    title: const Text('Hotel Samaya, Semarang'),
-                    onTap: () => _selectItem('Hotel Samaya, Semarang'),
+                child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'images/hotel.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
+                  title: const Text('Hotel Samaya, Semarang'),
+                  onTap: () => _selectItem('Hotel Samaya, Semarang'),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -662,21 +689,19 @@ class _HomePage extends State<HomePage> {
                     )
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListTile(
-                    leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset('images/hotel.png')),
-                    title: const Text('Hotel Samaya, Kab. Semarang'),
-                    onTap: () => _selectItem('Hotel Samaya, Kab. Semarang'),
-                  ),
+                child: ListTile(
+                  leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset('images/hotel.png')),
+                  title: const Text('Hotel Samaya, Kab. Semarang'),
+                  onTap: () => _selectItem('Hotel Samaya, Kab. Semarang'),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -688,21 +713,19 @@ class _HomePage extends State<HomePage> {
                     )
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListTile(
-                    leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset('images/hotel.png')),
-                    title: const Text('Hotel Samaya, Klaten'),
-                    onTap: () => _selectItem('Hotel Samaya, Klaten'),
-                  ),
+                child: ListTile(
+                  leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset('images/hotel.png')),
+                  title: const Text('Hotel Samaya, Klaten'),
+                  onTap: () => _selectItem('Hotel Samaya, Klaten'),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -714,21 +737,23 @@ class _HomePage extends State<HomePage> {
                     ),
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListTile(
-                    leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset('images/hotel.png')),
-                    title: const Text('Hotel Samaya, Solo'),
-                    onTap: () => _selectItem('Hotel Samaya, Solo'),
-                  ),
+                child: ListTile(
+                  leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset('images/hotel.png')),
+                  title: const Text('Hotel Samaya, Solo'),
+                  onTap: () => _selectItem('Hotel Samaya, Solo'),
                 ),
               ),
             ),
             const SizedBox(
-                height: 40,
-              child: Center(child: Text('No more data',style: TextStyle(color: Colors.grey),)),
+              height: 40,
+              child: Center(
+                child: Text(
+                  'No more data',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
             ),
           ],
         )
@@ -743,7 +768,7 @@ class _HomePage extends State<HomePage> {
     });
   }
 
-  //select date
+  /// select date
   void _pressedDate() {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
@@ -764,10 +789,11 @@ class _HomePage extends State<HomePage> {
               padding: const EdgeInsets.all(10),
               child: SfDateRangePicker(
                 onSelectionChanged: _onSelectionChanged,
-                todayHighlightColor: Colors.deepPurple,
-                startRangeSelectionColor: Colors.deepPurple,
-                endRangeSelectionColor: Colors.deepPurple,
-                rangeSelectionColor: Colors.deepPurple.withOpacity(0.1),
+                todayHighlightColor: const Color.fromRGBO(107, 83, 204, 1),
+                startRangeSelectionColor: const Color.fromRGBO(107, 83, 204, 1),
+                endRangeSelectionColor: const Color.fromRGBO(107, 83, 204, 1),
+                rangeSelectionColor:
+                    const Color.fromRGBO(107, 83, 204, 1).withOpacity(0.1),
                 selectionMode: DateRangePickerSelectionMode.range,
                 initialSelectedRange: PickerDateRange(
                     DateTime.now().subtract(const Duration(days: 0)),
@@ -783,7 +809,10 @@ class _HomePage extends State<HomePage> {
   void _onSelectionRoom() {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
       context: context,
       builder: (context) {
         return Column(
@@ -796,21 +825,37 @@ class _HomePage extends State<HomePage> {
               child: _buildButtonSelectionGuest(),
             ),
             Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                onPressed: () {
+              child: InkWell(
+                onTap: () {
                   setState(() {
-                    _room;
                     _guest;
+                    _room;
                   });
                   Navigator.pop(context);
                 },
-                child: const Text('Save'),
+                child: Container(
+                  width: 141,
+                  height: 37,
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(107, 83, 204, 1),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                            offset: Offset(2, 3),
+                            color: Colors.black38,
+                            blurRadius: 2)
+                      ]),
+                  child: const Center(
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
@@ -857,7 +902,7 @@ class _HomePage extends State<HomePage> {
                       top: 25,
                       child: Icon(
                         Icons.bed,
-                        color: Colors.deepPurple,
+                        color: Color.fromRGBO(107, 83, 204, 1),
                       ),
                     ),
                     Positioned(
@@ -873,7 +918,7 @@ class _HomePage extends State<HomePage> {
                         },
                         child: const Icon(
                           Icons.keyboard_arrow_up,
-                          color: Colors.deepPurple,
+                          color: Color.fromRGBO(107, 83, 204, 1),
                         ),
                       ),
                     ),
@@ -892,7 +937,7 @@ class _HomePage extends State<HomePage> {
                         },
                         child: const Icon(
                           Icons.keyboard_arrow_down,
-                          color: Colors.deepPurple,
+                          color: Color.fromRGBO(107, 83, 204, 1),
                         ),
                       ),
                     ),
@@ -940,8 +985,8 @@ class _HomePage extends State<HomePage> {
                       left: 10,
                       top: 25,
                       child: Icon(
-                        Icons.person,
-                        color: Colors.deepPurple,
+                        Icons.group,
+                        color: Color.fromRGBO(107, 83, 204, 1),
                       ),
                     ),
                     Positioned(
@@ -957,7 +1002,7 @@ class _HomePage extends State<HomePage> {
                         },
                         child: const Icon(
                           Icons.keyboard_arrow_up,
-                          color: Colors.deepPurple,
+                          color: Color.fromRGBO(107, 83, 204, 1),
                         ),
                       ),
                     ),
@@ -976,7 +1021,7 @@ class _HomePage extends State<HomePage> {
                             },
                             child: const Icon(
                               Icons.keyboard_arrow_down,
-                              color: Colors.deepPurple,
+                              color: Color.fromRGBO(107, 83, 204, 1),
                             ))),
                     Positioned(
                       left: 40,

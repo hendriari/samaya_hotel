@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/home/reservation_summary.dart';
 import 'package:intl/intl.dart';
 import 'package:samaya_hotel/model/singleton_model.dart';
@@ -73,14 +72,14 @@ class _ReservationDetailState extends State<ReservationDetail> {
               width: MediaQuery.of(context).size.width * 1,
               child: Stack(
                 children: <Widget>[
-                  Positioned(
-                    child: SizedBox(
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: SvgPicture.asset(
-                        'images/rectangle1.svg',
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width * 1,
+                  Container(
+                    height: 100,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(107, 83, 204, 1),
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.elliptical(50, 30),
+                        bottomLeft: Radius.elliptical(50, 30),
                       ),
                     ),
                   ),
@@ -123,7 +122,6 @@ class _ReservationDetailState extends State<ReservationDetail> {
                 return Padding(
                   padding: const EdgeInsets.all(8),
                   child: Container(
-                    height: 160,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -140,14 +138,15 @@ class _ReservationDetailState extends State<ReservationDetail> {
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: SizedBox(
-                            width: 140,
-                            height: 140,
+                            height: 160,
+                            width: 145,
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  _model.addItem![index].item.images!,
-                                  fit: BoxFit.cover,
-                                )),
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                _model.addItem![index].item.images!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                         Padding(
@@ -189,7 +188,6 @@ class _ReservationDetailState extends State<ReservationDetail> {
                               ),
                               SizedBox(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     const Icon(
                                       Icons.person,
@@ -203,45 +201,43 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
+                              SizedBox(
+                                child: Divider(color: Colors.grey.shade300),
                               ),
                               SizedBox(
-                                height: 40,
                                 width: MediaQuery.of(context).size.width * 0.55,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                child: Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 5),
                                       child: SizedBox(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
                                               'Price',
                                               style:
                                                   TextStyle(color: Colors.grey),
                                             ),
-                                            Text(NumberFormat.currency(
-                                                    locale: 'id',
-                                                    symbol: 'IDR ',
-                                                    decimalDigits: 0)
-                                                .format(_model.addItem![index]
-                                                    .item.price!)),
+                                            Text(
+                                              NumberFormat.currency(
+                                                      locale: 'id',
+                                                      symbol: 'IDR ',
+                                                      decimalDigits: 0)
+                                                  .format(_model.addItem![index]
+                                                      .item.price!),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                      padding: const EdgeInsets.only(left: 5),
                                       child: SizedBox(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
                                               'Amount',
@@ -254,23 +250,31 @@ class _ReservationDetailState extends State<ReservationDetail> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          const Text(
-                                            'Sub Total',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                          Text(NumberFormat.currency(
-                                            locale: 'id',
-                                            symbol: 'IDR ',
-                                            decimalDigits: 0,
-                                          ).format(_model.addItem![index].item
-                                              .selectedRoomPrice!)),
-                                        ],
+                                    const SizedBox(
+                                      child: Divider(
+                                        color: Colors.black38,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 5.0),
+                                      child: SizedBox(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Sub Total',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Text(NumberFormat.currency(
+                                              locale: 'id',
+                                              symbol: 'IDR ',
+                                              decimalDigits: 0,
+                                            ).format(_model.addItem![index].item
+                                                .selectedRoomPrice!)),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -499,16 +503,19 @@ class _ReservationDetailState extends State<ReservationDetail> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 2, 2, 0),
+              padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Tax & Service'),
                   SizedBox(
-                      width: 70,
-                      child: Text(NumberFormat.currency(
+                    width: 70,
+                    child: Text(
+                      NumberFormat.currency(
                               locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                          .format(_tax))),
+                          .format(_tax),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -543,9 +550,11 @@ class _ReservationDetailState extends State<ReservationDetail> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                  backgroundColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
                 onPressed: () {
                   Navigator.push(
                       context,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:samaya_hotel/model/myorder.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
@@ -8,15 +7,15 @@ class Orderan extends StatefulWidget {
   const Orderan({Key? key}) : super(key: key);
 
   @override
-  _Orderan createState() => _Orderan();
+  State<Orderan> createState() => _Orderan();
 }
 
 class _Orderan extends State<Orderan> {
   late List<HotelsInfo> _historyOrder;
 
   String? _range;
-  DateTime dateNow= DateTime.now();
-  final dates = DateFormat.yMMMEd().format(DateTime.now());
+  DateTime dateNow = DateTime.now();
+  final dates = DateFormat('EEEE, d MMMM y').format(DateTime.now());
 
   @override
   void initState() {
@@ -30,7 +29,7 @@ class _Orderan extends State<Orderan> {
         guestRoom: '1 Room, 1 Guest',
         history: const Text(
           'Reserved',
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.green, fontSize: 13),
         ),
         historyIcon: const Icon(
           Icons.check_circle,
@@ -44,7 +43,7 @@ class _Orderan extends State<Orderan> {
         guestRoom: '1 Room, 1 Guest',
         history: const Text(
           'Finish',
-          style: TextStyle(color: Colors.deepPurpleAccent),
+          style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 13),
         ),
         historyIcon: const Icon(
           Icons.access_time_filled,
@@ -72,7 +71,10 @@ class _Orderan extends State<Orderan> {
         guestRoom: '1 Room, 1 Guest',
         history: const Text(
           'Waiting Payment',
-          style: TextStyle(color: Colors.deepPurpleAccent),
+          style: TextStyle(
+            color: Colors.deepPurpleAccent,
+            fontSize: 13,
+          ),
         ),
         historyIcon: const Icon(
           Icons.access_time_filled_sharp,
@@ -86,7 +88,7 @@ class _Orderan extends State<Orderan> {
         guestRoom: '1 Room, 2 Guest',
         history: const Text(
           'Finish',
-          style: TextStyle(color: Colors.deepPurpleAccent),
+          style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 13),
         ),
         historyIcon: const Icon(
           Icons.check_circle,
@@ -100,7 +102,7 @@ class _Orderan extends State<Orderan> {
         guestRoom: '1 Room, 2 Guest',
         history: const Text(
           'Cancel',
-          style: TextStyle(color: Colors.deepPurpleAccent),
+          style: TextStyle(color: Colors.red, fontSize: 13),
         ),
         historyIcon: const Icon(
           Icons.cancel,
@@ -114,7 +116,7 @@ class _Orderan extends State<Orderan> {
         guestRoom: '1 Room, 2 Guest',
         history: const Text(
           'Reserved',
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.green, fontSize: 13),
         ),
         historyIcon: const Icon(
           Icons.check_circle,
@@ -127,10 +129,9 @@ class _Orderan extends State<Orderan> {
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
       if (args.value is PickerDateRange) {
-        _range =
-            'On ${DateFormat('d MMMM yyyy').format(args.value.startDate)} -'
+        _range = 'On ${DateFormat('d MMM y').format(args.value.startDate)} -'
             // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('d MMMM yyyy').format(args.value.endDate ?? args.value.startDate)}';
+            ' ${DateFormat('d MMM y').format(args.value.endDate ?? args.value.startDate)}';
       } else {}
     });
   }
@@ -147,18 +148,20 @@ class _Orderan extends State<Orderan> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    child: SizedBox(
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: SvgPicture.asset(
-                        'images/rectangle1.svg',
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width * 1,
+                    child: Container(
+                      height: 100,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color.fromRGBO(107, 83, 204, 1),
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.elliptical(50, 30),
+                          bottomLeft: Radius.elliptical(50, 30),
+                        ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 90,
+                    top: 83,
                     left: 0,
                     right: 0,
                     child: Align(
@@ -177,71 +180,61 @@ class _Orderan extends State<Orderan> {
                             ),
                           ],
                         ),
-                        child: Stack(
-                          children: [
-                            Align(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(8, 15, 40, 0),
-                                child: InkWell(
-                                  onTap: () => _buildSelectedDate(),
-                                  child: SizedBox(
-                                    height: 40,
-                                    width: double.infinity,
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            const Icon(
-                                              Icons.calendar_month_outlined,
-                                              color: Colors.deepPurple,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              _range!,
-                                              style:
-                                                  const TextStyle(fontSize: 16),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Positioned(
-                              top: 10,
-                              left: 10,
-                              child: Text(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
                                 'Date',
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 16),
                               ),
-                            ),
-                            Positioned(
-                                right: 10,
-                                top: 0,
-                                bottom: 0,
-                                child: InkWell(
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                    onTap: () => _buildSelectedDate(),
+                                    child: SizedBox(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.calendar_month_outlined,
+                                            color: Colors.deepPurple,
+                                          ),
+                                          const SizedBox(
+                                            width: 3,
+                                          ),
+                                          Text(
+                                            _range!,
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
                                     onTap: () {},
                                     child: const Icon(
                                       Icons.search,
                                       color: Colors.deepPurple,
-                                    ))),
-                            const Align(
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(8, 30, 8, 0),
-                                child: Divider(
-                                  color: Colors.black,
-                                ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            )
-                          ],
+                              const Divider(
+                                color: Colors.black,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -269,44 +262,45 @@ class _Orderan extends State<Orderan> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 100,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Stack(
-                              children: <Widget>[
-                                Positioned(
-                                  left: 10,
-                                  bottom: 5,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(
-                                      _historyOrder[index].imageHotel!,
-                                      fit: BoxFit.cover,
-                                      height: 90,
-                                      width: 100,
-                                    ),
-                                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.only(right: 10),
+                        height: 100,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: Colors.black12,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  _historyOrder[index].imageHotel!,
+                                  fit: BoxFit.cover,
+                                  height: 90,
+                                  width: 100,
                                 ),
-                                Positioned(
-                                  left: 120,
-                                  top: 10,
-                                  child: Text(
+                              ),
+                            ),
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     _historyOrder[index].nameHotel!,
-                                    style: const TextStyle(fontSize: 20),
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
                                   ),
-                                ),
-                                Positioned(
-                                  bottom: 40,
-                                  left: 118,
-                                  child: Row(
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
                                     children: <Widget>[
                                       const Icon(
                                         Icons.calendar_month_outlined,
@@ -315,41 +309,45 @@ class _Orderan extends State<Orderan> {
                                       Text(_historyOrder[index].date!)
                                     ],
                                   ),
-                                ),
-                                Positioned(
-                                  bottom: 14,
-                                  left: 118,
-                                  child: Row(
-                                    children: <Widget>[
-                                      const Icon(
-                                        Icons.bed_rounded,
-                                        color: Colors.deepPurple,
-                                      ),
-                                      Text(_historyOrder[index].guestRoom!),
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 10,
-                                  right: 20,
-                                  child: Row(
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        child:
-                                            _historyOrder[index].historyIcon!,
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.bed_rounded,
+                                            color: Colors.deepPurple,
+                                          ),
+                                          Text(
+                                            _historyOrder[index].guestRoom!,
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 50,
-                                        child: _historyOrder[index].history!,
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            child: _historyOrder[index]
+                                                .historyIcon!,
+                                          ),
+                                          SizedBox(
+                                            width: 60,
+                                            child:
+                                                _historyOrder[index].history!,
+                                          )
+                                        ],
                                       )
                                     ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   );
                 },

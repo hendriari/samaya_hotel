@@ -12,10 +12,13 @@ class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
 
   @override
-  _AccountPage createState() => _AccountPage();
+  State<AccountPage> createState() => _AccountPage();
 }
 
 class _AccountPage extends State<AccountPage> {
+  late double sizeHeight = MediaQuery.of(context).size.height;
+  late double sizeWidth = MediaQuery.of(context).size.width;
+
   Future getImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedImage =
@@ -53,13 +56,33 @@ class _AccountPage extends State<AccountPage> {
             height: 400,
             child: Stack(
               children: <Widget>[
-                SizedBox(
-                    height: 250,
-                    child: SvgPicture.asset(
-                      'images/rectangle2.svg',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    )),
+                Container(
+                  height: 243,
+                  width: sizeWidth,
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(107, 83, 204, 1),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.elliptical(90, 90),
+                      bottomLeft: Radius.elliptical(90, 90),
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  top: 80,
+                  left: 0,
+                  right: 0,
+                  child: SizedBox(
+                    child: Center(
+                      child: Text(
+                        'My Account',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
                 Positioned(
                   bottom: 65,
                   right: 0,
@@ -91,7 +114,7 @@ class _AccountPage extends State<AccountPage> {
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg',
+                                'https://img.okezone.com/content/2022/07/20/337/2633338/sosok-iron-man-viral-lari-demi-selamatkan-korban-kecelakaan-maut-di-cibubur-pmAFtHvuCH.jpg',
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -106,10 +129,13 @@ class _AccountPage extends State<AccountPage> {
                     height: 70,
                     width: 70,
                     child: InkWell(
-                        onTap: () async {
-                          await getImage();
-                        },
-                        child: SvgPicture.asset('images/iconcamera.svg')),
+                      onTap: () async {
+                        await getImage();
+                      },
+                      child: SvgPicture.asset(
+                        'images/iconcamera.svg',
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -122,7 +148,7 @@ class _AccountPage extends State<AccountPage> {
                       children: const [
                         Center(
                           child: Text(
-                            'Lilya Cordoba',
+                            'Hendri Ari',
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 20,
@@ -131,7 +157,7 @@ class _AccountPage extends State<AccountPage> {
                         ),
                         Center(
                           child: Text(
-                            'lilyacordoba@gmail.com',
+                            'hendriari@gmail.com',
                             style: TextStyle(color: Colors.black, fontSize: 18),
                           ),
                         )
@@ -157,9 +183,10 @@ class _AccountPage extends State<AccountPage> {
                     },
                     child: Container(
                       height: 50,
+                      padding: const EdgeInsets.fromLTRB(15, 13, 0, 0),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: const Color.fromRGBO(107, 83, 204, 1),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: const [
                           BoxShadow(
@@ -169,18 +196,9 @@ class _AccountPage extends State<AccountPage> {
                           ),
                         ],
                       ),
-                      child: Stack(
-                        children: const [
-                          Positioned(
-                            bottom: 13,
-                            left: 15,
-                            child: Text(
-                              'Profile',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
-                        ],
+                      child: const Text(
+                        'Profile',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
@@ -200,9 +218,10 @@ class _AccountPage extends State<AccountPage> {
                     },
                     child: Container(
                       height: 50,
+                      padding: const EdgeInsets.fromLTRB(15, 13, 0, 0),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: const Color.fromRGBO(107, 83, 204, 1),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: const [
                           BoxShadow(
@@ -212,18 +231,9 @@ class _AccountPage extends State<AccountPage> {
                           ),
                         ],
                       ),
-                      child: Stack(
-                        children: const [
-                          Positioned(
-                            bottom: 13,
-                            left: 15,
-                            child: Text(
-                              'Membership',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
-                        ],
+                      child: const Text(
+                        'Membership',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
@@ -239,9 +249,10 @@ class _AccountPage extends State<AccountPage> {
                     },
                     child: Container(
                       height: 50,
+                      padding: const EdgeInsets.fromLTRB(15, 13, 0, 0),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: const Color.fromRGBO(107, 83, 204, 1),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: const [
                           BoxShadow(
@@ -251,18 +262,9 @@ class _AccountPage extends State<AccountPage> {
                           ),
                         ],
                       ),
-                      child: Stack(
-                        children: const [
-                          Positioned(
-                            bottom: 13,
-                            left: 15,
-                            child: Text(
-                              'Setting',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
-                        ],
+                      child: const Text(
+                        'Setting',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
@@ -280,9 +282,10 @@ class _AccountPage extends State<AccountPage> {
                     },
                     child: Container(
                       height: 50,
+                      padding: const EdgeInsets.fromLTRB(15, 13, 0, 0),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: const Color.fromRGBO(107, 83, 204, 1),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: const [
                           BoxShadow(
@@ -292,18 +295,9 @@ class _AccountPage extends State<AccountPage> {
                           ),
                         ],
                       ),
-                      child: Stack(
-                        children: const [
-                          Positioned(
-                            bottom: 13,
-                            left: 15,
-                            child: Text(
-                              'Faq',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
-                        ],
+                      child: const Text(
+                        'Faq',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
@@ -312,54 +306,64 @@ class _AccountPage extends State<AccountPage> {
             ),
           ),
           const SizedBox(height: 40),
-          SizedBox(
-            height: 180,
-            child: Column(
-              children: <Widget>[
-                const Center(
+          Column(
+            children: <Widget>[
+              const Center(
+                child: Text(
+                  'Samaya Hotel',
+                  style: TextStyle(
+                      color: Color.fromRGBO(107, 83, 204, 1), fontSize: 22),
+                ),
+              ),
+              Container(
+                width: 135,
+                alignment: Alignment.centerRight,
+                child: const Text(
+                  'v 1.0.1',
+                  style: TextStyle(
+                      color: Color.fromRGBO(107, 83, 204, 1), fontSize: 12),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  _isLogin = false;
+                });
+              },
+              child: Container(
+                width: 141,
+                height: 37,
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(107, 83, 204, 1),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(2, 3),
+                          color: Colors.black38,
+                          blurRadius: 2)
+                    ]),
+                child: const Center(
                   child: Text(
-                    'Samaya Hotel',
-                    style: TextStyle(color: Colors.deepPurple, fontSize: 22),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                  child: Stack(
-                    children: const <Widget>[
-                      Positioned(
-                        right: 150,
-                        child: Text(
-                          'v 1.0.1',
-                          style: TextStyle(color: Colors.deepPurple),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Center(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                    onPressed: () {
-                      setState(
-                        () {
-                          _isLogin = false;
-                        },
-                      );
-                    },
-                    child: const Text(
-                      'Log Out',
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
+                    'Log Out',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
+          const SizedBox(
+            height: 80,
+          )
         ],
       ),
     );
@@ -367,23 +371,30 @@ class _AccountPage extends State<AccountPage> {
 
   //kodingan Login Page
   Widget _buildLogout() {
+    final sizeWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           SizedBox(
             height: 120,
-            width: MediaQuery.of(context).size.width * 1,
+            width: sizeWidth * 1,
             child: Stack(
               children: <Widget>[
                 Positioned(
-                  child: SvgPicture.asset(
-                    'images/rectangle1.svg',
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width * 1,
+                  child: Container(
+                    height: 100,
+                    width: sizeWidth * 1,
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(107, 83, 204, 1),
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.elliptical(50, 30),
+                        bottomLeft: Radius.elliptical(50, 30),
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
-                  top: 35,
+                  top: 33,
                   left: 0,
                   right: 0,
                   child: SizedBox(
@@ -393,15 +404,19 @@ class _AccountPage extends State<AccountPage> {
                         Navigator.pop(context);
                       },
                       child: Column(
-                        children: const [
-                          Text('Samaya Hotel',
+                        children: [
+                          const Text(
+                            'Samaya Hotel',
+                            style: TextStyle(color: Colors.white, fontSize: 36),
+                          ),
+                          Container(
+                            width: 225,
+                            alignment: Alignment.centerRight,
+                            child: const Text(
+                              'v 1.0.1',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 36)),
-                          Padding(
-                            padding: EdgeInsets.only(left: 155),
-                            child: Text('v 1.0.1',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14)),
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
                           ),
                         ],
                       ),
@@ -445,16 +460,15 @@ class _AccountPage extends State<AccountPage> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           labelText: 'Email',
-                          labelStyle:
-                              const TextStyle(color: Colors.deepPurple),
+                          labelStyle: const TextStyle(color: Colors.deepPurple),
                           focusedBorder: OutlineInputBorder(
                               borderSide:
                                   const BorderSide(color: Colors.deepPurple),
                               borderRadius: BorderRadius.circular(20)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(
-                                  color: Colors.deepPurple))),
+                              borderSide:
+                                  const BorderSide(color: Colors.deepPurple))),
                     ),
                   ),
                 ),
@@ -485,16 +499,15 @@ class _AccountPage extends State<AccountPage> {
                             ),
                           ),
                           labelText: 'Password',
-                          labelStyle:
-                              const TextStyle(color: Colors.deepPurple),
+                          labelStyle: const TextStyle(color: Colors.deepPurple),
                           focusedBorder: OutlineInputBorder(
                               borderSide:
                                   const BorderSide(color: Colors.deepPurple),
                               borderRadius: BorderRadius.circular(20)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(
-                                  color: Colors.deepPurple))),
+                              borderSide:
+                                  const BorderSide(color: Colors.deepPurple))),
                     ),
                   ),
                 ),
@@ -506,7 +519,7 @@ class _AccountPage extends State<AccountPage> {
             child: Row(
               children: <Widget>[
                 Checkbox(
-                  activeColor: Colors.deepPurple,
+                  activeColor: const Color.fromRGBO(107, 83, 204, 1),
                   value: checkbox,
                   onChanged: (value) {
                     setState(
@@ -534,7 +547,8 @@ class _AccountPage extends State<AccountPage> {
                 },
                 child: const Text(
                   'Forgot Password ?',
-                  style: TextStyle(color: Colors.deepPurple, fontSize: 15),
+                  style: TextStyle(
+                      color: Color.fromRGBO(107, 83, 204, 1), fontSize: 15),
                 ),
               ),
               SizedBox(
@@ -554,30 +568,48 @@ class _AccountPage extends State<AccountPage> {
                             MaterialPageRoute(
                                 builder: (context) => const RegisterAccount()));
                       },
-                      child: const Text('Sign Up',
-                          style: TextStyle(
-                              fontSize: 18, color: Colors.deepPurple)),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromRGBO(107, 83, 204, 1),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {
-                    setState(
-                      () {
-                        _isLogin = true;
-                      },
-                    );
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _isLogin = true;
+                    });
                   },
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 22,
+                  child: Container(
+                    width: 141,
+                    height: 37,
+                    decoration: BoxDecoration(
+                        color: const Color.fromRGBO(107, 83, 204, 1),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: const [
+                          BoxShadow(
+                              offset: Offset(2, 3),
+                              color: Colors.black38,
+                              blurRadius: 2)
+                        ]),
+                    child: const Center(
+                      child: Text(
+                        'Log In',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                 ),
